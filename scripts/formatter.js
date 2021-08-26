@@ -18,9 +18,6 @@ fs.readFile(filePath, "utf-8", (err, file) => {
   //make file text into an array to edit its values
   let csvArray = file.split("\n");
 
-  //get the URL that we want to remove
-  const unwantedValue = csvArray[1].split(",")[1] + ",";
-
   //traverse array and replaces first two columns with an empty string
   for (let i = 1; i < csvArray.length; i++) {
     if (csvArray[i].includes(unwantedValue)) {
