@@ -1,11 +1,12 @@
 const fs = require("fs");
-const filePath = "./assets/fighter_y.csv";
+const filePath = "./assets/fighter_o.csv";
 
 fs.readFile(filePath, "utf-8", (err, file) => {
   const csvArray = file.split("\n");
   if (csvArray[csvArray.length - 1] == "") {
     csvArray.pop();
   }
+  //   console.log();
   csvArray.forEach((fighterInfo) => {
     if (fighterInfo.includes(`"null"`)) {
       const replaceInd = csvArray.indexOf(fighterInfo);
