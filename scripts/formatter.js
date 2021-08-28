@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const filePath = "./assets/fighter_z.csv";
+const filePath = "./bruh.csv";
 
 const header =
   "firstname,lastname,nickname,height,weight,reach,stance,wins,losses,draws,belt";
@@ -17,7 +17,6 @@ fs.readFile(filePath, "utf-8", (err, file) => {
 
   //make file text into an array to edit its values
   let csvArray = file.split("\n");
-
   //traverse array and replaces first two columns with an empty string
   for (let i = 1; i < csvArray.length; i++) {
     if (csvArray[i].includes(unwantedValue)) {

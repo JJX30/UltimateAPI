@@ -1,45 +1,51 @@
 const mongoose = require("mongoose");
 
+function toLower(v) {
+  v.toLowerCase();
+}
 const FighterSchema = mongoose.Schema({
-  info: {
-    firstname: {
-      type: String,
-    },
-    lastname: {
-      type: String,
-    },
-    nickname: {
-      type: String,
-    },
+  firstname: {
+    type: String,
+    // set: toLower,
   },
-  stats: {
-    height: {
-      type: String,
-    },
-    weight: {
-      type: String,
-    },
-    reach: {
-      type: String,
-    },
-    stance: {
-      type: String,
-    },
+  lastname: {
+    type: String,
+    // set: toLower,
   },
-  career: {
-    wins: {
-      type: Number,
-    },
-    losses: {
-      type: Number,
-    },
-    draws: {
-      type: Number,
-    },
-    belt: {
-      type: Boolean,
-    },
+  nickname: {
+    type: String,
+    //set: toLower,
+  },
+
+  height: {
+    type: String,
+    //set: toLower,
+  },
+  weight: {
+    type: String,
+    //set: toLower,
+  },
+  reach: {
+    type: String,
+    //set: toLower,
+  },
+  stance: {
+    type: String,
+    //set: toLower,
+  },
+
+  wins: {
+    type: Number,
+  },
+  losses: {
+    type: Number,
+  },
+  draws: {
+    type: Number,
+  },
+  belt: {
+    type: Boolean,
   },
 });
 
-module.exports = mongoose.model("Fighters", FighterSchema);
+module.exports = mongoose.model("Fighter", FighterSchema);
