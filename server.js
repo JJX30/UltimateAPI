@@ -29,7 +29,8 @@ app.get("/v1/fighters", async (req, res) => {
     const result = await Fighter.find();
     res.status(200).send(result);
   } catch (err) {
-    alert(err);
+    console.log(err);
+    res.status(404).send("Something went wrong!");
   }
 });
 
@@ -183,6 +184,65 @@ app.get("/v1/fighters/:id/belt", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(404).send("Could not find by ID!");
+  }
+});
+
+app.get("/v1/fighters/find", async (req, res) => {
+  switch (req.query) {
+    case req.query.firstname:
+      const queryFirstname = req.query.firstname;
+      const result = await Fighter.find({ firstname: queryFirstname });
+      res.status(200).json(result);
+
+    case req.query.lastname:
+      const queryLastname = req.query.lastname;
+      const result = await Fighter.find({ firstname: queryLastname });
+      res.status(200).json(result);
+
+    case req.query.nickname:
+      const queryNickname = req.query.nickname;
+      const result = await Fighter.find({ firstname: queryNickname });
+      res.status(200).json(result);
+
+    case req.query.height:
+      const queryHeight = req.query.nickname;
+      const result = await Fighter.find({ firstname: queryHeight });
+      res.status(200).json(result);
+
+    case req.query.weight:
+      const queryWeight = req.query.weight;
+      const result = await Fighter.find({ firstname: queryWeight });
+      res.status(200).json(result);
+
+    case req.query.reach:
+      const queryReach = req.query.weight;
+      const result = await Fighter.find({ firstname: queryReach });
+      res.status(200).json(result);
+
+    case req.query.stance:
+      const queryStance = req.query.stance;
+      const result = await Fighter.find({ firstname: queryStance });
+      res.status(200).json(result);
+
+    case req.query.wins:
+      const queryWins = req.query.wins;
+      const result = await Fighter.find({ firstname: queryWins });
+      res.status(200).json(result);
+
+    case req.query.losses:
+      const queryLosses = req.query.losses;
+      const result = await Fighter.find({ firstname: queryLosses });
+      res.status(200).json(result);
+
+    case req.query.draws:
+      const queryDraws = req.query.draws;
+      const result = await Fighter.find({ firstname: queryDraws });
+      res.status(200).json(result);
+
+    case req.query.belt:
+      const queryBelt = req.query.belt;
+      const result = await Fighter.find({ firstname: queryBelt });
+      res.status(200).json(result);
   }
 });
 
