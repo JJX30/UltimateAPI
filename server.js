@@ -1,8 +1,8 @@
-const { query } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
-const Fighter = require("./models/Fighter.js");
 require("dotenv/config");
+
+const Fighter = require("./models/Fighter.js");
 
 const app = express();
 const port = 3000;
@@ -78,6 +78,33 @@ app.get("/v1/ufc/fighters", async (req, res) => {
           code: 400,
         },
       });
+    } else {
+      res.status(400).json({
+        status: {
+          message: "invalid input",
+          code: 400,
+        },
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: {
+        message: "internal server error",
+        code: 500,
+      },
+    });
+  }
+});
+// get fighter list based of height
+app.get("/v1/ufc/fighters/height", async (req, res) => {
+  const { height } = req.query;
+  try {
+    if (height) {
+      const fighterInfo = await Fighter.find({
+        stance: height,
+      });
+      res.status(200).json(fighterInfo);
     } else {
       res.status(400).json({
         status: {
