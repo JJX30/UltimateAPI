@@ -29,8 +29,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 130px;
-    margin-bottom: 140px;
+    margin-top: 123px;
+    margin-bottom: 123px;
   }
   .homepage-logo {
     font-family: Roboto, sans-serif;

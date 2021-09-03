@@ -2,13 +2,16 @@ import React from "react"
 import styled from "styled-components"
 import { FaArrowLeft } from "react-icons/fa"
 import { FaArrowRight } from "react-icons/fa"
+import { StaticImage } from "gatsby-plugin-image"
 
 const Info = () => {
   return (
     <Wrapper>
-      <div className="info-body">
+      <div id="about" className="info-body">
         <div className="info-content">
-          <FaArrowLeft size={40}></FaArrowLeft>
+          <button>
+            <FaArrowLeft size={40}></FaArrowLeft>
+          </button>
           <div className="info-content-text">
             <h1 className="info-content-heading">
               UFC fighter statistics at your<br></br>fingertips
@@ -23,13 +26,37 @@ const Info = () => {
               , <b>draws</b>, etc.
             </p>
           </div>
-          <div className="info-content-slide"></div>
-          <FaArrowRight size={40}></FaArrowRight>
+
+          <div className="bruh">
+            <button className="arrow">
+              <FaArrowLeft size={20}></FaArrowLeft>
+            </button>
+            <div>
+              <div className="info-content-slide">
+                <StaticImage
+                  src="../assets/images/fighters/conor.png"
+                  alt="Conor McGregor"
+                ></StaticImage>
+              </div>
+            </div>
+            <button className="arrow">
+              <FaArrowRight size={20}></FaArrowRight>
+            </button>
+          </div>
+          <button>
+            <FaArrowRight size={40}></FaArrowRight>
+          </button>
         </div>
         <div className="info-dynamic-bubbles">
-          <div className="bubble bubble-1"></div>
-          <div className="bubble bubble-2"></div>
-          <div className="bubble bubble-3"></div>
+          <button>
+            <div className="bubble bubble-1"></div>
+          </button>
+          <button>
+            <div className="bubble bubble-2"></div>
+          </button>
+          <button>
+            <div className="bubble bubble-3"></div>
+          </button>
         </div>
       </div>
     </Wrapper>
@@ -44,7 +71,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     background-color: #db0000;
-    height: 490px;
+    height: 564px;
   }
   .info-content {
     display: flex;
@@ -80,7 +107,12 @@ const Wrapper = styled.div`
     font-family: Roboto, sans-serif;
     font-weight: 200;
   }
-  .info-content-slide {
+
+  .bruh {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 449px;
     height: 430px;
     background-color: black;
@@ -110,5 +142,19 @@ const Wrapper = styled.div`
     margin-left: 40px;
     margin-right: 40px;
     color: rgba(255, 255, 255, 0.8);
+  }
+
+  img {
+    height: 417px;
+    width: 233px;
+  }
+  button {
+    color: white;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
   }
 `

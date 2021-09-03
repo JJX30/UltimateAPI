@@ -9,19 +9,15 @@ const signup = () => {
         <p>and recieve your API key</p>
         <form>
           <div className="signup-inputs">
+            <input type="text" placeholder="email" className="signup-input" />
             <input
-              type="text"
-              placeholder="    email"
+              type="password"
+              placeholder="password"
               className="signup-input"
             />
             <input
               type="password"
-              placeholder="    password"
-              className="signup-input"
-            />
-            <input
-              type="password"
-              placeholder="    confirm password"
+              placeholder="confirm password"
               className="signup-input"
             />
           </div>
@@ -73,6 +69,9 @@ const Wrapper = styled.div`
   }
 
   .signup-input {
+    font-size: 18px;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
     width: 387px;
     height: 46px;
     border-radius: 50px;

@@ -16,7 +16,7 @@ const Navbar = () => {
         <input type="text" placeholder="    search the documentation..." />
       </div>
       <div className="navbar-links">
-        <Link className="navbar-link navbar-about" to="/about">
+        <Link className="navbar-link navbar-about" to="#about">
           about
         </Link>
         <Link className="navbar-link navbar-doc" to="/doc">

@@ -5,6 +5,7 @@ import { VscTwitter } from "react-icons/vsc"
 import { RiInstagramLine } from "react-icons/ri"
 import { AiOutlineLinkedin } from "react-icons/ai"
 import { AiFillGithub } from "react-icons/ai"
+import { Link } from "gatsby"
 
 const Footer = () => {
   return (
@@ -19,11 +20,41 @@ const Footer = () => {
             <div className="footer-socials">
               <p className="footer-socials-heading">socials</p>
               <div className="footer-socials-icons">
-                <AiOutlineFacebook size={40}></AiOutlineFacebook>
-                <VscTwitter size={40}></VscTwitter>
-                <RiInstagramLine size={40}></RiInstagramLine>
-                <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
-                <AiFillGithub size={38}></AiFillGithub>
+                <Link
+                  to="https://www.facebook.com/profile.php?id=100009565177074"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <AiOutlineFacebook size={40}></AiOutlineFacebook>
+                </Link>
+                <Link
+                  to="https://twitter.com/mdelcas4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <VscTwitter size={40}></VscTwitter>
+                </Link>
+                <Link
+                  to="https://www.instagram.com/mdelcas4/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <RiInstagramLine size={40}></RiInstagramLine>
+                </Link>
+                <Link
+                  to="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
+                </Link>
+                <Link
+                  to="https://github.com/JJX30"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <AiFillGithub size={38}></AiFillGithub>
+                </Link>
               </div>
             </div>
           </div>
@@ -183,5 +214,11 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-decoration: none;
+    color: white;
+  }
+  a:-webkit-any-link {
+    color: white;
+    cursor: pointer;
   }
 `
