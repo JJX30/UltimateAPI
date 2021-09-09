@@ -1,5 +1,5 @@
 {
-  "name": "ufcapi",
+  "name": "ultimateapi",
   "version": "1.0.0",
   "description": "API for UFC fighters as of June 2021",
   "main": "server.js",
@@ -186,7 +186,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JJX30/ufc_api.git"
+    "url": "git+https://github.com/JJX30/UltimateAPI.git"
   },
   "keywords": [
     "MMA",
@@ -199,7 +199,7 @@
   "author": "Mauricio Del Castillo (mauriciodelcas30@gmail.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JJX30/ufc_api/issues"
+    "url": "https://github.com/JJX30/UltimateAPI/issues"
   },
-  "homepage": "https://github.com/JJX30/ufc_api#readme"
+  "homepage": "https://github.com/JJX30/UltimateAPI#readme"
 }
