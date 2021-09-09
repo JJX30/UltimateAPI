@@ -1,2 +1,2 @@
-# ufc_api
+# UltimateAPI
 API for the fighters in the UFC
