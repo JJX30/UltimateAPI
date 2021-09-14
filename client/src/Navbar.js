@@ -1,27 +1,27 @@
 import React from "react";
 import { GiBoxingGloveSurprise } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 const Navbar = () => {
   return (
     <Wrapper>
       <div className="navbar-search">
-        <a className="navbar-link navbar-logo" href="/">
+        <Link className="navbar-link navbar-logo" to="/">
           <GiBoxingGloveSurprise
             size={70}
             color="#DB0000"
           ></GiBoxingGloveSurprise>
-        </a>
+        </Link>
         <input type="text" placeholder="    search the documentation..." />
       </div>
       <div className="navbar-links">
-        <a className="navbar-link navbar-about" href="#about">
-          about
-        </a>
-        <a className="navbar-link navbar-doc" href="/doc">
+        <Link className="navbar-link navbar-doc" to="/doc">
           doc
-        </a>
-        <button className="navbar-link">sign in</button>
+        </Link>
+        <Link to="/signin">
+          <button className="navbar-link">sign in</button>
+        </Link>
       </div>
     </Wrapper>
   );
@@ -49,10 +49,9 @@ const Wrapper = styled.nav`
   }
   .navbar-links {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    width: 357px;
-    margin-right: 45px;
+    width: 250px;
   }
   .navbar-link {
     font-family: Roboto, sans-serif;
@@ -74,6 +73,7 @@ const Wrapper = styled.nav`
     align-items: center;
   }
   button {
+    cursor: pointer;
     border-style: none;
     border-radius: 50px;
     background: rgb(185, 1, 1);
