@@ -12,6 +12,7 @@
     "anymatch": "^3.1.2",
     "array-flatten": "^1.1.1",
     "balanced-match": "^1.0.2",
+    "bcrypt": "^5.0.1",
     "binary-extensions": "^2.2.0",
     "bl": "^2.2.1",
     "bluebird": "^3.5.1",
