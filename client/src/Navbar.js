@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { GiBoxingGloveSurprise } from "react-icons/gi";
 import { Link } from "react-router-dom";
-
 import styled from "styled-components";
+import { UserContext } from "./UserContext";
+
 const Navbar = () => {
+  const { user, setUser } = useContext(UserContext);
+  const profileLink = useRef(null);
+
+  useEffect(() => {
+    if (user) {
+      profileLink.current.hidden = true;
+    }
+  });
   return (
     <Wrapper>
       <div className="navbar-search">
@@ -16,12 +25,19 @@ const Navbar = () => {
         <input type="text" placeholder="    search the documentation..." />
       </div>
       <div className="navbar-links">
-        <Link className="navbar-link navbar-doc" to="/doc">
-          doc
-        </Link>
-        <Link to="/signin">
-          <button className="navbar-link">sign in</button>
-        </Link>
+        <div hidden className="navbar-profile">
+          <Link ref={profileLink} className="navbar-link navbar-doc" to="/doc">
+            profile
+          </Link>
+        </div>
+        <div className="navbar-signin">
+          <Link className="navbar-link navbar-doc" to="/doc">
+            doc
+          </Link>
+          <Link to="/signin">
+            <button className="navbar-link">sign in</button>
+          </Link>
+        </div>
       </div>
     </Wrapper>
   );
@@ -47,11 +63,20 @@ const Wrapper = styled.nav`
   input::placeholder {
     font-size: 18px;
   }
-  .navbar-links {
+  .navbar-profile {
+    margin-top: 25px;
+  }
+  .navbar-signin {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 250px;
+  }
+  .navbar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 360px;
   }
   .navbar-link {
     font-family: Roboto, sans-serif;

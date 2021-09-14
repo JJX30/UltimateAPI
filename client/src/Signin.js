@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { UserContext } from "./UserContext";
 
 const Signin = () => {
   const [authUser, setAuthUser] = useState({ email: "", password: "" });
   const errorMessage = useRef(null);
+  const { setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     errorMessage.current.innerHTML = "Please enter an email and password";
@@ -38,8 +40,8 @@ const Signin = () => {
           errorMessage.current.innerHTML = "Try signing in again!";
           errorMessage.current.hidden = false;
         } else {
-          console.log(result);
           console.log("log in successful");
+          setUser({ email: result.email, apiKey: result.apiKey });
         }
       } catch (err) {
         errorMessage.current.innerHTML = "Something went wrong";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import ReactDom from "react-dom";
 import Layout from "./Layout";
 import Info from "./Info";
@@ -6,48 +6,53 @@ import Signup from "./Signup";
 import styled from "styled-components";
 import "./index.css";
 import Signin from "./Signin";
+import { UserContext } from "./UserContext";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
-    <Wrapper>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Layout>
-              <div className="homepage">
-                <div className="homepage-logo">
-                  <h1 className="homepage-logo-heading">UltimateAPI</h1>
-                  <p className="homepage-logo-content">
-                    for UFC fighters and stats
-                  </p>
+    <UserContext.Provider value={providerUser}>
+      <Wrapper>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Layout>
+                <div className="homepage">
+                  <div className="homepage-logo">
+                    <h1 className="homepage-logo-heading">UltimateAPI</h1>
+                    <p className="homepage-logo-content">
+                      for UFC fighters and stats
+                    </p>
+                  </div>
+                  <div className="homepage-divider"></div>
+                  <Signup></Signup>
                 </div>
-                <div className="homepage-divider"></div>
-                <Signup></Signup>
-              </div>
-              <Info></Info>
-            </Layout>
-          </Route>
-          <Route exact path="/signin">
-            <Layout>
-              <div className="homepage">
-                <div className="homepage-logo">
-                  <h1 className="homepage-logo-heading">Sign in</h1>
-                  <p className="homepage-logo-content">
-                    for UFC fighters and stats
-                  </p>
+                <Info></Info>
+              </Layout>
+            </Route>
+            <Route exact path="/signin">
+              <Layout>
+                <div className="homepage">
+                  <div className="homepage-logo">
+                    <h1 className="homepage-logo-heading">Sign in</h1>
+                    <p className="homepage-logo-content">
+                      for UFC fighters and stats
+                    </p>
+                  </div>
+                  <div className="homepage-divider"></div>
+                  <div className="homepage-container">
+                    <Signin></Signin>
+                  </div>
                 </div>
-                <div className="homepage-divider"></div>
-                <div className="homepage-container">
-                  <Signin></Signin>
-                </div>
-              </div>
-            </Layout>
-          </Route>
-        </Switch>
-      </Router>
-    </Wrapper>
+              </Layout>
+            </Route>
+          </Switch>
+        </Router>
+      </Wrapper>
+    </UserContext.Provider>
   );
 }
 const Wrapper = styled.div`
