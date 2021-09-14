@@ -1,3 +1,3 @@
 # UltimateAPI
 
-API for the fighters in the UFC
+for UFC fighters and stats
