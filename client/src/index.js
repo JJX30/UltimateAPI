@@ -7,9 +7,11 @@ import "./index.css";
 import Signin from "./Signin";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import Error from "./Error";
 import { UserContext } from "./UserContext";
-
+import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,6 +51,14 @@ function App() {
                 </div>
               </div>
               <Footer></Footer>
+            </Route>
+            <ProtectedRoute
+              exact
+              path="/dashboard"
+              component={Dashboard}
+            ></ProtectedRoute>
+            <Route path="*">
+              <Error></Error>
             </Route>
           </Switch>
         </Router>

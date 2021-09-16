@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useRef, useContext } from "react";
+import Auth from "./Auth";
 
 import { useHistory } from "react-router";
 import { UserContext } from "./UserContext";
@@ -44,11 +45,13 @@ const Signin = () => {
           errorMessage.current.hidden = false;
         } else {
           console.log("log in successful");
-          history.push("/dashboard");
-          setUser({
-            email: result.email,
-            password: result.password,
-            apiKey: result.apiKey,
+          Auth.login(() => {
+            setUser({
+              email: result.email,
+              password: result.password,
+              apiKey: result.apiKey,
+            });
+            history.push("/dashboard");
           });
         }
       } catch (err) {

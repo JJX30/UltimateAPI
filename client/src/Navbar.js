@@ -2,28 +2,29 @@ import React, { useEffect, useContext, useRef } from "react";
 import { GiBoxingGloveSurprise } from "react-icons/gi";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import Auth from "./Auth";
 import { UserContext } from "./UserContext";
 
 const Navbar = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const profileLink = useRef(null);
   const dynamicButton = useRef(null);
   const history = useHistory();
 
   useEffect(() => {
-    console.log(user);
-    if (user) {
+    if (Auth.isAuthenticated()) {
       dynamicButton.current.innerHTML = "sign out";
-
       profileLink.current.hidden = false;
     }
-  }, [user]);
+  });
 
   const handleClick = () => {
-    if (dynamicButton.current.innerHTML === "sign out") {
+    if (Auth.isAuthenticated()) {
       console.log("Signed out");
       setUser(null);
-      history.push("/");
+      Auth.logout(() => {
+        history.push("/");
+      });
     } else {
       history.push("/signin");
     }
