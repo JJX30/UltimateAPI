@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from "react";
 import ReactDom from "react-dom";
-import Layout from "./Layout";
 import Info from "./Info";
 import Signup from "./Signup";
 import styled from "styled-components";
 import "./index.css";
 import Signin from "./Signin";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 import { UserContext } from "./UserContext";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -19,35 +20,35 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Layout>
-                <div className="homepage">
-                  <div className="homepage-logo">
-                    <h1 className="homepage-logo-heading">UltimateAPI</h1>
-                    <p className="homepage-logo-content">
-                      for UFC fighters and stats
-                    </p>
-                  </div>
-                  <div className="homepage-divider"></div>
-                  <Signup></Signup>
+              <Navbar></Navbar>
+              <div className="homepage">
+                <div className="homepage-logo">
+                  <h1 className="homepage-logo-heading">UltimateAPI</h1>
+                  <p className="homepage-logo-content">
+                    for UFC fighters and stats
+                  </p>
                 </div>
-                <Info></Info>
-              </Layout>
+                <div className="homepage-divider"></div>
+                <Signup></Signup>
+              </div>
+              <Info></Info>
+              <Footer></Footer>
             </Route>
             <Route exact path="/signin">
-              <Layout>
-                <div className="homepage">
-                  <div className="homepage-logo">
-                    <h1 className="homepage-logo-heading">Sign in</h1>
-                    <p className="homepage-logo-content">
-                      for UFC fighters and stats
-                    </p>
-                  </div>
-                  <div className="homepage-divider"></div>
-                  <div className="homepage-container">
-                    <Signin></Signin>
-                  </div>
+              <Navbar></Navbar>
+              <div className="homepage">
+                <div className="homepage-logo">
+                  <h1 className="homepage-logo-heading">Sign in</h1>
+                  <p className="homepage-logo-content">
+                    for UFC fighters and stats
+                  </p>
                 </div>
-              </Layout>
+                <div className="homepage-divider"></div>
+                <div className="homepage-container">
+                  <Signin></Signin>
+                </div>
+              </div>
+              <Footer></Footer>
             </Route>
           </Switch>
         </Router>

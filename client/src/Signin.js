@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useRef, useContext } from "react";
+
+import { useHistory } from "react-router";
 import { UserContext } from "./UserContext";
 
 const Signin = () => {
   const [authUser, setAuthUser] = useState({ email: "", password: "" });
   const errorMessage = useRef(null);
   const { setUser } = useContext(UserContext);
+  const history = useHistory();
 
   const handleChange = (e) => {
     errorMessage.current.innerHTML = "Please enter an email and password";
@@ -41,7 +44,12 @@ const Signin = () => {
           errorMessage.current.hidden = false;
         } else {
           console.log("log in successful");
-          setUser({ email: result.email, apiKey: result.apiKey });
+          history.push("/dashboard");
+          setUser({
+            email: result.email,
+            password: result.password,
+            apiKey: result.apiKey,
+          });
         }
       } catch (err) {
         errorMessage.current.innerHTML = "Something went wrong";

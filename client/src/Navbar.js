@@ -1,18 +1,33 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { GiBoxingGloveSurprise } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./UserContext";
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const profileLink = useRef(null);
+  const dynamicButton = useRef(null);
+  const history = useHistory();
 
   useEffect(() => {
+    console.log(user);
     if (user) {
-      profileLink.current.hidden = true;
+      dynamicButton.current.innerHTML = "sign out";
+
+      profileLink.current.hidden = false;
     }
-  });
+  }, [user]);
+
+  const handleClick = () => {
+    if (dynamicButton.current.innerHTML === "sign out") {
+      console.log("Signed out");
+      setUser(null);
+      history.push("/");
+    } else {
+      history.push("/signin");
+    }
+  };
   return (
     <Wrapper>
       <div className="navbar-search">
@@ -25,8 +40,13 @@ const Navbar = () => {
         <input type="text" placeholder="    search the documentation..." />
       </div>
       <div className="navbar-links">
-        <div hidden className="navbar-profile">
-          <Link ref={profileLink} className="navbar-link navbar-doc" to="/doc">
+        <div className="navbar-profile">
+          <Link
+            hidden
+            ref={profileLink}
+            className="navbar-link"
+            to="/dashboard"
+          >
             profile
           </Link>
         </div>
@@ -34,15 +54,18 @@ const Navbar = () => {
           <Link className="navbar-link navbar-doc" to="/doc">
             doc
           </Link>
-          <Link to="/signin">
-            <button className="navbar-link">sign in</button>
-          </Link>
+          <button
+            className="navbar-link"
+            ref={dynamicButton}
+            onClick={handleClick}
+          >
+            sign in
+          </button>
         </div>
       </div>
     </Wrapper>
   );
 };
-
 export default Navbar;
 
 const Wrapper = styled.nav`

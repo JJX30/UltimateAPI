@@ -68,7 +68,7 @@ const Footer = () => {
             <div className="footer-built">
               <p className="footer-built-heading">built with</p>
               <p className="footer-built-content">
-                Gatsby<br></br>Express<br></br>MongoDB
+                React<br></br>Express<br></br>MongoDB
               </p>
             </div>
           </div>
@@ -177,6 +177,9 @@ const Wrapper = styled.div`
 
     color: rgba(255, 255, 255, 0.6);
   }
+  .footer-terms-heading {
+    margin-bottom: 5px;
+  }
   .footer-about {
     width: 427px;
     height: 163px;
@@ -187,6 +190,9 @@ const Wrapper = styled.div`
     color: rgba(255, 255, 255, 0.6);
     line-height: 200%;
   }
+  .footer-about-heading {
+    margin-bottom: 5px;
+  }
 
   .footer-socials {
     width: 268px;
@@ -195,6 +201,7 @@ const Wrapper = styled.div`
 
   .footer-socials-heading {
     margin-top: 0px;
+    margin-bottom: 5px;
   }
 
   .footer-built-content {
@@ -203,11 +210,17 @@ const Wrapper = styled.div`
     color: rgba(255, 255, 255, 0.6);
     line-height: 200%;
   }
+  .footer-built-heading {
+    margin-bottom: 5px;
+  }
   .footer-contact-content {
     font-weight: 300;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
     line-height: 200%;
+  }
+  .footer-contact-heading {
+    margin-bottom: 5px;
   }
   .footer-socials-icons {
     display: flex;
