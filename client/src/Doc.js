@@ -8,13 +8,9 @@ const Doc = () => {
   return (
     <Wrapper>
       <Navbar></Navbar>
-      <div className="dashboard">
-        <div className="dashboard-bar">
-          <div className="dashboard-profile-">
-            <p className="dashboard-profile-text">Profile</p>
-            <ProfileCard link={false}></ProfileCard>
-          </div>
-          <div className="dashboard-divider"></div>
+      <div className="doc-body">
+        <div className="doc-navbar">
+          <ProfileCard link={true}></ProfileCard>
         </div>
       </div>
       <Footer></Footer>
