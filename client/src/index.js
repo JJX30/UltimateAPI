@@ -58,7 +58,9 @@ function App() {
               component={Dashboard}
             ></ProtectedRoute>
             <Route path="*">
+              <Navbar></Navbar>
               <Error></Error>
+              <Footer></Footer>
             </Route>
           </Switch>
         </Router>
