@@ -10,6 +10,7 @@ import Navbar from "./Navbar";
 import Error from "./Error";
 import { UserContext } from "./UserContext";
 import Dashboard from "./Dashboard";
+import Doc from "./Doc";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 
@@ -57,6 +58,7 @@ function App() {
               path="/dashboard"
               component={Dashboard}
             ></ProtectedRoute>
+            <ProtectedRoute exact path="/doc" component={Doc}></ProtectedRoute>
             <Route path="*">
               <Navbar></Navbar>
               <Error></Error>

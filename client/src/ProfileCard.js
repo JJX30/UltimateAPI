@@ -4,7 +4,37 @@ import { useHistory } from "react-router";
 import { UserContext } from "./UserContext";
 import { FiEdit } from "react-icons/fi";
 
-const ProfileCard = () => {
+const ProfileCard = (props) => {
+  const linked = props.link;
+
+  if (linked) {
+    return <LinkedProfileCard></LinkedProfileCard>;
+  } else {
+    return <UnlinkedProfileCard></UnlinkedProfileCard>;
+  }
+};
+
+function UnlinkedProfileCard(props) {
+  const { user } = useContext(UserContext);
+
+  return (
+    <Wrapper>
+      <div className="profile-card">
+        <div className="border">
+          <div className="profile-image">
+            <img src={user.image} alt={user.email} />
+          </div>
+          <div className="profile-text">
+            <h3>{user.email}</h3>
+            <p>key: {user.apiKey}</p>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  );
+}
+
+function LinkedProfileCard(props) {
   const { user } = useContext(UserContext);
   const history = useHistory();
   const handleClick = () => {
@@ -27,7 +57,7 @@ const ProfileCard = () => {
       </div>
     </Wrapper>
   );
-};
+}
 
 export default ProfileCard;
 

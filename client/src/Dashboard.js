@@ -9,21 +9,23 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <div>
+    <Wrapper>
       <Navbar></Navbar>
       <div className="dashboard">
         <div className="dashboard-bar">
-          <p>Profile</p>
-          <ProfileCard></ProfileCard>
+          <div className="dashboard-profile-">
+            <p className="dashboard-profile-text">Profile</p>
+            <ProfileCard link={false}></ProfileCard>
+          </div>
+          <div className="dashboard-divider"></div>
         </div>
-        <div className="dashboard-divider"></div>
         <div className="dashboard-options">
           <div className="setting dashboard-options-email">
-            <p>{user.emails}</p>
+            <p>Email: {user.email}</p>
             <FiEdit></FiEdit>
           </div>
           <div className="setting dashboard-options-apikey">
-            <p>{user.apiKey}</p>
+            <p>Key: {user.apiKey}</p>
             <FiEdit></FiEdit>
           </div>
           <div className="setting dashboard-options-password">
@@ -36,10 +38,52 @@ const Dashboard = () => {
         </div>
       </div>
       <Footer></Footer>
-    </div>
+    </Wrapper>
   );
 };
 
 export default Dashboard;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .dashboard-bar {
+    display: flex;
+    flex-direction: row;
+  }
+  .dashboard-profile-content {
+    display: flex;
+    flex-direction: row;
+  }
+  .dashboard-divider {
+    height: 500px;
+    width: 2px;
+    background-color: #9c9a9b;
+    margin: 20px;
+  }
+  .dashboard-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .dashboard-profile-text {
+    font-family: Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.8);
+    margin: 10px;
+  }
+  .setting {
+    display: flex;
+    flex-direction: row;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    color: #9c9a9b;
+    color: rgba(0, 0, 0, 0.8);
+  }
+`;

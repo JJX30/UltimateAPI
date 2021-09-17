@@ -8,6 +8,7 @@ import { UserContext } from "./UserContext";
 const Navbar = () => {
   const { setUser } = useContext(UserContext);
   const profileLink = useRef(null);
+  const docLink = useRef(null);
   const dynamicButton = useRef(null);
   const history = useHistory();
 
@@ -15,6 +16,7 @@ const Navbar = () => {
     if (Auth.isAuthenticated()) {
       dynamicButton.current.innerHTML = "sign out";
       profileLink.current.hidden = false;
+      docLink.current.hidden = false;
     }
   });
 
@@ -23,7 +25,9 @@ const Navbar = () => {
       console.log("Signed out");
       setUser(null);
       Auth.logout(() => {
+        dynamicButton.current.innerHTML = "sign in";
         history.push("/");
+        alert("You have signed out");
       });
     } else {
       history.push("/signin");
@@ -50,11 +54,16 @@ const Navbar = () => {
           >
             profile
           </Link>
-        </div>
-        <div className="navbar-signin">
-          <Link className="navbar-link navbar-doc" to="/doc">
+          <Link
+            hidden
+            ref={docLink}
+            className="navbar-link navbar-doc"
+            to="/doc"
+          >
             doc
           </Link>
+        </div>
+        <div className="navbar-signin">
           <button
             className="navbar-link"
             ref={dynamicButton}
@@ -88,13 +97,17 @@ const Wrapper = styled.nav`
     font-size: 18px;
   }
   .navbar-profile {
-    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
   }
   .navbar-signin {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 250px;
+    width: 200px;
   }
   .navbar-links {
     display: flex;
