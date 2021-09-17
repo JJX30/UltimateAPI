@@ -50,6 +50,8 @@ const Signin = () => {
               email: result.email,
               password: result.password,
               apiKey: result.apiKey,
+              registrationDate: result.registrationDate,
+              image: `https://avatars.dicebear.com/api/identicon/${result.apiKey}.svg`,
             });
             history.push("/dashboard");
           });
