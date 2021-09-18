@@ -24,56 +24,57 @@ const Dashboard = () => {
           </div>
           <div className="dashboard-divider"></div>
         </div>
-        <div className="dashboard-options">
-          <div className="setting dashboard-options-email">
-            <div className="left">
-              <p>Email:</p>
-              <input
-                className="dashboard-input"
-                type="text"
-                value={user.email}
-                readOnly
-              />
+        {showModal ? (
+          <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
+        ) : (
+          <div className="dashboard-options">
+            <div className="setting dashboard-options-email">
+              <div className="left">
+                <p>Email:</p>
+                <input
+                  className="dashboard-input"
+                  type="text"
+                  value={user.email}
+                  readOnly
+                />
+              </div>
+              <button onClick={openModal} className="dashboard-button">
+                <FiEdit className="icon"></FiEdit>
+              </button>
             </div>
-            <button onClick={openModal} className="dashboard-button">
-              <FiEdit className="icon"></FiEdit>
-              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
-            </button>
-          </div>
-          <div className="setting dashboard-options-apikey">
-            <div className="left">
-              <p>Key:</p>
-              <input
-                className="dashboard-input"
-                type="text"
-                value={user.apiKey}
-                readOnly
-              />
+            <div className="setting dashboard-options-apikey">
+              <div className="left">
+                <p>Key:</p>
+                <input
+                  className="dashboard-input"
+                  type="text"
+                  value={user.apiKey}
+                  readOnly
+                />
+              </div>
+              <button onClick={openModal} className="dashboard-button">
+                <FiEdit className="icon"></FiEdit>
+              </button>
             </div>
-            <button onClick={openModal} className="dashboard-button">
-              <FiEdit className="icon"></FiEdit>
-              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
-            </button>
-          </div>
-          <div className="setting dashboard-options-password">
-            <div className="left">
-              <p>Password:</p>
-              <input
-                className="dashboard-input"
-                type="password"
-                value="nicetrydumbass"
-                readOnly
-              />
+            <div className="setting dashboard-options-password">
+              <div className="left">
+                <p>Password:</p>
+                <input
+                  className="dashboard-input"
+                  type="password"
+                  value="nicetrydumbass"
+                  readOnly
+                />
+              </div>
+              <button onClick={openModal} className="dashboard-button">
+                <FiEdit className="icon"></FiEdit>
+              </button>
             </div>
-            <button onClick={openModal} className="dashboard-button">
-              <FiEdit className="icon"></FiEdit>
-              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
-            </button>
+            <div className="setting dashboard-options-registration">
+              <p>Account created on: {user.registrationDate}</p>
+            </div>
           </div>
-          <div className="setting dashboard-options-registration">
-            <p>Account created on: {user.registrationDate}</p>
-          </div>
-        </div>
+        )}
       </div>
       <Footer></Footer>
     </Wrapper>

@@ -27,6 +27,8 @@ const Navbar = () => {
       Auth.logout(() => {
         dynamicButton.current.innerHTML = "sign in";
         history.push("/");
+        profileLink.current.hidden = true;
+        docLink.current.hidden = true;
         alert("You have signed out");
       });
     } else {
