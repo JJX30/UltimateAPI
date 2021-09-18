@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
-import Navbar from "./Navbar";
+import React, { useContext, useState } from "react";
 import Footer from "./Footer";
 import styled from "styled-components";
 import { UserContext } from "./UserContext";
+import Navbar from "./Navbar";
 import { FiEdit } from "react-icons/fi";
 import ProfileCard from "./ProfileCard";
+import { Modal } from "./Modal";
 const Dashboard = () => {
   const { user } = useContext(UserContext);
+  const [showModal, setShowModal] = useState(false);
 
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
   return (
     <Wrapper>
       <Navbar></Navbar>
@@ -21,16 +26,49 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-options">
           <div className="setting dashboard-options-email">
-            <p>Email: {user.email}</p>
-            <FiEdit></FiEdit>
+            <div className="left">
+              <p>Email:</p>
+              <input
+                className="dashboard-input"
+                type="text"
+                value={user.email}
+                readOnly
+              />
+            </div>
+            <button onClick={openModal} className="dashboard-button">
+              <FiEdit className="icon"></FiEdit>
+              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
+            </button>
           </div>
           <div className="setting dashboard-options-apikey">
-            <p>Key: {user.apiKey}</p>
-            <FiEdit></FiEdit>
+            <div className="left">
+              <p>Key:</p>
+              <input
+                className="dashboard-input"
+                type="text"
+                value={user.apiKey}
+                readOnly
+              />
+            </div>
+            <button onClick={openModal} className="dashboard-button">
+              <FiEdit className="icon"></FiEdit>
+              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
+            </button>
           </div>
           <div className="setting dashboard-options-password">
-            <p>Change password</p>
-            <FiEdit></FiEdit>
+            <div className="left">
+              <p>Password:</p>
+              <input
+                className="dashboard-input"
+                type="password"
+                value="nicetrydumbass"
+                readOnly
+              />
+            </div>
+            <button onClick={openModal} className="dashboard-button">
+              <FiEdit className="icon"></FiEdit>
+              <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
+            </button>
           </div>
           <div className="setting dashboard-options-registration">
             <p>Account created on: {user.registrationDate}</p>
@@ -45,6 +83,12 @@ const Dashboard = () => {
 export default Dashboard;
 
 const Wrapper = styled.div`
+  .left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 650px;
+  }
   .dashboard {
     display: flex;
     flex-direction: row;
@@ -81,9 +125,33 @@ const Wrapper = styled.div`
   .setting {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     font-family: Roboto, sans-serif;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: 300;
     color: #9c9a9b;
     color: rgba(0, 0, 0, 0.8);
+  }
+  .dashboard-input {
+    width: 500px;
+    font-family: Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: #9c9a9b;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  .dashboard-button {
+    width: 32px;
+    background-color: white;
+    border-style: none;
+  }
+
+  .dashboard-button:active {
+    background-color: whitesmoke;
+  }
+
+  .icon {
+    width: 25px;
+    height: 25px;
   }
 `;
