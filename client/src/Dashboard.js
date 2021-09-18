@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext";
 import Navbar from "./Navbar";
 import { FiEdit } from "react-icons/fi";
 import ProfileCard from "./ProfileCard";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
