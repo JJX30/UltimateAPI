@@ -14,15 +14,17 @@ const Modal = ({ showModal, setShowModal }) => {
 
 const EmailModal = ({ closeModal }) => {
   const { user } = useContext(UserContext);
-  const [setEmail] = useState({ email: user.email });
+  const [email, setEmail] = useState(user.email);
   const errorMessage = useRef(null);
   const handleChange = (e) => {
     const value = e.target.value;
     errorMessage.current.hidden = true;
-    setEmail({ email: value });
+    setEmail(value);
   };
-
-  // ADD ONCLICK FOR SUBMIT
+  const handleSubmit = () => {
+    if (email === "") {
+    }
+  };
   return (
     <>
       <Wrapper>
@@ -37,13 +39,15 @@ const EmailModal = ({ closeModal }) => {
             <p>Change email to:</p>
             <input
               className="dashboard-input"
-              type="text"
-              value={user.email}
+              type="email"
+              value={email}
               onChange={handleChange}
             />
           </div>
           <div className="modal-section-3">
-            <button className="modal-submit-button">Change</button>
+            <button onClick={handleSubmit} className="modal-submit-button">
+              Change
+            </button>
             <p hidden ref={errorMessage} className="error-message">
               error
             </p>
@@ -89,7 +93,7 @@ const Wrapper = styled.div`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 250px;
+    height: 220px;
     font-family: Roboto, sans-serif;
     font-size: 24px;
     font-weight: 300;
@@ -97,7 +101,7 @@ const Wrapper = styled.div`
   }
   .modal-body {
     width: 888.48px;
-    height: 450px;
+    height: 400px;
     border-style: solid;
     border-width: 2px;
     border-radius: 15px;
@@ -122,7 +126,7 @@ const Wrapper = styled.div`
   .modal-close-button {
     height: 29px;
     border-style: none;
-    background-color: white;
+    background-color: black;
   }
   .icon {
     color: white;
