@@ -25,7 +25,7 @@ const Dashboard = () => {
           </div>
           <div className="dashboard-divider"></div>
         </div>
-        {showModal ? (
+        {showModal.show ? (
           <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
         ) : (
           <div className="dashboard-options">

@@ -12,17 +12,21 @@ const Modal = ({ showModal, setShowModal }) => {
   if (showModal.type === "email") {
     return (
       <>
-        {showModal ? <EmailModal closeModal={closeModal}></EmailModal> : null}
+        {showModal.show ? (
+          <EmailModal closeModal={closeModal}></EmailModal>
+        ) : null}
       </>
     );
   } else if (showModal.type === "key") {
     return (
-      <>{showModal ? <KeyModal closeModal={closeModal}></KeyModal> : null}</>
+      <>
+        {showModal.show ? <KeyModal closeModal={closeModal}></KeyModal> : null}
+      </>
     );
   } else if (showModal.type === "password") {
     return (
       <>
-        {showModal ? (
+        {showModal.show ? (
           <PasswordModal closeModal={closeModal}></PasswordModal>
         ) : null}
       </>
