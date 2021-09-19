@@ -8,11 +8,12 @@ import ProfileCard from "./ProfileCard";
 import Modal from "./Modal";
 const Dashboard = () => {
   const { user } = useContext(UserContext);
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
+  const [showModal, setShowModal] = useState({ show: false, type: "" });
+  function openModal(type) {
+    setShowModal((prev) => {
+      return { show: !prev.show, type: type };
+    });
+  }
   return (
     <Wrapper>
       <Navbar></Navbar>
@@ -38,7 +39,12 @@ const Dashboard = () => {
                   readOnly
                 />
               </div>
-              <button onClick={openModal} className="dashboard-button">
+              <button
+                onClick={() => {
+                  openModal("email");
+                }}
+                className="dashboard-button"
+              >
                 <FiEdit className="icon"></FiEdit>
               </button>
             </div>
@@ -52,7 +58,12 @@ const Dashboard = () => {
                   readOnly
                 />
               </div>
-              <button onClick={openModal} className="dashboard-button">
+              <button
+                onClick={() => {
+                  openModal("key");
+                }}
+                className="dashboard-button"
+              >
                 <FiEdit className="icon"></FiEdit>
               </button>
             </div>
@@ -66,7 +77,12 @@ const Dashboard = () => {
                   readOnly
                 />
               </div>
-              <button onClick={openModal} className="dashboard-button">
+              <button
+                onClick={() => {
+                  openModal("password");
+                }}
+                className="dashboard-button"
+              >
                 <FiEdit className="icon"></FiEdit>
               </button>
             </div>

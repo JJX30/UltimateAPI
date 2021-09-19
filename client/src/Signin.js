@@ -57,8 +57,6 @@ const Signin = () => {
           });
         }
       } catch (err) {
-        errorMessage.current.innerHTML = "Something went wrong";
-        errorMessage.current.hidden = false;
         console.log(err);
       }
     } else {

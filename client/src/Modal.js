@@ -5,10 +5,122 @@ import { UserContext } from "./UserContext";
 
 const Modal = ({ showModal, setShowModal }) => {
   const closeModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal((prev) => {
+      return { show: !prev.show };
+    });
+  };
+  if (showModal.type === "email") {
+    return (
+      <>
+        {showModal ? <EmailModal closeModal={closeModal}></EmailModal> : null}
+      </>
+    );
+  } else if (showModal.type === "key") {
+    return (
+      <>{showModal ? <KeyModal closeModal={closeModal}></KeyModal> : null}</>
+    );
+  } else if (showModal.type === "password") {
+    return (
+      <>
+        {showModal ? (
+          <PasswordModal closeModal={closeModal}></PasswordModal>
+        ) : null}
+      </>
+    );
+  }
+};
+
+const PasswordModal = ({ closeModal }) => {
+  const { user } = useContext(UserContext);
+  const [password, setPassword] = useState(user.password);
+  const errorMessage = useRef(null);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    errorMessage.current.hidden = true;
+    setPassword(value);
+  };
+  const handleSubmit = () => {
+    if (password === "") {
+    }
   };
   return (
-    <>{showModal ? <EmailModal closeModal={closeModal}></EmailModal> : null}</>
+    <>
+      <Wrapper>
+        <div className="modal-body">
+          <div className="modal-section-1">
+            <p className="profile-text">Password</p>
+            <button onClick={closeModal} className="modal-close-button">
+              <MdClose className="icon"></MdClose>
+            </button>
+          </div>
+          <div className="modal-section-2">
+            <p>Change password:</p>
+            <input
+              className="dashboard-input"
+              type="email"
+              value={password}
+              onChange={handleChange}
+              autoFocus
+            />
+          </div>
+          <div className="modal-section-3">
+            <button onClick={handleSubmit} className="modal-submit-button">
+              Change
+            </button>
+            <p hidden ref={errorMessage} className="error-message">
+              error
+            </p>
+          </div>
+        </div>
+      </Wrapper>
+    </>
+  );
+};
+
+const KeyModal = ({ closeModal }) => {
+  const { user } = useContext(UserContext);
+  const [key, setKey] = useState(user.apiKey);
+  const errorMessage = useRef(null);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    errorMessage.current.hidden = true;
+    setKey(value);
+  };
+  const handleSubmit = () => {
+    if (key === "") {
+    }
+  };
+  return (
+    <>
+      <Wrapper>
+        <div className="modal-body">
+          <div className="modal-section-1">
+            <p className="profile-text">Key</p>
+            <button onClick={closeModal} className="modal-close-button">
+              <MdClose className="icon"></MdClose>
+            </button>
+          </div>
+          <div className="modal-section-2">
+            <p>Generate another key:</p>
+            <input
+              className="dashboard-input"
+              type="email"
+              value={key}
+              onChange={handleChange}
+              autoFocus
+            />
+          </div>
+          <div className="modal-section-3">
+            <button onClick={handleSubmit} className="modal-submit-button">
+              Generate
+            </button>
+            <p hidden ref={errorMessage} className="error-message">
+              error
+            </p>
+          </div>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 
@@ -42,6 +154,7 @@ const EmailModal = ({ closeModal }) => {
               type="email"
               value={email}
               onChange={handleChange}
+              autoFocus
             />
           </div>
           <div className="modal-section-3">
