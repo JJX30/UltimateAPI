@@ -360,7 +360,7 @@ const Wrapper = styled.div`
     margin-left: 20px;
   }
   .doc-documentation-h1 {
-    font-size: 70px;
+    font-size: 90px;
     margin-top: 20px;
     margin-left: 20px;
   }
