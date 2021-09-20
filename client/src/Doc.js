@@ -32,91 +32,20 @@ const Doc = () => {
           <div className="doc-divider"></div>
         </div>
         <div className="doc-documentation">
-          <p className="doc-documentation-h1">Getting started</p>
-          <p className="doc-documentation-subtitle">
-            This page is an overview on how to use the UltimateAPI API with
-            correct queries
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
-          <p className="doc-documentation-p">
-            bruh this is contetnt
-            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
-            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
-          </p>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h1">Getting started</p>
+            <p className="doc-documentation-subtitle">
+              This page is an overview on how to use the UltimateAPI API with
+              correct queries
+            </p>
+          </div>
+          <div className="doc-documentation-paragraph">
+            <p className="doc-documentation-p">
+              <b>UltimateAPI</b> is an API for UFC fighters, (and more MMA
+              promotions soon) we will continue to update the data to reflect
+              current events as well.
+            </p>
+          </div>
         </div>
       </div>
       <DocFooter></DocFooter>
@@ -132,21 +61,28 @@ const Wrapper = styled.div`
     padding-top: 50px;
     padding-bottom: 70px;
     margin-top: 80px;
+    padding-right: 80px;
     font-family: Roboto, sans-serif;
   }
+
   .doc-documentation-h1 {
     font-size: 70px;
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
   }
   .doc-documentation-subtitle {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 300;
-    margin: 20px;
+    margin-left: 20px;
+    margin-top: 5px;
     color: rgba(0, 0, 0, 0.6);
   }
   .doc-documentation-p {
-    font-size: 18px;
-    margin: 20px;
+    font-size: 17px;
+    margin-top: 50px;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.7;
   }
   .doc-bar {
     display: flex;
