@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Auth from "./Auth";
 import { UserContext } from "./UserContext";
 
-const Navbar = () => {
+const DocNavbar = () => {
   const { setUser } = useContext(UserContext);
   const profileLink = useRef(null);
   const docLink = useRef(null);
@@ -36,7 +36,7 @@ const Navbar = () => {
     }
   };
   return (
-    <Wrapper>
+    <DocDiv>
       <div className="navbar-search">
         <Link className="navbar-link navbar-logo" to="/">
           <GiBoxingGloveSurprise
@@ -44,11 +44,7 @@ const Navbar = () => {
             color="#DB0000"
           ></GiBoxingGloveSurprise>
         </Link>
-        <input
-          className="nav-input"
-          type="text"
-          placeholder="search the documentation..."
-        />
+        <input type="text" placeholder="    search the documentation..." />
       </div>
       <div className="navbar-links">
         <div className="navbar-profile">
@@ -79,28 +75,29 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-    </Wrapper>
+    </DocDiv>
   );
 };
-export default Navbar;
 
-const Wrapper = styled.nav`
+export default DocNavbar;
+
+const DocDiv = styled.nav`
   display: flex;
+  position: fixed;
+  z-index: 10;
   justify-content: space-between;
   background-color: black;
   height: 78px;
+  width: 1440px;
 
   li {
     list-style-type: none;
   }
-  .nav-input {
+  input {
     width: 533px;
     height: 42px;
     border-radius: 50px;
     border-style: none;
-    font-size: 18px;
-    padding-inline-start: 30px;
-    padding-inline-end: 30px;
   }
   input::placeholder {
     font-size: 18px;

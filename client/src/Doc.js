@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import DocNavbar from "./DocNavbar";
+import DocFooter from "./DocFooter";
 import { Link } from "react-router-dom";
 
 const Doc = () => {
   return (
     <Wrapper>
-      <Navbar></Navbar>
+      <DocNavbar></DocNavbar>
       <div className="doc-bar">
         <div className="doc-nav-container">
           <nav className="doc-nav">
@@ -32,11 +32,94 @@ const Doc = () => {
           <div className="doc-divider"></div>
         </div>
         <div className="doc-documentation">
-          <h1>Getting started</h1>
-          <p>IDk what to say</p>
+          <p className="doc-documentation-h1">Getting started</p>
+          <p className="doc-documentation-subtitle">
+            This page is an overview on how to use the UltimateAPI API with
+            correct queries
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
+          <p className="doc-documentation-p">
+            bruh this is contetnt
+            tsanefjkdnafjkdsnfjkasdnfjkdsnfjksdnjfkdsnjkfndsjkfnsdjkfnsjdkfnjksdnfjksdnfjksdfnjksdnfjksdnfjkds
+            fjkds fdsjkf dsjkf dsjkf sdjkf dsjk fkjsdf jskd fksjdf
+          </p>
         </div>
       </div>
-      <Footer></Footer>
+      <DocFooter></DocFooter>
     </Wrapper>
   );
 };
@@ -45,6 +128,25 @@ export default Doc;
 
 const Wrapper = styled.div`
   .doc-documentation {
+    padding-left: 350px;
+    padding-top: 50px;
+    padding-bottom: 70px;
+    margin-top: 80px;
+    font-family: Roboto, sans-serif;
+  }
+  .doc-documentation-h1 {
+    font-size: 70px;
+    margin: 20px;
+  }
+  .doc-documentation-subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 20px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .doc-documentation-p {
+    font-size: 18px;
+    margin: 20px;
   }
   .doc-bar {
     display: flex;
@@ -52,26 +154,33 @@ const Wrapper = styled.div`
   }
   .doc-nav-container {
     display: flex;
-    padding-left: 100px;
+    padding-left: 70px;
     background-color: #f7f7f7;
+    position: fixed;
+    height: 796px;
   }
   .doc-nav-list {
     display: flex;
     flex-direction: column;
+    padding-right: 20px;
+  }
+  .doc-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
   .doc-nav-link-container {
-    margin: 10px;
+    margin: 12px;
   }
   .doc-nav-links {
     font-family: "Work Sans", sans-serif;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 300;
-    color: #6d6d6d;
+    color: #262626;
     text-decoration: none;
   }
   .doc-divider {
-    height: 500px;
     width: 2px;
-    background-color: #9c9a9b;
+    background-color: #ebebeb;
   }
 `;
