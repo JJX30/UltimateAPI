@@ -173,6 +173,34 @@ app.get("/api/v1/ufc/fighters/height", async (req, res) => {
     });
   }
 });
+// get fighter list based off weight
+app.get("/api/v1/ufc/fighters/weight", async (req, res) => {
+  const { weight } = req.query;
+
+  try {
+    if (weight) {
+      const fighterInfo = await Fighter.find({
+        weight: new RegExp(weight, "i"),
+      });
+      res.status(200).json(fighterInfo);
+    } else {
+      res.status(400).json({
+        status: {
+          message: "invalid input",
+          code: 400,
+        },
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: {
+        message: "internal server error",
+        code: 500,
+      },
+    });
+  }
+});
 // get fighter list based off stances
 app.get("/api/v1/ufc/fighters/stance", async (req, res) => {
   const { stance } = req.query;
@@ -336,6 +364,7 @@ app.get("/api/v1/ufc/fighters/record", async (req, res) => {
     });
   }
 });
+
 // fighter ID's based off firstname and lastname query
 app.get("/api/v1/ufc/fighters/id", async (req, res) => {
   const { firstname, lastname } = req.query;

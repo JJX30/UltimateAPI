@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { GrDown } from "react-icons/gr";
 
 const Doc = () => {
+  const handleClick = () => {
+    console.log("bruh");
+  };
   return (
     <Wrapper>
       <DocNavbar></DocNavbar>
@@ -15,28 +18,30 @@ const Doc = () => {
           <nav className="doc-nav">
             <ul className="doc-nav-list">
               <div className="doc-nav-link-container">
-                <Link className="doc-nav-links">🔎GETTING STARTED </Link>
-                <div className="arrow-icon">
+                <Link to="/doc/#getting-started" className="doc-nav-links">
+                  🔎GETTING STARTED{" "}
+                </Link>
+                <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
-                </div>
+                </button>
               </div>
               <div className="doc-nav-link-container">
                 <Link className="doc-nav-links">🪜STRUCTURE</Link>
-                <div className="arrow-icon">
+                <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
-                </div>
+                </button>
               </div>
               <div className="doc-nav-link-container">
                 <Link className="doc-nav-links">❓QUERIES</Link>
-                <div className="arrow-icon">
+                <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
-                </div>
+                </button>
               </div>
               <div className="doc-nav-link-container">
                 <Link className="doc-nav-links">📝FAQ</Link>
-                <div className="arrow-icon">
+                <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
-                </div>
+                </button>
               </div>
               <div className="doc-nav-link-container">
                 <Link className="doc-nav-links">🎉THANK YOU</Link>
@@ -213,7 +218,7 @@ const Doc = () => {
           </div>
           <div className="doc-documentation-divider"></div>
           <div className="doc-documentation-heading">
-            <p className="doc-documentation-h2"> 📏 Attributes</p>
+            <p className="doc-documentation-h2"> 📊 Stats</p>
             <p className="doc-documentation-p">
               Each fighter has attribute properties for their weight, height,
               reach, and stance. <br></br>
@@ -266,25 +271,638 @@ const Doc = () => {
             </p>
           </div>
           <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-list">
+            <ul className="list">
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Find a fighter</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Find by attributes</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Find the ID</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Search with ID</u>
+                  </mark>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="doc-documentation-divider"></div>
           <div className="doc-documentation-heading">
-            <p className="doc-documentation-h2"> 🏆 Record</p>
+            <p className="doc-documentation-h2"> 🥷 Find a fighter</p>
             <p className="doc-documentation-p">
-              Finally each fighter has record properties for counting their
-              achievements... <br></br>
+              The "/fighters" route takes a first name and last name query, you
+              do not need both for the query to be valid. <br></br>
+              <br></br> Query may return more than one value if fighters share a
+              name.<br></br>
               <br></br>
-              Who is the best!
+              For example, a query like this: <br></br>
               <div className="doc-documentation-code-box">
                 <p className="doc-documentation-code">
-                  <span className="name">wins: </span>
-                  <span className="record-content">26</span>, <br></br>
-                  <span className="name">losses: </span>
-                  <span className="record-content">6</span>, <br></br>
-                  <span className="name">draws: </span>
-                  <span className="record-content">0</span>, <br></br>
-                  <span className="name">belt: </span>
-                  <span className="belt-content">false</span>
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters?
+                  <mark className="highlight">firstname=conor</mark>
                 </p>
               </div>
+              would return list of conors:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {"["}
+                  <br></br> <span className="indent">{"{"}</span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58314d73f352602c282b"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Conor"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Heun"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">"Hurricane"</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 10"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"155 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"76"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">9</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">5</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                  </span>
+                  <span className="name indent"> {"{"} </span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58314d73f352602c282b"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Conor"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Heun"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">"Hurricane"</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 10"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"155 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"76"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">9</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">5</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"} <br></br>
+                  </span>
+                  {"]"}
+                </p>
+              </div>
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">🕵️ Find by attributes</p>
+            <p className="doc-documentation-p">
+              Queries for height, weight, stance, and record are all available
+              and will return a list of fighters with those queries.{" "}
+            </p>
+            <p className="doc-documentation-h3">📏 Height</p>
+            <p className="doc-documentation-p-sub">
+              The "/height" route takes a height query and returns a list of
+              fighters with that height. <br></br>
+              <br></br>
+              For example, a query like this:<br></br>
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/height?
+                  <mark className="highlight">height=5' 11</mark>
+                </p>
+              </div>
+              would return list of fighters with that height:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {"["}
+                  <br></br> <span className="indent">{"{"}</span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58314d73f352602c2702"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Tony"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Ferguson"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">"El Cucuy"</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 11"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"155 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"76"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">26</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">6</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                  </span>
+                  <span className="name indent"> {"{"} </span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58324d73f352602c2fdd"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Michael"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Trizano"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">"The Lone Wolf"</span>,{" "}
+                  <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 11"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"145 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"71"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">10</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">1</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                    <span className="name indent">
+                      {"{ ... } //more items"}
+                    </span>{" "}
+                    <br></br>
+                  </span>
+                  {"]"}
+                </p>
+              </div>
+            </p>
+            <p className="doc-documentation-h3">⚖️ Weight</p>
+            <p className="doc-documentation-p-sub">
+              The "/weight" route takes a weight query and returns a list of
+              fighters with that weight. <br></br>
+              <br></br>
+              For example, a query like this:<br></br>
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/weight?
+                  <mark className="highlight">weight=155</mark>
+                </p>
+              </div>
+              would return list of fighters with that weight.
+            </p>
+            <p className="doc-documentation-h3">🥋 Stance</p>
+            <p className="doc-documentation-p-sub">
+              The "/stance" route takes a stance query and returns a list of
+              fighters with that stance. <br></br>
+              <br></br>
+              For example a query like this:<br></br>
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/stance?
+                  <mark className="highlight">stance=switch</mark>
+                </p>
+              </div>
+              would return list of fighters with that stance.
+            </p>
+            <p className="doc-documentation-h3">🏅 Record</p>
+            <p className="doc-documentation-p-sub">
+              The "/record" route takes a win, loss, or draw query and returns a
+              list of fighters with those matching queries. <br></br>
+              <br></br>
+              For example, a query like this:<br></br>
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/record?
+                  <mark className="highlight">wins=29</mark>
+                </p>
+              </div>
+              would return:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {"["}
+                  <br></br> <span className="indent">{"{"}</span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58304d73f352602c232c"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Jose"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Aldo"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">""</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 7"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"135 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"70"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">29</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">7</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                  </span>
+                  <span className="name indent"> {"{"} </span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58304d73f352602c233d"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Eddie"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Alvarez"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">""</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"5' 9"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"155 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"69"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">29</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">6</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                    <span className="name indent">
+                      {"{ ... } //more items"}
+                    </span>{" "}
+                    <br></br>
+                  </span>
+                  {"]"}
+                </p>
+              </div>
+              <br></br>
+              You could query individually wins, losses, or draws, but if you
+              want you could combine them to find the exact record you're
+              looking for. <br></br> <br></br>For example, a query like this:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/record?
+                  <mark className="highlight">
+                    {"wins=32&losses=14&draws=0"}
+                  </mark>
+                </p>
+              </div>
+              would return:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {"["}
+                  <br></br> <span className="indent">{"{"}</span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58304d73f352602c2548"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Carlos"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Condit"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">
+                    "The Natural Born Killer"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"6' 2"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"170 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"75"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Orthodox"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">32</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">14</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                  </span>
+                  <span className="name indent"> {"{"} </span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58314d73f352602c2b0f"
+                  </span>
+                  , <br></br>
+                  <span className="name indent2"> firstname: </span>
+                  <span className="name-content">"Gerald"</span>, <br></br>
+                  <span className="name indent2"> lastname: </span>
+                  <span className="name-content">"Meerschaert"</span>, <br></br>
+                  <span className="name indent2"> nickname: </span>
+                  <span className="name-content">"GM3"</span>, <br></br>
+                  <span className="name indent2"> height: </span>
+                  <span className="name-content">"6' 1"</span>, <br></br>
+                  <span className="name indent2"> weight: </span>
+                  <span className="name-content">"185 lbs."</span>, <br></br>
+                  <span className="name indent2"> reach: </span>
+                  <span className="record-content">"77"</span>, <br></br>
+                  <span className="name indent2"> stance: </span>
+                  <span className="record-content">"Southpaw"</span>, <br></br>
+                  <span className="name indent2"> wins: </span>
+                  <span className="record-content">32</span>, <br></br>
+                  <span className="name indent2"> losses: </span>
+                  <span className="record-content">14</span>, <br></br>
+                  <span className="name indent2"> draws: </span>
+                  <span className="record-content">0</span>, <br></br>
+                  <span className="name indent2"> belt: </span>
+                  <span className="belt-content">false</span> <br></br>
+                  <span className="name indent">
+                    {"}"}, <br></br>
+                  </span>
+                  {"]"}
+                </p>
+              </div>
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">🆔 Find the ID</p>
+            <p className="doc-documentation-p">
+              Queries for the "/id" route must take a first and last name query,
+              or else it will return an error. <br></br>
+              <br></br>For example, a query like this:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  www.ultimateapi.io/api/v1/
+                  <mark className="highlight">
+                    {"{"}your_key{"}"}
+                  </mark>
+                  /ufc/fighters/id?
+                  <mark className="highlight">
+                    {"firstname=conor&lastname=mcgregor"}
+                  </mark>
+                </p>
+              </div>
+              would return that fighter's ID:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {"["}
+                  <br></br> <span className="indent">{"{"}</span>
+                  <br></br>
+                  <span className="name indent2"> _id: </span>
+                  <span className="name-content ">
+                    "612a58304d73f352602c2548"
+                  </span>
+                  <br></br>
+                  <span className="indent">{"}"}</span>
+                  <br></br>
+                  {"]"}
+                </p>
+              </div>
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">🔍 Search with ID</p>
+            <p className="doc-documentation-p">
+              Once you have the ID of a fighter, you can specifically look for
+              properties from that fighter. <br></br>For example, a query like
+              this:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  <p className="doc-documentation-code">
+                    www.ultimateapi.io/api/v1/
+                    <mark className="highlight">
+                      {"{"}your_key{"}"}
+                    </mark>
+                    /ufc/fighters/
+                    <mark className="highlight">
+                      {"612a58304d73f352602c2548"}
+                    </mark>
+                    /firstname
+                  </p>
+                </p>
+              </div>
+              would return the property typed:
+              <div className="doc-documentation-code-box">
+                <p className="doc-documentation-code">
+                  {" "}
+                  <span className="name">{"{"}</span>
+                  <br></br>
+                  <span className="name indent"> firstname: </span>
+                  <span className="name-content ">"Carlos"</span>
+                  <br></br>
+                  <span className="name">{"}"}</span>
+                </p>
+              </div>
+              You can type any property that a fighter object has: <br></br>
+              <br></br>
+              <ul>
+                <li className="indent">firstname</li>
+                <li className="indent">lastname</li>
+                <li className="indent">nickname</li>
+                <li className="indent">height</li>
+                <li className="indent">weight</li>
+                <li className="indent">reach</li>
+                <li className="indent">stance</li>
+                <li className="indent">wins</li>
+                <li className="indent">losses</li>
+                <li className="indent">draws</li>
+                <li className="indent">belt</li>
+              </ul>
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h1">📝 FAQ</p>
+            <p className="doc-documentation-subtitle">
+              Here are some frequently asked questions incase any of these help
+              you.
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-list">
+            <ul className="list">
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>How did you get the data?</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Why is the data formatted so weird?</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>How often will this API be updated?</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>I'm confused is this a solo project?</u>
+                  </mark>
+                </Link>
+              </li>
+              <li className="list-item">
+                <Link>
+                  <mark className="highlight">
+                    <u>Are these real questions?</u>
+                  </mark>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">How did you get the data?</p>
+            <p className="doc-documentation-p">
+              The data is continuously scraped from multiple MMA websites.
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">
+              Why is the data formatted so weird?
+            </p>
+            <p className="doc-documentation-p">
+              Since the data is scraped, lets just say the scrapping methods
+              aren't the best. We're looking to improve that though.
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">
+              How often will this API be updated?
+            </p>
+            <p className="doc-documentation-p">
+              I'll be working on my landing page after this is fully developed,
+              so updating will come slowly. You can always yell at me on my
+              emails to get me to hurry up though.
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">
+              I'm confused is this a solo project? Because you've used "we" and
+              now you're contradicting yourself.
+            </p>
+            <p className="doc-documentation-p">
+              Yeah it's a solo project, but saying "we" sounds a lot better,
+              don't you think?
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h2">Are these real questions?</p>
+            <p className="doc-documentation-p">
+              Nope, but it makes the documentation look a lot bigger B)
+            </p>
+          </div>
+          <div className="doc-documentation-divider"></div>
+          <div className="doc-documentation-heading">
+            <p className="doc-documentation-h1">🎉 Thank you</p>
+            <p className="doc-documentation-p">
+              Thank you to whoever gets this far on the site! Even if you
+              probably won't use the API ;D
             </p>
           </div>
         </div>
@@ -297,6 +915,18 @@ const Doc = () => {
 export default Doc;
 
 const Wrapper = styled.div`
+  .doc-documentation-h3 {
+    font-size: 30px;
+    margin-top: 60px;
+    margin-left: 20px;
+  }
+  .doc-documentation-p-sub {
+    font-size: 17px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.7;
+  }
   .record-content {
     color: #1100c9;
   }
@@ -305,6 +935,12 @@ const Wrapper = styled.div`
   }
   .name-content {
     color: #378f00;
+  }
+  .indent {
+    margin-left: 25px;
+  }
+  .indent2 {
+    margin-left: 50px;
   }
   .doc-documentation-heading {
     margin-top: 80px;
@@ -329,6 +965,7 @@ const Wrapper = styled.div`
     padding-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 14px;
   }
   .doc-documentation-code {
     font-family: "Courier New", Courier, monospace;
@@ -339,6 +976,8 @@ const Wrapper = styled.div`
     align-items: center;
     margin-left: 5px;
     margin-top: 2px;
+    background-color: #f7f7f7;
+    border-style: none;
   }
   .doc-documentation-divider {
     height: 1px;
