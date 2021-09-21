@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DocNavbar from "./DocNavbar";
 import DocFooter from "./DocFooter";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 // import { BsLink } from "react-icons/bs";
 import { GrDown } from "react-icons/gr";
 
@@ -18,9 +19,9 @@ const Doc = () => {
           <nav className="doc-nav">
             <ul className="doc-nav-list">
               <div className="doc-nav-link-container">
-                <Link to="/doc/#getting-started" className="doc-nav-links">
+                <HashLink to="/doc/#getting-started" className="doc-nav-links">
                   🔎GETTING STARTED{" "}
-                </Link>
+                </HashLink>
                 <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
                 </button>
