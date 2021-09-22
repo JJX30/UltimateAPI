@@ -1,16 +1,68 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import DocNavbar from "./DocNavbar";
 import DocFooter from "./DocFooter";
-import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 // import { BsLink } from "react-icons/bs";
 import { GrDown } from "react-icons/gr";
 
 const Doc = () => {
-  const handleClick = () => {
+  const [displayGetting, setDisplayGetting] = useState("none");
+  const [displayStructure, setDisplayStructure] = useState("none");
+  const [displayQueries, setDisplayQueries] = useState("none");
+  const [displayFAQ, setDisplayFAQ] = useState("none");
+  const gettingDropDown = useRef(null);
+  const structureDropDown = useRef(null);
+  const queriesDropDown = useRef(null);
+  const faqDropDown = useRef(null);
+  const list = [
+    gettingDropDown,
+    structureDropDown,
+    queriesDropDown,
+    faqDropDown,
+  ];
+
+  function handleClick(type) {
     console.log("bruh");
-  };
+    list.forEach((refs) => {
+      if (refs.current.style.display === "flex") {
+        refs.current.style.display = "none";
+      }
+    });
+    if (type === "gettingStarted") {
+      if (displayGetting === "none") {
+        gettingDropDown.current.style.display = "flex";
+        setDisplayGetting("flex");
+      } else {
+        gettingDropDown.current.style.display = "none";
+        setDisplayGetting("none");
+      }
+    } else if (type === "structure") {
+      if (displayStructure === "none") {
+        structureDropDown.current.style.display = "flex";
+        setDisplayStructure("flex");
+      } else {
+        structureDropDown.current.style.display = "none";
+        setDisplayStructure("none");
+      }
+    } else if (type === "queries") {
+      if (displayQueries === "none") {
+        queriesDropDown.current.style.display = "flex";
+        setDisplayQueries("flex");
+      } else {
+        queriesDropDown.current.style.display = "none";
+        setDisplayQueries("none");
+      }
+    } else if (type === "faq") {
+      if (displayFAQ === "none") {
+        faqDropDown.current.style.display = "flex";
+        setDisplayFAQ("flex");
+      } else {
+        faqDropDown.current.style.display = "none";
+        setDisplayFAQ("none");
+      }
+    }
+  }
   return (
     <Wrapper>
       <DocNavbar></DocNavbar>
@@ -22,33 +74,189 @@ const Doc = () => {
                 <HashLink to="/doc#top" className="doc-nav-links">
                   🔎GETTING STARTED{" "}
                 </HashLink>
-                <button onClick={handleClick} className="arrow-icon">
+                <button
+                  onClick={() => {
+                    handleClick("gettingDropDown");
+                  }}
+                  className="arrow-icon"
+                >
                   <GrDown></GrDown>
                 </button>
+              </div>
+              <div ref={gettingDropDown} className="doc-nav-drop-list">
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Try UltimateAPI
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Generate the key
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Your first request
+                  </HashLink>
+                </div>
               </div>
               <div className="doc-nav-link-container">
                 <HashLink to="/doc#structure" className="doc-nav-links">
                   🪜STRUCTURE
                 </HashLink>
-                <button onClick={handleClick} className="arrow-icon">
+                <button
+                  onClick={() => {
+                    handleClick("structureDropDown");
+                  }}
+                  className="arrow-icon"
+                >
                   <GrDown></GrDown>
                 </button>
+              </div>
+              <div ref={structureDropDown} className="doc-nav-drop-list">
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    ID
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Name
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Stats
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Record
+                  </HashLink>
+                </div>
               </div>
               <div className="doc-nav-link-container">
                 <HashLink to="/doc#queries" className="doc-nav-links">
                   ❓QUERIES
                 </HashLink>
-                <button onClick={handleClick} className="arrow-icon">
+                <button
+                  onClick={() => {
+                    handleClick("queriesDropDown");
+                  }}
+                  className="arrow-icon"
+                >
                   <GrDown></GrDown>
                 </button>
+              </div>
+              <div ref={queriesDropDown} className="doc-nav-drop-list">
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Find a fighter
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Find by attributes
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Find the ID
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Search with ID
+                  </HashLink>
+                </div>
               </div>
               <div className="doc-nav-link-container">
                 <HashLink to="/doc#FAQ" className="doc-nav-links">
                   📝FAQ
                 </HashLink>
-                <button onClick={handleClick} className="arrow-icon">
+                <button
+                  onClick={() => {
+                    handleClick("faqDropDown");
+                  }}
+                  className="arrow-icon"
+                >
                   <GrDown></GrDown>
                 </button>
+              </div>
+              <div ref={faqDropDown} className="doc-nav-drop-list">
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    How did you <br></br>get the data?
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Why is the <br></br>data formatted <br></br>so weird?
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    How often <br></br>will this API <br></br>be updated?
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    I'm confused <br></br>is this a <br></br>solo project?
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#structure-try"
+                    className="doc-nav-drop-links"
+                  >
+                    Are these <br></br>real questions?
+                  </HashLink>
+                </div>
               </div>
               <div className="doc-nav-link-container">
                 <HashLink to="/doc#thankyou" className="doc-nav-links">
@@ -76,25 +284,25 @@ const Doc = () => {
           <div className="doc-documentation-list">
             <ul className="list">
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#getting-started-try">
                   <mark className="highlight">
                     <u>Try UltimateAPI</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
-                  <mark className="highlight">
+                <HashLink to="/doc#getting-started-generate">
+                  <mark id="getting-started-try" className="highlight">
                     <u>Generate the key</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#getting-started-your">
                   <mark className="highlight">
                     <u>Your first request</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
             </ul>
           </div>
@@ -104,7 +312,8 @@ const Doc = () => {
             <p className="doc-documentation-p">
               Whether you’re making an app, making your own API, or just an MMA
               fan that happens to code, UltimateAPI is here to provide you with
-              the best UFC data at the fastest speeds. <br></br> <br></br>
+              the best UFC data at the fastest speeds. <br></br>{" "}
+              <br id="getting-started-generate"></br>
               If you are making an app, consider letting us know by reaching
               out! We’re excited to see what people will create with our
               product.
@@ -118,7 +327,7 @@ const Doc = () => {
               can be done in your profile tab, hit the edit button and then hit
               generate. Copy that key into your clipboard. You can generate as
               many times as you want!<br></br>
-              <br></br>
+              <br id="getting-started-your"></br>
               You’ll need that key to gain access to the API.
             </p>
           </div>
@@ -161,32 +370,32 @@ const Doc = () => {
           <div className="doc-documentation-list">
             <ul className="list">
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#structure-id">
                   <mark className="highlight">
                     <u>ID</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#structure-name">
                   <mark className="highlight">
                     <u>Name</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
-              <li className="list-item">
-                <Link>
+              <li id="structure-id" className="list-item">
+                <HashLink to="/doc#structure-stats">
                   <mark className="highlight">
-                    <u>Attributes</u>
+                    <u>Stats</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#structure-record">
                   <mark className="highlight">
                     <u>Record</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
             </ul>
           </div>
@@ -199,7 +408,7 @@ const Doc = () => {
               <div className="doc-documentation-code-box">
                 <p className="doc-documentation-code">
                   <span className="name">_id: </span>
-                  <span className="name-content">
+                  <span id="structure-name" className="name-content">
                     "612a58314d73f352602c2702"
                   </span>
                 </p>
@@ -220,7 +429,9 @@ const Doc = () => {
                   <span className="name">lastname: </span>
                   <span className="name-content">"Ferguson"</span>, <br></br>
                   <span className="name">nickname: </span>
-                  <span className="name-content">"El Cucuy"</span>
+                  <span id="structure-stats" className="name-content">
+                    "El Cucuy"
+                  </span>
                 </p>
               </div>
             </p>
@@ -241,7 +452,9 @@ const Doc = () => {
                   <span className="name">reach: </span>
                   <span className="name-content">"76"</span>, <br></br>
                   <span className="name">stance: </span>
-                  <span className="name-content">"Orthodox"</span>
+                  <span id="structure-record" className="name-content">
+                    "Orthodox"
+                  </span>
                 </p>
               </div>
             </p>
@@ -285,32 +498,60 @@ const Doc = () => {
           <div className="doc-documentation-list">
             <ul className="list">
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#queries-fighter">
                   <mark className="highlight">
                     <u>Find a fighter</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#queries-attributes">
                   <mark className="highlight">
                     <u>Find by attributes</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
-              <li className="list-item">
-                <Link>
+              <li className="list-item-indent">
+                <HashLink to="/doc#queries-height">
+                  <mark className="highlight">
+                    <u>Height</u>
+                  </mark>
+                </HashLink>
+              </li>
+              <li className="list-item-indent">
+                <HashLink to="/doc#queries-weight">
+                  <mark className="highlight">
+                    <u>Weight</u>
+                  </mark>
+                </HashLink>
+              </li>
+              <li className="list-item-indent">
+                <HashLink to="/doc#queries-stance">
+                  <mark className="highlight">
+                    <u>Stance</u>
+                  </mark>
+                </HashLink>
+              </li>
+              <li className="list-item-indent">
+                <HashLink to="/doc#queries-rec">
+                  <mark className="highlight">
+                    <u>Record</u>
+                  </mark>
+                </HashLink>
+              </li>
+              <li id="queries-fighter" className="list-item">
+                <HashLink to="/doc#queries-find">
                   <mark className="highlight">
                     <u>Find the ID</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#queries-search">
                   <mark className="highlight">
                     <u>Search with ID</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
             </ul>
           </div>
@@ -399,7 +640,7 @@ const Doc = () => {
                   <span className="record-content">0</span>, <br></br>
                   <span className="name indent2"> belt: </span>
                   <span className="belt-content">false</span> <br></br>
-                  <span className="name indent">
+                  <span id="queries-attributes" className="name indent">
                     {"}"} <br></br>
                   </span>
                   {"]"}
@@ -410,7 +651,7 @@ const Doc = () => {
           <div className="doc-documentation-divider"></div>
           <div className="doc-documentation-heading">
             <p className="doc-documentation-h2">🕵️ Find by attributes</p>
-            <p className="doc-documentation-p">
+            <p id="queries-height" className="doc-documentation-p">
               Queries for height, weight, stance, and record are all available
               and will return a list of fighters with those queries.{" "}
             </p>
@@ -501,7 +742,7 @@ const Doc = () => {
                     <span className="name indent">
                       {"{ ... } //more items"}
                     </span>{" "}
-                    <br></br>
+                    <br id="queries-weight"></br>
                   </span>
                   {"]"}
                 </p>
@@ -520,7 +761,9 @@ const Doc = () => {
                     {"{"}your_key{"}"}
                   </mark>
                   /ufc/fighters/weight?
-                  <mark className="highlight">weight=155</mark>
+                  <mark id="queries-stance" className="highlight">
+                    weight=155
+                  </mark>
                 </p>
               </div>
               would return list of fighters with that weight.
@@ -538,7 +781,9 @@ const Doc = () => {
                     {"{"}your_key{"}"}
                   </mark>
                   /ufc/fighters/stance?
-                  <mark className="highlight">stance=switch</mark>
+                  <mark id="queries-rec" className="highlight">
+                    stance=switch
+                  </mark>
                 </p>
               </div>
               would return list of fighters with that stance.
@@ -718,12 +963,13 @@ const Doc = () => {
                   <span className="record-content">0</span>, <br></br>
                   <span className="name indent2"> belt: </span>
                   <span className="belt-content">false</span> <br></br>
-                  <span className="name indent">
+                  <span id="queries-find" className="name indent">
                     {"}"}, <br></br>
                   </span>
                   {"]"}
                 </p>
               </div>
+              Hash
             </p>
           </div>
           <div className="doc-documentation-divider"></div>
@@ -756,7 +1002,9 @@ const Doc = () => {
                     "612a58304d73f352602c2548"
                   </span>
                   <br></br>
-                  <span className="indent">{"}"}</span>
+                  <span id="queries-search" className="indent">
+                    {"}"}
+                  </span>
                   <br></br>
                   {"]"}
                 </p>
@@ -828,46 +1076,46 @@ const Doc = () => {
           <div className="doc-documentation-list">
             <ul className="list">
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#FAQ-data">
                   <mark className="highlight">
                     <u>How did you get the data?</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#FAQ-weird">
                   <mark className="highlight">
                     <u>Why is the data formatted so weird?</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#FAQ-updated">
                   <mark className="highlight">
                     <u>How often will this API be updated?</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
-              <li className="list-item">
-                <Link>
+              <li id="FAQ-data" className="list-item">
+                <HashLink to="/doc#FAQ-project">
                   <mark className="highlight">
                     <u>I'm confused is this a solo project?</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
               <li className="list-item">
-                <Link>
+                <HashLink to="/doc#FAQ-questions">
                   <mark className="highlight">
                     <u>Are these real questions?</u>
                   </mark>
-                </Link>
+                </HashLink>
               </li>
             </ul>
           </div>
           <div className="doc-documentation-divider"></div>
           <div className="doc-documentation-heading">
             <p className="doc-documentation-h2">How did you get the data?</p>
-            <p className="doc-documentation-p">
+            <p id="FAQ-weird" className="doc-documentation-p">
               The data is continuously scraped from multiple MMA websites.
             </p>
           </div>
@@ -876,7 +1124,7 @@ const Doc = () => {
             <p className="doc-documentation-h2">
               Why is the data formatted so weird?
             </p>
-            <p className="doc-documentation-p">
+            <p id="FAQ-updated" className="doc-documentation-p">
               Since the data is scraped, lets just say the scrapping methods
               aren't the best. We're looking to improve that though.
             </p>
@@ -886,7 +1134,7 @@ const Doc = () => {
             <p className="doc-documentation-h2">
               How often will this API be updated?
             </p>
-            <p className="doc-documentation-p">
+            <p id="FAQ-project" className="doc-documentation-p">
               I'll be working on my landing page after this is fully developed,
               so updating will come slowly. You can always yell at me on my
               emails to get me to hurry up though.
@@ -898,7 +1146,7 @@ const Doc = () => {
               I'm confused is this a solo project? Because you've used "we" and
               now you're contradicting yourself.
             </p>
-            <p className="doc-documentation-p">
+            <p id="FAQ-questions" className="doc-documentation-p">
               Yeah it's a solo project, but saying "we" sounds a lot better,
               don't you think?
             </p>
@@ -928,6 +1176,27 @@ const Doc = () => {
 export default Doc;
 
 const Wrapper = styled.div`
+  .doc-nav-drop-list {
+    display: none;
+    flex-direction: column;
+    margin-left: 40px;
+  }
+  .doc-nav-drop-container {
+    margin: 5px;
+  }
+  .doc-nav-drop-links {
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #262626;
+    text-decoration: none;
+  }
+  .list-item-indent {
+    margin-left: 70px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    list-style: circle;
+  }
   .doc-documentation-h3 {
     font-size: 30px;
     margin-top: 60px;
@@ -1005,7 +1274,6 @@ const Wrapper = styled.div`
     padding-right: 100px;
     font-family: Roboto, sans-serif;
   }
-
   .doc-documentation-h2 {
     font-size: 45px;
     margin-top: 60px;
