@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import DocNavbar from "./DocNavbar";
 import DocFooter from "./DocFooter";
@@ -7,61 +7,33 @@ import { HashLink } from "react-router-hash-link";
 import { GrDown } from "react-icons/gr";
 
 const Doc = () => {
-  const [displayGetting, setDisplayGetting] = useState("none");
-  const [displayStructure, setDisplayStructure] = useState("none");
-  const [displayQueries, setDisplayQueries] = useState("none");
-  const [displayFAQ, setDisplayFAQ] = useState("none");
+  // const [displayGetting, setDisplayGetting] = useState("none");
+  // const [displayStructure, setDisplayStructure] = useState("none");
+  // const [displayQueries, setDisplayQueries] = useState("none");
+  // const [displayFAQ, setDisplayFAQ] = useState("none");
   const gettingDropDown = useRef(null);
   const structureDropDown = useRef(null);
   const queriesDropDown = useRef(null);
   const faqDropDown = useRef(null);
   const list = [
-    gettingDropDown,
-    structureDropDown,
-    queriesDropDown,
-    faqDropDown,
+    { ref: gettingDropDown, name: "getting" },
+    { ref: structureDropDown, name: "structure" },
+    { ref: queriesDropDown, name: "queries" },
+    { ref: faqDropDown, name: "faq" },
   ];
 
   function handleClick(type) {
-    console.log("bruh");
-    list.forEach((refs) => {
-      if (refs.current.style.display === "flex") {
-        refs.current.style.display = "none";
+    list.forEach(({ ref, name }) => {
+      if (name === type) {
+        if (ref.current.style.display === "none") {
+          ref.current.style.display = "flex";
+        } else {
+          ref.current.style.display = "none";
+        }
+      } else {
+        ref.current.style.display = "none";
       }
     });
-    if (type === "gettingStarted") {
-      if (displayGetting === "none") {
-        gettingDropDown.current.style.display = "flex";
-        setDisplayGetting("flex");
-      } else {
-        gettingDropDown.current.style.display = "none";
-        setDisplayGetting("none");
-      }
-    } else if (type === "structure") {
-      if (displayStructure === "none") {
-        structureDropDown.current.style.display = "flex";
-        setDisplayStructure("flex");
-      } else {
-        structureDropDown.current.style.display = "none";
-        setDisplayStructure("none");
-      }
-    } else if (type === "queries") {
-      if (displayQueries === "none") {
-        queriesDropDown.current.style.display = "flex";
-        setDisplayQueries("flex");
-      } else {
-        queriesDropDown.current.style.display = "none";
-        setDisplayQueries("none");
-      }
-    } else if (type === "faq") {
-      if (displayFAQ === "none") {
-        faqDropDown.current.style.display = "flex";
-        setDisplayFAQ("flex");
-      } else {
-        faqDropDown.current.style.display = "none";
-        setDisplayFAQ("none");
-      }
-    }
   }
   return (
     <Wrapper>
@@ -76,7 +48,7 @@ const Doc = () => {
                 </HashLink>
                 <button
                   onClick={() => {
-                    handleClick("gettingDropDown");
+                    handleClick("getting");
                   }}
                   className="arrow-icon"
                 >
@@ -86,7 +58,7 @@ const Doc = () => {
               <div ref={gettingDropDown} className="doc-nav-drop-list">
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
                     Try UltimateAPI
@@ -94,7 +66,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
                     Generate the key
@@ -102,7 +74,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
                     Your first request
@@ -115,7 +87,7 @@ const Doc = () => {
                 </HashLink>
                 <button
                   onClick={() => {
-                    handleClick("structureDropDown");
+                    handleClick("structure");
                   }}
                   className="arrow-icon"
                 >
@@ -125,7 +97,7 @@ const Doc = () => {
               <div ref={structureDropDown} className="doc-nav-drop-list">
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#structure-id"
                     className="doc-nav-drop-links"
                   >
                     ID
@@ -133,7 +105,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#structure-name"
                     className="doc-nav-drop-links"
                   >
                     Name
@@ -141,7 +113,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#structure-stats"
                     className="doc-nav-drop-links"
                   >
                     Stats
@@ -149,7 +121,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#structure-record"
                     className="doc-nav-drop-links"
                   >
                     Record
@@ -162,7 +134,7 @@ const Doc = () => {
                 </HashLink>
                 <button
                   onClick={() => {
-                    handleClick("queriesDropDown");
+                    handleClick("queries");
                   }}
                   className="arrow-icon"
                 >
@@ -172,7 +144,7 @@ const Doc = () => {
               <div ref={queriesDropDown} className="doc-nav-drop-list">
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#queries-fighter"
                     className="doc-nav-drop-links"
                   >
                     Find a fighter
@@ -180,7 +152,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#queries-attributes"
                     className="doc-nav-drop-links"
                   >
                     Find by attributes
@@ -188,7 +160,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#queries-find"
                     className="doc-nav-drop-links"
                   >
                     Find the ID
@@ -196,7 +168,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#queries-search"
                     className="doc-nav-drop-links"
                   >
                     Search with ID
@@ -209,7 +181,7 @@ const Doc = () => {
                 </HashLink>
                 <button
                   onClick={() => {
-                    handleClick("faqDropDown");
+                    handleClick("faq");
                   }}
                   className="arrow-icon"
                 >
@@ -218,24 +190,18 @@ const Doc = () => {
               </div>
               <div ref={faqDropDown} className="doc-nav-drop-list">
                 <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-try"
-                    className="doc-nav-drop-links"
-                  >
+                  <HashLink to="/doc#faq-data" className="doc-nav-drop-links">
                     How did you <br></br>get the data?
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-try"
-                    className="doc-nav-drop-links"
-                  >
+                  <HashLink to="/doc#faq-weird" className="doc-nav-drop-links">
                     Why is the <br></br>data formatted <br></br>so weird?
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#faq-updated"
                     className="doc-nav-drop-links"
                   >
                     How often <br></br>will this API <br></br>be updated?
@@ -243,7 +209,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#faq-project"
                     className="doc-nav-drop-links"
                   >
                     I'm confused <br></br>is this a <br></br>solo project?
@@ -251,7 +217,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#structure-try"
+                    to="/doc#faq-questions"
                     className="doc-nav-drop-links"
                   >
                     Are these <br></br>real questions?
@@ -1260,6 +1226,7 @@ const Wrapper = styled.div`
     margin-top: 2px;
     background-color: #f7f7f7;
     border-style: none;
+    cursor: pointer;
   }
   .doc-documentation-divider {
     height: 1px;
