@@ -19,7 +19,7 @@ const Doc = () => {
           <nav className="doc-nav">
             <ul className="doc-nav-list">
               <div className="doc-nav-link-container">
-                <HashLink to="/doc/#getting-started" className="doc-nav-links">
+                <HashLink to="/doc#top" className="doc-nav-links">
                   🔎GETTING STARTED{" "}
                 </HashLink>
                 <button onClick={handleClick} className="arrow-icon">
@@ -27,25 +27,33 @@ const Doc = () => {
                 </button>
               </div>
               <div className="doc-nav-link-container">
-                <Link className="doc-nav-links">🪜STRUCTURE</Link>
+                <HashLink to="/doc#structure" className="doc-nav-links">
+                  🪜STRUCTURE
+                </HashLink>
                 <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
                 </button>
               </div>
               <div className="doc-nav-link-container">
-                <Link className="doc-nav-links">❓QUERIES</Link>
+                <HashLink to="/doc#queries" className="doc-nav-links">
+                  ❓QUERIES
+                </HashLink>
                 <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
                 </button>
               </div>
               <div className="doc-nav-link-container">
-                <Link className="doc-nav-links">📝FAQ</Link>
+                <HashLink to="/doc#FAQ" className="doc-nav-links">
+                  📝FAQ
+                </HashLink>
                 <button onClick={handleClick} className="arrow-icon">
                   <GrDown></GrDown>
                 </button>
               </div>
               <div className="doc-nav-link-container">
-                <Link className="doc-nav-links">🎉THANK YOU</Link>
+                <HashLink to="/doc#thankyou" className="doc-nav-links">
+                  🎉THANK YOU
+                </HashLink>
               </div>
             </ul>
           </nav>
@@ -133,7 +141,7 @@ const Doc = () => {
               Place your key within this link and navigate to the url. You
               should get a page that returns some JSON data from a fighter in
               our database.<br></br>
-              <br></br>
+              <br id="structure"></br>
               Congratulations you just made your first request to UltimateAPI,
               pretty cool huh?
             </p>
@@ -255,7 +263,9 @@ const Doc = () => {
                   <span className="name">draws: </span>
                   <span className="record-content">0</span>, <br></br>
                   <span className="name">belt: </span>
-                  <span className="belt-content">false</span>
+                  <span id="queries" className="belt-content">
+                    false
+                  </span>
                 </p>
               </div>
             </p>
@@ -800,7 +810,9 @@ const Doc = () => {
                 <li className="indent">wins</li>
                 <li className="indent">losses</li>
                 <li className="indent">draws</li>
-                <li className="indent">belt</li>
+                <li id="FAQ" className="indent">
+                  belt
+                </li>
               </ul>
             </p>
           </div>
@@ -894,7 +906,7 @@ const Doc = () => {
           <div className="doc-documentation-divider"></div>
           <div className="doc-documentation-heading">
             <p className="doc-documentation-h2">Are these real questions?</p>
-            <p className="doc-documentation-p">
+            <p id="thankyou" className="doc-documentation-p">
               Nope, but it makes the documentation look a lot bigger B)
             </p>
           </div>
