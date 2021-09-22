@@ -44,7 +44,11 @@ const DocNavbar = () => {
             color="#DB0000"
           ></GiBoxingGloveSurprise>
         </Link>
-        <input type="text" placeholder="    search the documentation..." />
+        <input
+          className="nav-input"
+          type="text"
+          placeholder="search the documentation..."
+        />
       </div>
       <div className="navbar-links">
         <div className="navbar-profile">
@@ -156,5 +160,17 @@ const DocDiv = styled.nav`
 
   GiBoxingGlove {
     color: #db0000;
+  }
+  .nav-input {
+    width: 533px;
+    height: 42px;
+    border-radius: 50px;
+    border-style: none;
+    font-size: 18px;
+    padding-inline-start: 30px;
+    padding-inline-end: 30px;
+  }
+  input::placeholder {
+    font-size: 18px;
   }
 `;

@@ -36,6 +36,7 @@ const Info = () => {
       }
     });
   });
+
   const handleClickForward = () => {
     if (index === 2) {
       setIndex(0);
@@ -50,6 +51,16 @@ const Info = () => {
       setIndex((num) => num - 1);
     }
   };
+
+  function handleBubble(num) {
+    if (num === 1) {
+      setIndex(0);
+    } else if (num === 2) {
+      setIndex(1);
+    } else {
+      setIndex(2);
+    }
+  }
   return (
     <Wrapper>
       <div id="about" className="info-body">
@@ -71,13 +82,25 @@ const Info = () => {
           </button>
         </div>
         <div className="info-dynamic-bubbles">
-          <button>
+          <button
+            onClick={() => {
+              handleBubble(1);
+            }}
+          >
             <div ref={bubble1} className="bubble bubble-1"></div>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              handleBubble(2);
+            }}
+          >
             <div ref={bubble2} className="bubble bubble-2"></div>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              handleBubble(3);
+            }}
+          >
             <div ref={bubble3} className="bubble bubble-3"></div>
           </button>
         </div>

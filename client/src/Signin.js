@@ -53,7 +53,7 @@ const Signin = () => {
               registrationDate: result.registrationDate,
               image: `https://avatars.dicebear.com/api/identicon/${result.apiKey}.svg`,
             });
-            history.push("/dashboard");
+            history.push("/");
           });
         }
       } catch (err) {
