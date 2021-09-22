@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { VscTwitter } from "react-icons/vsc";
@@ -23,6 +24,7 @@ const Footer = () => {
                   href="https://www.facebook.com/profile.php?id=100009565177074"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="social-link"
                 >
                   <AiOutlineFacebook size={40}></AiOutlineFacebook>
                 </a>
@@ -30,6 +32,7 @@ const Footer = () => {
                   href="https://twitter.com/mdelcas4"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="social-link"
                 >
                   <VscTwitter size={40}></VscTwitter>
                 </a>
@@ -37,6 +40,7 @@ const Footer = () => {
                   href="https://www.instagram.com/mdelcas4/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="social-link"
                 >
                   <RiInstagramLine size={40}></RiInstagramLine>
                 </a>
@@ -44,6 +48,7 @@ const Footer = () => {
                   href="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="social-link"
                 >
                   <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
                 </a>
@@ -51,6 +56,7 @@ const Footer = () => {
                   href="https://github.com/JJX30"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="social-link"
                 >
                   <AiFillGithub size={38}></AiFillGithub>
                 </a>
@@ -61,14 +67,25 @@ const Footer = () => {
             <div className="footer-terms">
               <p className="footer-terms-heading">terms & conditions</p>
               <p className="footer-terms-content">
-                Terms and conditions of sale<br></br>Privacy policy<br></br>
-                Website terms and conditions
+                <Link className="footer-terms-link">
+                  Terms and conditions of sale
+                </Link>
+                <br></br>
+                <Link className="footer-terms-link">Privacy policy</Link>
+                <br></br>
+                <Link className="footer-terms-link">
+                  Website terms and conditions
+                </Link>
               </p>
             </div>
             <div className="footer-built">
               <p className="footer-built-heading">built with</p>
               <p className="footer-built-content">
-                React<br></br>Express<br></br>MongoDB
+                <Link className="footer-built-link">React</Link>
+                <br></br>
+                <Link className="footer-built-link">Express</Link>
+                <br></br>
+                <Link className="footer-built-link">MongoDB</Link>
               </p>
             </div>
           </div>
@@ -159,13 +176,24 @@ const Wrapper = styled.div`
     margin: 0px;
     font-weight: 500;
   }
+
   .footer-logo-content {
     font-size: 18px;
     margin: 0;
-    color: rgba(255, 255, 255, 0.6);
     font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
   }
 
+  .footer-terms-link {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 200%;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .footer-terms-link:hover {
+    text-decoration: underline;
+  }
   .footer-terms {
     width: 226px;
     height: 163px;
@@ -204,6 +232,16 @@ const Wrapper = styled.div`
     margin-bottom: 5px;
   }
 
+  .footer-built-link {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 200%;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .footer-built-link:hover {
+    text-decoration: underline;
+  }
   .footer-built-content {
     font-weight: 300;
     font-size: 14px;
@@ -229,8 +267,10 @@ const Wrapper = styled.div`
     text-decoration: none;
     color: white;
   }
-  a:-webkit-any-link {
-    color: white;
+
+  .social-link {
+    text-decoration: none;
     cursor: pointer;
+    color: white;
   }
 `;

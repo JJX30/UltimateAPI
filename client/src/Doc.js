@@ -1079,7 +1079,8 @@ const Doc = () => {
               </p>
             </div>
             <p className="doc-documentation-p-sub">
-              You can query any property that a fighter object has: <br></br>
+              You can query any property that a fighter object has, if you also
+              have their ID: <br></br>
               <br></br>
             </p>
             <ul className="doc-documentation-list-sub">
