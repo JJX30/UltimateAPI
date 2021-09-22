@@ -15,6 +15,7 @@ const Doc = () => {
   const structureDropDown = useRef(null);
   const queriesDropDown = useRef(null);
   const faqDropDown = useRef(null);
+  const miniDropDown = useRef(null);
   const list = [
     { ref: gettingDropDown, name: "getting" },
     { ref: structureDropDown, name: "structure" },
@@ -35,6 +36,14 @@ const Doc = () => {
       }
     });
   }
+
+  const handleMini = () => {
+    if (miniDropDown.current.style.display === "flex") {
+      miniDropDown.current.style.display = "none";
+    } else {
+      miniDropDown.current.style.display = "flex";
+    }
+  };
   return (
     <Wrapper>
       <DocNavbar></DocNavbar>
@@ -150,13 +159,55 @@ const Doc = () => {
                     Find a fighter
                   </HashLink>
                 </div>
-                <div className="doc-nav-drop-container">
+                <div className="doc-nav-drop-container-bruh">
                   <HashLink
                     to="/doc#queries-attributes"
                     className="doc-nav-drop-links"
                   >
                     Find by attributes
                   </HashLink>
+                  <button
+                    onClick={() => {
+                      handleMini();
+                    }}
+                    className="arrow-icon-mini"
+                  >
+                    <GrDown></GrDown>
+                  </button>
+                </div>
+                <div ref={miniDropDown} className="doc-nav-drop-list-mini">
+                  <div className="doc-nav-drop-container-mini">
+                    <HashLink
+                      to="/doc#queries-height"
+                      className="doc-nav-drop-links"
+                    >
+                      Height
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container-mini">
+                    <HashLink
+                      to="/doc#queries-weight"
+                      className="doc-nav-drop-links"
+                    >
+                      Weight
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container-mini">
+                    <HashLink
+                      to="/doc#queries-stance"
+                      className="doc-nav-drop-links"
+                    >
+                      Stance
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container-mini">
+                    <HashLink
+                      to="/doc#queries-rec"
+                      className="doc-nav-drop-links"
+                    >
+                      Record
+                    </HashLink>
+                  </div>
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
@@ -1142,6 +1193,31 @@ const Doc = () => {
 export default Doc;
 
 const Wrapper = styled.div`
+  .arrow-icon-mini {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 4px;
+    background-color: #f7f7f7;
+    border-style: none;
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+  }
+  .doc-nav-drop-container-bruh {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+  }
+  .doc-nav-drop-list-mini {
+    display: none;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  .doc-nav-drop-container-mini {
+    margin: 5px;
+  }
   .doc-nav-drop-list {
     display: none;
     flex-direction: column;
