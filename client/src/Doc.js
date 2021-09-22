@@ -26,7 +26,13 @@ const Doc = () => {
   function handleClick(type) {
     list.forEach(({ ref, name }) => {
       if (name === type) {
-        if (ref.current.style.display === "none") {
+        console.log("bruh");
+        console.log(ref.current.style.display);
+        if (
+          ref.current.style.display === "none" ||
+          ref.current.style.display === ""
+        ) {
+          console.log("bruh");
           ref.current.style.display = "flex";
         } else {
           ref.current.style.display = "none";
@@ -70,7 +76,7 @@ const Doc = () => {
                     to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
-                    Try UltimateAPI
+                    🥊 Try UltimateAPI
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -78,7 +84,7 @@ const Doc = () => {
                     to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
-                    Generate the key
+                    🔑 Generate the key
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -86,7 +92,7 @@ const Doc = () => {
                     to="/doc#getting-started-try"
                     className="doc-nav-drop-links"
                   >
-                    Your first request
+                    🥇 Your first request
                   </HashLink>
                 </div>
               </div>
@@ -109,7 +115,7 @@ const Doc = () => {
                     to="/doc#structure-id"
                     className="doc-nav-drop-links"
                   >
-                    ID
+                    🎫 ID
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -117,7 +123,7 @@ const Doc = () => {
                     to="/doc#structure-name"
                     className="doc-nav-drop-links"
                   >
-                    Name
+                    ✒️ Name
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -125,7 +131,7 @@ const Doc = () => {
                     to="/doc#structure-stats"
                     className="doc-nav-drop-links"
                   >
-                    Stats
+                    📊 Stats
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -133,7 +139,7 @@ const Doc = () => {
                     to="/doc#structure-record"
                     className="doc-nav-drop-links"
                   >
-                    Record
+                    🏆 Record
                   </HashLink>
                 </div>
               </div>
@@ -156,7 +162,7 @@ const Doc = () => {
                     to="/doc#queries-fighter"
                     className="doc-nav-drop-links"
                   >
-                    Find a fighter
+                    🥷 Find a fighter
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container-bruh">
@@ -164,7 +170,7 @@ const Doc = () => {
                     to="/doc#queries-attributes"
                     className="doc-nav-drop-links"
                   >
-                    Find by attributes
+                    🕵️ Find by attributes
                   </HashLink>
                   <button
                     onClick={() => {
@@ -181,7 +187,7 @@ const Doc = () => {
                       to="/doc#queries-height"
                       className="doc-nav-drop-links"
                     >
-                      Height
+                      📏 Height
                     </HashLink>
                   </div>
                   <div className="doc-nav-drop-container-mini">
@@ -189,7 +195,7 @@ const Doc = () => {
                       to="/doc#queries-weight"
                       className="doc-nav-drop-links"
                     >
-                      Weight
+                      ⚖️ Weight
                     </HashLink>
                   </div>
                   <div className="doc-nav-drop-container-mini">
@@ -197,7 +203,7 @@ const Doc = () => {
                       to="/doc#queries-stance"
                       className="doc-nav-drop-links"
                     >
-                      Stance
+                      🥋 Stance
                     </HashLink>
                   </div>
                   <div className="doc-nav-drop-container-mini">
@@ -205,7 +211,7 @@ const Doc = () => {
                       to="/doc#queries-rec"
                       className="doc-nav-drop-links"
                     >
-                      Record
+                      🏅 Record
                     </HashLink>
                   </div>
                 </div>
@@ -214,7 +220,7 @@ const Doc = () => {
                     to="/doc#queries-find"
                     className="doc-nav-drop-links"
                   >
-                    Find the ID
+                    🆔 Find the ID
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
@@ -222,7 +228,7 @@ const Doc = () => {
                     to="/doc#queries-search"
                     className="doc-nav-drop-links"
                   >
-                    Search with ID
+                    🔍 Search with ID
                   </HashLink>
                 </div>
               </div>
@@ -241,37 +247,37 @@ const Doc = () => {
               </div>
               <div ref={faqDropDown} className="doc-nav-drop-list">
                 <div className="doc-nav-drop-container">
-                  <HashLink to="/doc#faq-data" className="doc-nav-drop-links">
-                    How did you <br></br>get the data?
+                  <HashLink to="/doc#FAQ-data" className="doc-nav-drop-links">
+                    📀 How did you <br></br>get the data?
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
-                  <HashLink to="/doc#faq-weird" className="doc-nav-drop-links">
-                    Why is the <br></br>data formatted <br></br>so weird?
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#faq-updated"
-                    className="doc-nav-drop-links"
-                  >
-                    How often <br></br>will this API <br></br>be updated?
+                  <HashLink to="/doc#FAQ-weird" className="doc-nav-drop-links">
+                    ⁉️ Why is the <br></br>data formatted <br></br>so weird?
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#faq-project"
+                    to="/doc#FAQ-updated"
                     className="doc-nav-drop-links"
                   >
-                    I'm confused <br></br>is this a <br></br>solo project?
+                    ⏰ How often <br></br>will this API <br></br>be updated?
                   </HashLink>
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#faq-questions"
+                    to="/doc#FAQ-project"
                     className="doc-nav-drop-links"
                   >
-                    Are these <br></br>real questions?
+                    ☝️ I'm confused <br></br>is this a <br></br>solo project?
+                  </HashLink>
+                </div>
+                <div className="doc-nav-drop-container">
+                  <HashLink
+                    to="/doc#FAQ-questions"
+                    className="doc-nav-drop-links"
+                  >
+                    🙃 Are these <br></br>real questions?
                   </HashLink>
                 </div>
               </div>
@@ -1217,7 +1223,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-left: 5px;
-    margin-top: 4px;
+    margin-top: 9px;
     background-color: #f7f7f7;
     border-style: none;
     cursor: pointer;
@@ -1251,6 +1257,9 @@ const Wrapper = styled.div`
     font-weight: 300;
     color: #262626;
     text-decoration: none;
+  }
+  .doc-nav-drop-links:hover {
+    color: #eb4034;
   }
   .list-item-indent {
     margin-left: 70px;
@@ -1295,9 +1304,14 @@ const Wrapper = styled.div`
   .list-item {
     margin: 35px;
   }
+
   .highlight {
     background-color: rgba(219, 0, 0, 0.6);
     color: white;
+  }
+  .highlight:hover {
+    /* background-color: rgba(255, 110, 110, 0.6); */
+    background-color: rgba(219, 0, 0, 0.3);
   }
   .doc-documentation-code-box {
     border-style: solid;
@@ -1395,6 +1409,9 @@ const Wrapper = styled.div`
     font-weight: 300;
     color: #262626;
     text-decoration: none;
+  }
+  .doc-nav-links:hover {
+    color: #eb4034;
   }
   .doc-divider {
     width: 2px;
