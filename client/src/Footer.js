@@ -67,13 +67,15 @@ const Footer = () => {
             <div className="footer-terms">
               <p className="footer-terms-heading">terms & conditions</p>
               <p className="footer-terms-content">
-                <Link className="footer-terms-link">
+                <Link to="/" className="footer-terms-link">
                   Terms and conditions of sale
                 </Link>
                 <br></br>
-                <Link className="footer-terms-link">Privacy policy</Link>
+                <Link to="/" className="footer-terms-link">
+                  Privacy policy
+                </Link>
                 <br></br>
-                <Link className="footer-terms-link">
+                <Link to="/" className="footer-terms-link">
                   Website terms and conditions
                 </Link>
               </p>
@@ -81,11 +83,20 @@ const Footer = () => {
             <div className="footer-built">
               <p className="footer-built-heading">built with</p>
               <p className="footer-built-content">
-                <Link className="footer-built-link">React</Link>
+                <a href="https://reactjs.org/" className="footer-built-link">
+                  React
+                </a>
                 <br></br>
-                <Link className="footer-built-link">Express</Link>
+                <a href="https://expressjs.com/" className="footer-built-link">
+                  Express
+                </a>
                 <br></br>
-                <Link className="footer-built-link">MongoDB</Link>
+                <a
+                  href="https://www.mongodb.com/"
+                  className="footer-built-link"
+                >
+                  MongoDB
+                </a>
               </p>
             </div>
           </div>

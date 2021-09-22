@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
@@ -19,9 +19,23 @@ import cageImage from "./images/promotions/cage-warriors-logo.png";
 import oneImage from "./images/promotions/onechamp.jpeg";
 
 const Info = () => {
+  const bubble1 = useRef(null);
+  const bubble2 = useRef(null);
+  const bubble3 = useRef(null);
+
+  const bubbleList = [bubble1, bubble2, bubble3];
   const slider = ["stats", "open", "updates"];
   const [index, setIndex] = useState(0);
 
+  useEffect(() => {
+    bubbleList.forEach((bubble, i) => {
+      if (index === i) {
+        bubble.current.style.backgroundColor = "white";
+      } else {
+        bubble.current.style.backgroundColor = "#797979";
+      }
+    });
+  });
   const handleClickForward = () => {
     if (index === 2) {
       setIndex(0);
@@ -40,23 +54,31 @@ const Info = () => {
     <Wrapper>
       <div id="about" className="info-body">
         <div className="info-content">
-          <button onClick={handleClickBackward}>
+          <button
+            onClick={() => {
+              handleClickBackward();
+            }}
+          >
             <FaArrowLeft size={40}></FaArrowLeft>
           </button>
           {<Slider which={slider[index]}></Slider>}
-          <button onClick={handleClickForward}>
+          <button
+            onClick={() => {
+              handleClickForward();
+            }}
+          >
             <FaArrowRight size={40}></FaArrowRight>
           </button>
         </div>
         <div className="info-dynamic-bubbles">
           <button>
-            <div className="bubble bubble-1"></div>
+            <div ref={bubble1} className="bubble bubble-1"></div>
           </button>
           <button>
-            <div className="bubble bubble-2"></div>
+            <div ref={bubble2} className="bubble bubble-2"></div>
           </button>
           <button>
-            <div className="bubble bubble-3"></div>
+            <div ref={bubble3} className="bubble bubble-3"></div>
           </button>
         </div>
       </div>
@@ -357,6 +379,12 @@ const Wrapper = styled.div`
   }
   .bubble-1 {
     background-color: white;
+  }
+  .bubble-2 {
+    background-color: #797979;
+  }
+  .bubble-3 {
+    background-color: #797979;
   }
   .info-content-text {
     width: 571px;
