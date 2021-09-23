@@ -81,7 +81,8 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#getting-started-try"
+                    HashLink
+                    to="/doc#getting-started-generate"
                     className="doc-nav-drop-links"
                   >
                     🔑 Generate the key
@@ -89,7 +90,7 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    to="/doc#getting-started-try"
+                    to="/doc#getting-started-your"
                     className="doc-nav-drop-links"
                   >
                     🥇 Your first request

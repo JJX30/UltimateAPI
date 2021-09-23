@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Auth from "./Auth";
 import { UserContext } from "./UserContext";
+import SearchData from "./SearchData";
 
 const Navbar = () => {
   const { setUser } = useContext(UserContext);
@@ -14,10 +15,11 @@ const Navbar = () => {
   const [size, setSize] = useState(window.innerWidth);
   const [small, setSmall] = useState(false);
 
+  const [search, setSearch] = useState("");
+
   const checkSize = () => {
     setSize(window.innerWidth);
   };
-
   useEffect(() => {
     if (size < 984) {
       setSmall(true);
@@ -54,6 +56,12 @@ const Navbar = () => {
       history.push("/signin");
     }
   };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+  };
+
   return (
     <Wrapper>
       {small ? (
@@ -73,11 +81,39 @@ const Navbar = () => {
               color="#DB0000"
             ></GiBoxingGloveSurprise>
           </Link>
-          <input
-            className="nav-input"
-            type="text"
-            placeholder="search the documentation..."
-          />
+
+          <div className="search">
+            <input
+              className="nav-input"
+              type="text"
+              placeholder="search the documentation..."
+              onChange={handleChange}
+              value={search}
+            />
+            <div className="nav-search-box">
+              {search !== "" ? (
+                <div>
+                  {SearchData.map((value, key) => {
+                    const newVal = value.split(" ").join("");
+                    const newSearch = search.split(" ").join("");
+                    if (
+                      newVal.toLowerCase().includes(newSearch.toLowerCase())
+                    ) {
+                      return (
+                        <div key={key}>
+                          <p>{value}</p>
+                        </div>
+                      );
+                    } else {
+                      return <div key={key}></div>;
+                    }
+                  })}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
         </div>
       )}
       <div className="navbar-links">
@@ -112,6 +148,7 @@ const Navbar = () => {
     </Wrapper>
   );
 };
+
 export default Navbar;
 
 const Wrapper = styled.nav`
@@ -122,6 +159,19 @@ const Wrapper = styled.nav`
 
   li {
     list-style-type: none;
+  }
+
+  .search {
+    margin-top: 18px;
+  }
+  .nav-search-box {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 490px;
+    background-color: blue;
+    z-index: 1;
+    margin-left: 20px;
   }
   .nav-input {
     width: 533px;
@@ -163,7 +213,7 @@ const Wrapper = styled.nav`
   }
   .navbar-search {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 653px;
     margin-left: 31px;
