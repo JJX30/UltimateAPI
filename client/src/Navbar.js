@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
 import { GiBoxingGloveSurprise } from "react-icons/gi";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -11,6 +11,25 @@ const Navbar = () => {
   const docLink = useRef(null);
   const dynamicButton = useRef(null);
   const history = useHistory();
+  const [size, setSize] = useState(window.innerWidth);
+  const [small, setSmall] = useState(false);
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (size < 984) {
+      setSmall(true);
+    }
+    if (size > 984) {
+      setSmall(false);
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
 
   useEffect(() => {
     if (Auth.isAuthenticated()) {
@@ -37,19 +56,30 @@ const Navbar = () => {
   };
   return (
     <Wrapper>
-      <div className="navbar-search">
-        <Link className="navbar-link navbar-logo" to="/">
-          <GiBoxingGloveSurprise
-            size={70}
-            color="#DB0000"
-          ></GiBoxingGloveSurprise>
-        </Link>
-        <input
-          className="nav-input"
-          type="text"
-          placeholder="search the documentation..."
-        />
-      </div>
+      {small ? (
+        <div className="navbar-search">
+          <Link className="navbar-link navbar-logo" to="/">
+            <GiBoxingGloveSurprise
+              size={70}
+              color="#DB0000"
+            ></GiBoxingGloveSurprise>
+          </Link>
+        </div>
+      ) : (
+        <div className="navbar-search">
+          <Link className="navbar-link navbar-logo" to="/">
+            <GiBoxingGloveSurprise
+              size={70}
+              color="#DB0000"
+            ></GiBoxingGloveSurprise>
+          </Link>
+          <input
+            className="nav-input"
+            type="text"
+            placeholder="search the documentation..."
+          />
+        </div>
+      )}
       <div className="navbar-links">
         <div className="navbar-profile">
           <Link

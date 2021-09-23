@@ -17,7 +17,7 @@ import seanImage from "./images/fighters/sean.png";
 import bellaImage from "./images/promotions/bellator.png";
 import cageImage from "./images/promotions/cage-warriors-logo.png";
 import oneImage from "./images/promotions/onechamp.jpeg";
-
+//650
 const Info = () => {
   const bubble1 = useRef(null);
   const bubble2 = useRef(null);
@@ -26,6 +26,26 @@ const Info = () => {
   const bubbleList = [bubble1, bubble2, bubble3];
   const slider = ["stats", "open", "updates"];
   const [index, setIndex] = useState(0);
+
+  const [size, setSize] = useState(window.innerWidth);
+  const [small, setSmall] = useState(false);
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (size < 1100) {
+      setSmall(true);
+    }
+    if (size > 1100) {
+      setSmall(false);
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
 
   useEffect(() => {
     bubbleList.forEach((bubble, i) => {
@@ -61,52 +81,101 @@ const Info = () => {
       setIndex(2);
     }
   }
-  return (
-    <Wrapper>
-      <div id="about" className="info-body">
-        <div className="info-content">
-          <button
-            onClick={() => {
-              handleClickBackward();
-            }}
-          >
-            <FaArrowLeft size={40}></FaArrowLeft>
-          </button>
-          {<Slider which={slider[index]}></Slider>}
-          <button
-            onClick={() => {
-              handleClickForward();
-            }}
-          >
-            <FaArrowRight size={40}></FaArrowRight>
-          </button>
+  if (size < 650 && small) {
+    return (
+      <Wrapper>
+        <div id="about" className="info-body">
+          <div className="info-content">
+            {<Slider which={slider[index]}></Slider>}
+          </div>
+          <div className="info-dynamic-bubbles">
+            <button
+              onClick={() => {
+                handleClickBackward();
+              }}
+            >
+              <FaArrowLeft className="icon" size={40}></FaArrowLeft>
+            </button>
+            <button
+              onClick={() => {
+                handleBubble(1);
+              }}
+            >
+              <div ref={bubble1} className="bubble bubble-1"></div>
+            </button>
+            <button
+              onClick={() => {
+                handleBubble(2);
+              }}
+            >
+              <div ref={bubble2} className="bubble bubble-2"></div>
+            </button>
+            <button
+              onClick={() => {
+                handleBubble(3);
+              }}
+            >
+              <div ref={bubble3} className="bubble bubble-3"></div>
+            </button>
+            <button
+              onClick={() => {
+                handleClickForward();
+              }}
+            >
+              <FaArrowRight className="icon" size={40}></FaArrowRight>
+            </button>
+          </div>
         </div>
-        <div className="info-dynamic-bubbles">
-          <button
-            onClick={() => {
-              handleBubble(1);
-            }}
-          >
-            <div ref={bubble1} className="bubble bubble-1"></div>
-          </button>
-          <button
-            onClick={() => {
-              handleBubble(2);
-            }}
-          >
-            <div ref={bubble2} className="bubble bubble-2"></div>
-          </button>
-          <button
-            onClick={() => {
-              handleBubble(3);
-            }}
-          >
-            <div ref={bubble3} className="bubble bubble-3"></div>
-          </button>
+      </Wrapper>
+    );
+  } else {
+    return (
+      <Wrapper>
+        <div id="about" className="info-body">
+          <div className="info-content">
+            <button
+              onClick={() => {
+                handleClickBackward();
+              }}
+            >
+              <FaArrowLeft className="icon" size={40}></FaArrowLeft>
+            </button>
+            {<Slider which={slider[index]}></Slider>}
+            <button
+              onClick={() => {
+                handleClickForward();
+              }}
+            >
+              <FaArrowRight className="icon" size={40}></FaArrowRight>
+            </button>
+          </div>
+          <div className="info-dynamic-bubbles">
+            <button
+              onClick={() => {
+                handleBubble(1);
+              }}
+            >
+              <div ref={bubble1} className="bubble bubble-1"></div>
+            </button>
+            <button
+              onClick={() => {
+                handleBubble(2);
+              }}
+            >
+              <div ref={bubble2} className="bubble bubble-2"></div>
+            </button>
+            <button
+              onClick={() => {
+                handleBubble(3);
+              }}
+            >
+              <div ref={bubble3} className="bubble bubble-3"></div>
+            </button>
+          </div>
         </div>
-      </div>
-    </Wrapper>
-  );
+      </Wrapper>
+    );
+  }
 };
 
 const Slider = ({ which }) => {
@@ -127,6 +196,26 @@ const Slider = ({ which }) => {
 
   const promotionSlider = ["bella", "cage", "one"];
   const [promotionIndex, setPromotionIndex] = useState(0);
+
+  const [size, setSize] = useState(window.innerWidth);
+  const [small, setSmall] = useState(false);
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (size < 1100) {
+      setSmall(true);
+    }
+    if (size > 1100) {
+      setSmall(false);
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
 
   const handleFighterForward = () => {
     if (fighterIndex === 10) {
@@ -159,100 +248,164 @@ const Slider = ({ which }) => {
   };
   if (which === "stats") {
     return (
-      <div className="info-body-main">
-        <div className="info-content-text">
-          <h1 className="info-content-heading">
-            UFC fighter statistics at your<br></br>fingertips
-          </h1>
-          <p className="info-content-paragraph">
-            Query through all fighters in the UFC, past and present, and
-            retrieve data instantly, all bundled up in a nice JSON response
-          </p>
-          <p className="info-content-paragraph-2">Query by:</p>
-          <p className="info-content-paragraph-3">
-            First <b>name</b> and <b>last name</b>, <b>wins</b>, <b>losses</b>,{" "}
-            <b>draws</b>, etc.
-          </p>
-        </div>
-
-        <div className="image-slider">
-          <button className="arrow">
-            <FaArrowLeft
-              onClick={handleFighterBackward}
-              size={20}
-            ></FaArrowLeft>
-          </button>
-          <div>
-            <Fighter which={fighterSlider[fighterIndex]}></Fighter>
+      <div>
+        {small ? (
+          <div className="info-content-small">
+            <div className="info-content-text-small">
+              <h1 className="info-content-heading">
+                UFC fighter statistics at your<br></br>fingertips
+              </h1>
+              <p className="info-content-paragraph">
+                Query through all fighters in the UFC, past and present, and
+                retrieve data instantly, all bundled up in a nice JSON response
+              </p>
+              <p className="info-content-paragraph-2">Query by:</p>
+              <p className="info-content-paragraph-3">
+                First <b>name</b> and <b>last name</b>, <b>wins</b>,{" "}
+                <b>losses</b>, <b>draws</b>, etc.
+              </p>
+            </div>
           </div>
-          <button className="arrow">
-            <FaArrowRight
-              onClick={handleFighterForward}
-              size={20}
-            ></FaArrowRight>
-          </button>
-        </div>
+        ) : (
+          <div className="info-body-main">
+            <div className="info-content-text">
+              <h1 className="info-content-heading">
+                UFC fighter statistics at your<br></br>fingertips
+              </h1>
+              <p className="info-content-paragraph">
+                Query through all fighters in the UFC, past and present, and
+                retrieve data instantly, all bundled up in a nice JSON response
+              </p>
+              <p className="info-content-paragraph-2">Query by:</p>
+              <p className="info-content-paragraph-3">
+                First <b>name</b> and <b>last name</b>, <b>wins</b>,{" "}
+                <b>losses</b>, <b>draws</b>, etc.
+              </p>
+            </div>
+
+            <div className="image-slider">
+              <button className="icon arrow">
+                <FaArrowLeft
+                  onClick={handleFighterBackward}
+                  size={20}
+                ></FaArrowLeft>
+              </button>
+              <div>
+                <Fighter which={fighterSlider[fighterIndex]}></Fighter>
+              </div>
+              <button className="icon arrow">
+                <FaArrowRight
+                  onClick={handleFighterForward}
+                  size={20}
+                ></FaArrowRight>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   } else if (which === "open") {
     return (
-      <div className="info-body-main">
-        <div className="info-content-text">
-          <h1 className="info-content-heading">Open Source</h1>
-          <p className="info-content-paragraph">
-            Found a bug? Thought of a feature? Bored? Feel free to visit our
-            repository and build on our ideas! We'd love to hear from you as
-            well, please feel free to reach out below.
-          </p>
-          <p className="image-div">
-            <a
-              href="https://github.com/JJX30/ultimateapi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <AiFillGithub size={120}></AiFillGithub>
-            </a>
-          </p>
-        </div>
+      <div>
+        {small ? (
+          <div className="info-content-small">
+            <div className="info-content-text-small">
+              <h1 className="info-content-heading">Open Source</h1>
+              <p className="info-content-paragraph">
+                Found a bug? Thought of a feature? Bored? Feel free to visit our
+                repository and build on our ideas! We'd love to hear from you as
+                well, please feel free to reach out below.
+              </p>
+              <p className="image-div">
+                <a
+                  href="https://github.com/JJX30/ultimateapi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                >
+                  <AiFillGithub size={120}></AiFillGithub>
+                </a>
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="info-body-main">
+            <div className="info-content-text">
+              <h1 className="info-content-heading">Open Source</h1>
+              <p className="info-content-paragraph">
+                Found a bug? Thought of a feature? Bored? Feel free to visit our
+                repository and build on our ideas! We'd love to hear from you as
+                well, please feel free to reach out below.
+              </p>
+              <p className="image-div">
+                <a
+                  href="https://github.com/JJX30/ultimateapi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                >
+                  <AiFillGithub size={120}></AiFillGithub>
+                </a>
+              </p>
+            </div>
 
-        <div className="image-slider">
-          <DiOpensource size={500}></DiOpensource>
-        </div>
+            <div className="image-slider">
+              <DiOpensource size={500}></DiOpensource>
+            </div>
+          </div>
+        )}
       </div>
     );
   } else if (which === "updates") {
     return (
-      <div className="info-body-main">
-        <div className="info-content-text">
-          <h1 className="info-content-heading">Coming soon...</h1>
-          <p className="info-content-paragraph-2-open">Promotions:</p>
-          <p className="info-content-paragraph-open">
-            The UFC isn’t the only MMA promotion out there, so for that reason
-            we’re looking to add more fighters from some of our other favorite
-            promotions.
-          </p>
-          <p className="info-content-paragraph-2-open">Events:</p>
-          <p className="info-content-paragraph-open">
-            UFC events first, upcoming and previous event data will come in due
-            time, we’ll keep you updated.
-          </p>
-        </div>
+      <div>
+        {small ? (
+          <div className="info-content-small">
+            <div className="info-content-text-small">
+              <h1 className="info-content-heading">Coming soon...</h1>
+              <p className="info-content-paragraph-2-open">Promotions:</p>
+              <p className="info-content-paragraph-open">
+                The UFC isn’t the only MMA promotion out there, so for that
+                reason we’re looking to add more fighters from some of our other
+                favorite promotions.
+              </p>
+              <p className="info-content-paragraph-2-open">Events:</p>
+              <p className="info-content-paragraph-open">
+                UFC events first, upcoming and previous event data will come in
+                due time, we’ll keep you updated.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="info-body-main">
+            <div className="info-content-text">
+              <h1 className="info-content-heading">Coming soon...</h1>
+              <p className="info-content-paragraph-2-open">Promotions:</p>
+              <p className="info-content-paragraph-open">
+                The UFC isn’t the only MMA promotion out there, so for that
+                reason we’re looking to add more fighters from some of our other
+                favorite promotions.
+              </p>
+              <p className="info-content-paragraph-2-open">Events:</p>
+              <p className="info-content-paragraph-open">
+                UFC events first, upcoming and previous event data will come in
+                due time, we’ll keep you updated.
+              </p>
+            </div>
 
-        <div className="image-slider">
-          <button className="arrow">
-            <FaArrowLeft
-              onClick={handlePromotionBackward}
-              size={20}
-            ></FaArrowLeft>
-          </button>
+            <div className="image-slider">
+              <button onClick={handlePromotionBackward} className="icon arrow">
+                <FaArrowLeft size={20}></FaArrowLeft>
+              </button>
 
-          <Promotion which={promotionSlider[promotionIndex]}></Promotion>
+              <Promotion which={promotionSlider[promotionIndex]}></Promotion>
 
-          <button onClick={handlePromotionForward} className="arrow">
-            <FaArrowRight size={20}></FaArrowRight>
-          </button>
-        </div>
+              <button onClick={handlePromotionForward} className="icon arrow">
+                <FaArrowRight size={20}></FaArrowRight>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -354,6 +507,8 @@ function getRandomInt(max) {
 export default Info;
 
 const Wrapper = styled.div`
+  @media only screen and (max-width: 1099px) {
+  }
   .social-link {
     text-decoration: none;
     cursor: pointer;
@@ -362,8 +517,7 @@ const Wrapper = styled.div`
   .info-body-main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 1100px;
+    justify-content: space-evenly;
   }
   .info-body {
     display: flex;
@@ -385,7 +539,14 @@ const Wrapper = styled.div`
     align-items: center;
     margin-top: 18px;
   }
-
+  .info-content-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: white;
+    align-items: center;
+    margin-top: 18px;
+  }
   .info-dynamic-bubbles {
     display: flex;
     flex-direction: row;
@@ -413,6 +574,15 @@ const Wrapper = styled.div`
     width: 571px;
     height: 430px;
     background-color: black;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    font-family: Roboto, sans-serif;
+    font-weight: 200;
+  }
+  .info-content-text-small {
+    width: 571px;
+    height: 430px;
+    background-color: black;
     border-radius: 50px;
     font-family: Roboto, sans-serif;
     font-weight: 200;
@@ -423,10 +593,12 @@ const Wrapper = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     width: 450px;
     height: 430px;
     background-color: black;
-    border-radius: 50px;
   }
   .info-content-heading {
     font-weight: 400;
@@ -482,12 +654,12 @@ const Wrapper = styled.div`
   .info-content-slide-cage {
     height: 350px;
     width: 350px;
-    padding-top: 70px;
+    padding-top: 90px;
     border-radius: 50px;
     background-color: white;
   }
   .cage-image {
-    height: 200px;
+    height: 160px;
     width: 350px;
   }
 
@@ -510,5 +682,18 @@ const Wrapper = styled.div`
     cursor: pointer;
     overflow: hidden;
     outline: none;
+  }
+  .icon:hover {
+    color: #797979;
+  }
+  @media only screen and (max-width: 570px) {
+    .info-content-text-small {
+      width: 500px;
+      height: 430px;
+      background-color: black;
+      border-radius: 50px;
+      font-family: Roboto, sans-serif;
+      font-weight: 200;
+    }
   }
 `;

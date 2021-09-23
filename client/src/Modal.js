@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { UserContext } from "./UserContext";
-
+//1224
 const Modal = ({ showModal, setShowModal }) => {
   const closeModal = () => {
     setShowModal((prev) => {
@@ -152,7 +152,7 @@ const EmailModal = ({ closeModal }) => {
             </button>
           </div>
           <div className="modal-section-2">
-            <p>Change email to:</p>
+            <p className="modal-section-2-p">Change email to:</p>
             <input
               className="dashboard-input"
               type="email"
@@ -250,6 +250,29 @@ const Wrapper = styled.div`
     height: 30px;
     width: 30px;
     background-color: black;
+  }
+  @media only screen and (max-width: 890px) {
+    .modal-body {
+      width: 500px;
+      height: 300px;
+      border-style: solid;
+      border-width: 2px;
+      border-radius: 15px;
+      border-color: #9c9a9b;
+      box-shadow: 5px 7px #dddddd;
+    }
+    .modal-section-2 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 150px;
+      font-family: Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
+      margin: 10px;
+    }
   }
 `;
 

@@ -6,6 +6,8 @@ import Navbar from "./Navbar";
 import { FiEdit } from "react-icons/fi";
 import ProfileCard from "./ProfileCard";
 import Modal from "./Modal";
+
+//1224
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [showModal, setShowModal] = useState({ show: false, type: "" });
@@ -19,7 +21,7 @@ const Dashboard = () => {
       <Navbar></Navbar>
       <div className="dashboard">
         <div className="dashboard-bar">
-          <div className="dashboard-profile-">
+          <div className="dashboard-profile">
             <p className="dashboard-profile-text">Profile</p>
             <ProfileCard link={false}></ProfileCard>
           </div>
@@ -170,5 +172,178 @@ const Wrapper = styled.div`
   .icon {
     width: 25px;
     height: 25px;
+  }
+  @media only screen and (max-width: 1224px) {
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .dashboard-divider {
+      display: none;
+    }
+    .dashboard-options {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .setting {
+      margin: 20px;
+    }
+    .dashboard-profile {
+      margin: 20px;
+    }
+  }
+  @media only screen and (max-width: 722px) {
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .dashboard-divider {
+      display: none;
+    }
+    .dashboard-options {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .setting {
+      margin: 20px;
+    }
+    .dashboard-profile {
+      margin: 20px;
+    }
+    .dashboard-button {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 690px) {
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .dashboard-divider {
+      display: none;
+    }
+    .dashboard-options {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .setting {
+      margin: 20px;
+    }
+    .dashboard-profile {
+      margin: 20px;
+    }
+    .dashboard-button {
+      display: none;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+    }
+    .dashboard-input {
+      font-family: Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: #9c9a9b;
+      color: rgba(0, 0, 0, 0.8);
+    }
+    .dashboard-options-registration {
+      margin: 40px;
+    }
+  }
+  @media only screen and (max-width: 650px) {
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .dashboard-divider {
+      display: none;
+    }
+    .dashboard-options {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .setting {
+      margin: 20px;
+    }
+    .dashboard-profile {
+      margin: 20px;
+    }
+    .dashboard-button {
+      display: none;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+    }
+    .dashboard-options-registration {
+      margin: 40px;
+    }
+  }
+  @media only screen and (max-width: 585px) {
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .dashboard-divider {
+      display: none;
+    }
+    .dashboard-options {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    .setting {
+      margin: 20px;
+    }
+    .dashboard-profile {
+      margin: 20px;
+    }
+    .dashboard-button {
+      display: none;
+    }
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .dashboard-input {
+      font-family: Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+      color: #9c9a9b;
+      color: rgba(0, 0, 0, 0.8);
+      width: 100%;
+    }
+    .dashboard-options-registration {
+      margin: 40px;
+    }
   }
 `;

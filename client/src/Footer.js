@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineFacebook } from "react-icons/ai";
@@ -6,127 +6,311 @@ import { VscTwitter } from "react-icons/vsc";
 import { RiInstagramLine } from "react-icons/ri";
 import { AiOutlineLinkedin } from "react-icons/ai";
 import { AiFillGithub } from "react-icons/ai";
+//695
 
 const Footer = () => {
-  return (
-    <Wrapper>
-      <div className="body">
-        <footer>
-          <div className="footer-div-1">
-            <div className="footer-logo">
-              <p className="footer-logo-heading">UltimateAPI</p>
-              <p className="footer-logo-content">for UFC fighters and stats</p>
-            </div>
-            <div className="footer-socials">
-              <p className="footer-socials-heading">socials</p>
-              <div className="footer-socials-icons">
-                <a
-                  href="https://www.facebook.com/profile.php?id=100009565177074"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <AiOutlineFacebook size={40}></AiOutlineFacebook>
-                </a>
-                <a
-                  href="https://twitter.com/mdelcas4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <VscTwitter size={40}></VscTwitter>
-                </a>
-                <a
-                  href="https://www.instagram.com/mdelcas4/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <RiInstagramLine size={40}></RiInstagramLine>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
-                </a>
-                <a
-                  href="https://github.com/JJX30"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <AiFillGithub size={38}></AiFillGithub>
-                </a>
+  const [size, setSize] = useState(window.innerWidth);
+  const [small, setSmall] = useState(false);
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (size < 986) {
+      setSmall(true);
+    }
+    if (size > 986) {
+      setSmall(false);
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
+
+  if (size < 695) {
+    return (
+      <Wrapper>
+        <div className="body">
+          <footer>
+            <div className="footer-div-1">
+              <div className="footer-logo">
+                <p className="footer-logo-heading">UltimateAPI</p>
+                <p className="footer-logo-content">
+                  for UFC fighters and stats
+                </p>
+              </div>
+              <div className="footer-socials">
+                <p className="footer-socials-heading">socials</p>
+                <div className="footer-socials-icons">
+                  <a
+                    href="https://www.facebook.com/profile.php?id=100009565177074"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                  >
+                    <AiOutlineFacebook size={40}></AiOutlineFacebook>
+                  </a>
+                  <a
+                    href="https://twitter.com/mdelcas4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                  >
+                    <VscTwitter size={40}></VscTwitter>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/mdelcas4/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                  >
+                    <RiInstagramLine size={40}></RiInstagramLine>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                  >
+                    <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
+                  </a>
+                  <a
+                    href="https://github.com/JJX30"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                  >
+                    <AiFillGithub size={38}></AiFillGithub>
+                  </a>
+                </div>
               </div>
             </div>
+          </footer>
+          <div className="footer-copyright-small">
+            <p>@ 2021 UltimateAPI ® All rights reserved</p>
           </div>
-          <div className="footer-div-2">
-            <div className="footer-terms">
-              <p className="footer-terms-heading">terms & conditions</p>
-              <p className="footer-terms-content">
-                <Link to="/" className="footer-terms-link">
-                  Terms and conditions of sale
-                </Link>
-                <br></br>
-                <Link to="/" className="footer-terms-link">
-                  Privacy policy
-                </Link>
-                <br></br>
-                <Link to="/" className="footer-terms-link">
-                  Website terms and conditions
-                </Link>
-              </p>
-            </div>
-            <div className="footer-built">
-              <p className="footer-built-heading">built with</p>
-              <p className="footer-built-content">
-                <a href="https://reactjs.org/" className="footer-built-link">
-                  React
-                </a>
-                <br></br>
-                <a href="https://expressjs.com/" className="footer-built-link">
-                  Express
-                </a>
-                <br></br>
-                <a
-                  href="https://www.mongodb.com/"
-                  className="footer-built-link"
-                >
-                  MongoDB
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="footer-div-3">
-            <div className="footer-about">
-              <p className="footer-about-heading">about us</p>
-              <p className="footer-about-content">
-                UltimateAPI is made for developers and mma fans that have been
-                yearning for a deep, functional, and comprehensive, mma api
-                since 2018. So we made one! For each fighter in the UFC,
-                UltimateAPI provides accurate and fast data for your project.
-                Headquarters in Miami, FL USA.
-              </p>
-            </div>
-            <div className="footer-contact">
-              <p className="footer-contact-heading">contact us</p>
-              <p className="footer-contact-content">
-                mauriciodelcas30@gmail.com<br></br>m.delcastillo@ufl.edu
-                <br></br>
-                (305)-713-6206
-              </p>
-            </div>
-          </div>
-        </footer>
-        <div className="footer-copyright">
-          <p>@ 2021 UltimateAPI ® All rights reserved</p>
         </div>
+      </Wrapper>
+    );
+  } else {
+    return (
+      <div>
+        {small ? (
+          <Wrapper>
+            <div className="body">
+              <footer className="footer-small">
+                <div className="footer-div-1">
+                  <div className="footer-logo">
+                    <p className="footer-logo-heading">UltimateAPI</p>
+                    <p className="footer-logo-content">
+                      for UFC fighters and stats
+                    </p>
+                  </div>
+                  <div className="footer-socials">
+                    <p className="footer-socials-heading">socials</p>
+                    <div className="footer-socials-icons">
+                      <a
+                        href="https://www.facebook.com/profile.php?id=100009565177074"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiOutlineFacebook size={40}></AiOutlineFacebook>
+                      </a>
+                      <a
+                        href="https://twitter.com/mdelcas4"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <VscTwitter size={40}></VscTwitter>
+                      </a>
+                      <a
+                        href="https://www.instagram.com/mdelcas4/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <RiInstagramLine size={40}></RiInstagramLine>
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
+                      </a>
+                      <a
+                        href="https://github.com/JJX30"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiFillGithub size={38}></AiFillGithub>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="footer-div-3">
+                  <div className="footer-about">
+                    <p className="footer-about-heading">about us</p>
+                    <p className="footer-about-content">
+                      UltimateAPI is made for developers and mma fans that have
+                      been yearning for a deep, functional, and comprehensive,
+                      mma api since 2018. So we made one! For each fighter in
+                      the UFC, UltimateAPI provides accurate and fast data for
+                      your project. Headquarters in Miami, FL USA.
+                    </p>
+                  </div>
+                  <div className="footer-contact">
+                    <p className="footer-contact-heading">contact us</p>
+                    <p className="footer-contact-content">
+                      mauriciodelcas30@gmail.com<br></br>m.delcastillo@ufl.edu
+                      <br></br>
+                      (305)-713-6206
+                    </p>
+                  </div>
+                </div>
+              </footer>
+              <div className="footer-copyright">
+                <p>@ 2021 UltimateAPI ® All rights reserved</p>
+              </div>
+            </div>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <div className="body">
+              <footer>
+                <div className="footer-div-1">
+                  <div className="footer-logo">
+                    <p className="footer-logo-heading">UltimateAPI</p>
+                    <p className="footer-logo-content">
+                      for UFC fighters and stats
+                    </p>
+                  </div>
+                  <div className="footer-socials">
+                    <p className="footer-socials-heading">socials</p>
+                    <div className="footer-socials-icons">
+                      <a
+                        href="https://www.facebook.com/profile.php?id=100009565177074"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiOutlineFacebook size={40}></AiOutlineFacebook>
+                      </a>
+                      <a
+                        href="https://twitter.com/mdelcas4"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <VscTwitter size={40}></VscTwitter>
+                      </a>
+                      <a
+                        href="https://www.instagram.com/mdelcas4/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <RiInstagramLine size={40}></RiInstagramLine>
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/mauricio-del-castillo-264611219/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiOutlineLinkedin size={40}></AiOutlineLinkedin>
+                      </a>
+                      <a
+                        href="https://github.com/JJX30"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-link"
+                      >
+                        <AiFillGithub size={38}></AiFillGithub>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="footer-div-2">
+                  <div className="footer-terms">
+                    <p className="footer-terms-heading">terms & conditions</p>
+                    <p className="footer-terms-content">
+                      <Link to="/" className="footer-terms-link">
+                        Terms and conditions of sale
+                      </Link>
+                      <br></br>
+                      <Link to="/" className="footer-terms-link">
+                        Privacy policy
+                      </Link>
+                      <br></br>
+                      <Link to="/" className="footer-terms-link">
+                        Website terms and conditions
+                      </Link>
+                    </p>
+                  </div>
+                  <div className="footer-built">
+                    <p className="footer-built-heading">built with</p>
+                    <p className="footer-built-content">
+                      <a
+                        href="https://reactjs.org/"
+                        className="footer-built-link"
+                      >
+                        React
+                      </a>
+                      <br></br>
+                      <a
+                        href="https://expressjs.com/"
+                        className="footer-built-link"
+                      >
+                        Express
+                      </a>
+                      <br></br>
+                      <a
+                        href="https://www.mongodb.com/"
+                        className="footer-built-link"
+                      >
+                        MongoDB
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <div className="footer-div-3">
+                  <div className="footer-about">
+                    <p className="footer-about-heading">about us</p>
+                    <p className="footer-about-content">
+                      UltimateAPI is made for developers and mma fans that have
+                      been yearning for a deep, functional, and comprehensive,
+                      mma api since 2018. So we made one! For each fighter in
+                      the UFC, UltimateAPI provides accurate and fast data for
+                      your project. Headquarters in Miami, FL USA.
+                    </p>
+                  </div>
+                  <div className="footer-contact">
+                    <p className="footer-contact-heading">contact us</p>
+                    <p className="footer-contact-content">
+                      mauriciodelcas30@gmail.com<br></br>m.delcastillo@ufl.edu
+                      <br></br>
+                      (305)-713-6206
+                    </p>
+                  </div>
+                </div>
+              </footer>
+              <div className="footer-copyright">
+                <p>@ 2021 UltimateAPI ® All rights reserved</p>
+              </div>
+            </div>
+          </Wrapper>
+        )}
       </div>
-    </Wrapper>
-  );
+    );
+  }
 };
 
 export default Footer;
@@ -283,5 +467,14 @@ const Wrapper = styled.div`
     text-decoration: none;
     cursor: pointer;
     color: white;
+  }
+  .footer-copyright-small {
+    margin-left: 41px;
+    margin-top: 120px;
+    color: white;
+    font-weight: 100;
+    font-family: Roboto, sans-serif;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
   }
 `;
