@@ -72,6 +72,22 @@ const Navbar = () => {
     }
     return "search the documentation...";
   }
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClickoutside);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickoutside);
+    };
+  }, []);
+  const handleClickoutside = (e) => {
+    if (searchBar.current.contains(e.target)) {
+      searchBar.current.style.display = "block";
+      return;
+    }
+    // outside click
+    searchBar.current.style.display = "none";
+  };
 
   const handleLink = () => {
     searchBar.current.style.display = "none";
@@ -192,16 +208,18 @@ const Wrapper = styled.nav`
     text-decoration: none;
     color: black;
     width: 100%;
+
+    padding: 10px;
   }
   .search-empty {
-    display: none;
+    border-style: none;
   }
   .search-option {
+    display: flex;
     background-color: white;
     border-style: solid;
     border-width: 0 0 1px 0; /* top right bottom left */
     height: 50px;
-    padding: 10px;
     font-family: Roboto, sans-serif;
   }
   .search-option:hover {
@@ -221,9 +239,7 @@ const Wrapper = styled.nav`
     border-style: solid;
     border-width: 1px 1px 0 1px;
   }
-  .nav-search-box:focus {
-    height: 200px;
-  }
+
   .nav-input {
     width: 533px;
     height: 42px;

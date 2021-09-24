@@ -71,12 +71,12 @@ const DocNavbar = () => {
   return (
     <DocDiv>
       <div className="navbar-search">
-        <Link className="navbar-link navbar-logo" to="/">
+        <HashLink className="navbar-link navbar-logo" to="/">
           <GiBoxingGloveSurprise
             size={70}
             color="#DB0000"
           ></GiBoxingGloveSurprise>
-        </Link>
+        </HashLink>
 
         <div className="search">
           <input
@@ -171,6 +171,7 @@ const DocDiv = styled.nav`
     border-style: none;
   }
   .search-option {
+    display: flex;
     background-color: white;
     border-style: solid;
     border-width: 0 0 1px 0; /* top right bottom left */
