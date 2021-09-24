@@ -71,7 +71,7 @@ const DocNavbar = () => {
   return (
     <DocDiv>
       <div className="navbar-search">
-        <HashLink className="navbar-link navbar-logo" to="/">
+        <HashLink className="navbar-link navbar-logo" to="/#top">
           <GiBoxingGloveSurprise
             size={70}
             color="#DB0000"
