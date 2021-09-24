@@ -51,7 +51,7 @@ const Signin = () => {
               password: result.password,
               apiKey: result.apiKey,
               registrationDate: result.registrationDate,
-              image: `https://avatars.dicebear.com/api/identicon/${result.apiKey}.svg`,
+              image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
             });
             history.push("/");
           });

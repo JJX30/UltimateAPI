@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { UserContext } from "./UserContext";
+import { useHistory } from "react-router";
 //1224
 const Modal = ({ showModal, setShowModal }) => {
   const closeModal = () => {
@@ -129,18 +130,66 @@ const KeyModal = ({ closeModal }) => {
 };
 
 const EmailModal = ({ closeModal }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState(user.email);
+  const history = useHistory();
   const errorMessage = useRef(null);
   const handleChange = (e) => {
+    errorMessage.current.hidden = true;
     const value = e.target.value;
     errorMessage.current.hidden = true;
     setEmail(value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (email === "") {
+      errorMessage.current.innerHTML = "Cannot be empty";
+      errorMessage.current.hidden = false;
+    } else if (!email.includes("@")) {
+      errorMessage.current.innerHTML = "This is not a valid email address";
+      errorMessage.current.hidden = false;
+    } else {
+      const newEmail = {
+        new: email,
+        old: user.email,
+        apiKey: user.apiKey,
+        registrationDate: user.registrationDate,
+        password: user.password,
+      };
+      const url = "/api/changeemail";
+
+      const options = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        body: JSON.stringify(newEmail),
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        if (result.status === 404) {
+          errorMessage.current.innerHTML = "This email does not exist";
+          errorMessage.current.hidden = false;
+        } else {
+          alert("Email successfully changed!");
+          setUser({
+            email: newEmail.new,
+            password: result.password,
+            apiKey: result.apiKey,
+            registrationDate: result.registrationDate,
+            image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
+          });
+          history.push("/");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
+
   return (
     <>
       <Wrapper>

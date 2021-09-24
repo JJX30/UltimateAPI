@@ -26,6 +26,27 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+app.post("/api/changeemail", async (req, res) => {
+  const response = await User.findOneAndReplace(
+    { email: req.body.old },
+    {
+      email: req.body.new,
+      password: req.body.password,
+      apiKey: req.body.apiKey,
+      registrationDate: req.body.registrationDate,
+    }
+  );
+  if (response !== null) {
+    console.log("email changed successful");
+    res.status(200).json(response);
+  } else {
+    console.log("couldn't change email");
+    res.status(404).json({
+      status: 404,
+    });
+  }
+});
+
 app.post("/api/signin", async (req, res) => {
   const response = await User.findOne({ email: req.body.email });
   if (response !== null) {
