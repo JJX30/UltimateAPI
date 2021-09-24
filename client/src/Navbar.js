@@ -6,11 +6,14 @@ import Auth from "./Auth";
 import { UserContext } from "./UserContext";
 import SearchData from "./SearchData";
 
+import { HashLink } from "react-router-hash-link";
+
 const Navbar = () => {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const profileLink = useRef(null);
   const docLink = useRef(null);
   const dynamicButton = useRef(null);
+  const searchBar = useRef(null);
   const history = useHistory();
   const [size, setSize] = useState(window.innerWidth);
   const [small, setSmall] = useState(false);
@@ -20,6 +23,7 @@ const Navbar = () => {
   const checkSize = () => {
     setSize(window.innerWidth);
   };
+
   useEffect(() => {
     if (size < 984) {
       setSmall(true);
@@ -62,6 +66,20 @@ const Navbar = () => {
     setSearch(value);
   };
 
+  function handlePlaceholder() {
+    if (user === null) {
+      return "Sign in to access documentation...";
+    }
+    return "search the documentation...";
+  }
+
+  const handleLink = () => {
+    searchBar.current.style.display = "none";
+  };
+
+  const handleFocus = () => {
+    searchBar.current.style.display = "block";
+  };
   return (
     <Wrapper>
       {small ? (
@@ -86,26 +104,34 @@ const Navbar = () => {
             <input
               className="nav-input"
               type="text"
-              placeholder="search the documentation..."
+              placeholder={handlePlaceholder()}
               onChange={handleChange}
               value={search}
+              onFocus={handleFocus}
             />
-            <div className="nav-search-box">
-              {search !== "" ? (
+
+            <div ref={searchBar} className="nav-search-box">
+              {search !== "" && user !== null ? (
                 <div>
-                  {SearchData.map((value, key) => {
-                    const newVal = value.split(" ").join("");
+                  {SearchData.map(({ title, link }, key) => {
+                    const newVal = title.split(" ").join("");
                     const newSearch = search.split(" ").join("");
                     if (
                       newVal.toLowerCase().includes(newSearch.toLowerCase())
                     ) {
                       return (
-                        <div key={key}>
-                          <p>{value}</p>
+                        <div className="search-option" key={key}>
+                          <HashLink
+                            onClick={handleLink}
+                            className="option-link"
+                            to={link}
+                          >
+                            {title}
+                          </HashLink>
                         </div>
                       );
                     } else {
-                      return <div key={key}></div>;
+                      return <div className="search-empty" key={key}></div>;
                     }
                   })}
                 </div>
@@ -156,11 +182,31 @@ const Wrapper = styled.nav`
   justify-content: space-between;
   background-color: black;
   height: 78px;
-
   li {
     list-style-type: none;
   }
-
+  * {
+    outline: none;
+  }
+  .option-link {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+  }
+  .search-empty {
+    display: none;
+  }
+  .search-option {
+    background-color: white;
+    border-style: solid;
+    border-width: 0 0 1px 0; /* top right bottom left */
+    height: 50px;
+    padding: 10px;
+    font-family: Roboto, sans-serif;
+  }
+  .search-option:hover {
+    background-color: #dedede;
+  }
   .search {
     margin-top: 18px;
   }
@@ -169,9 +215,14 @@ const Wrapper = styled.nav`
     flex-direction: column;
     position: absolute;
     width: 490px;
-    background-color: blue;
+    background-color: white;
     z-index: 1;
     margin-left: 20px;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+  }
+  .nav-search-box:focus {
+    height: 200px;
   }
   .nav-input {
     width: 533px;
