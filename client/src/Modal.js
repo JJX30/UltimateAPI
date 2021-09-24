@@ -83,16 +83,54 @@ const PasswordModal = ({ closeModal }) => {
 };
 
 const KeyModal = ({ closeModal }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [key, setKey] = useState(user.apiKey);
   const errorMessage = useRef(null);
+  const history = useHistory();
+
   const handleChange = (e) => {
     const value = e.target.value;
     errorMessage.current.hidden = true;
     setKey(value);
   };
-  const handleSubmit = () => {
-    if (key === "") {
+  const handleSubmit = async () => {
+    const newKey = {
+      old: user.apiKey,
+      email: user.email,
+      registrationDate: user.registrationDate,
+      password: user.password,
+    };
+
+    const url = "/api/changekey";
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify(newKey),
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      if (result.status === 404) {
+        errorMessage.current.innerHTML = "Something went wrong";
+        errorMessage.current.hidden = false;
+      } else {
+        alert("New key generated!");
+        setUser({
+          email: result.email,
+          password: result.password,
+          apiKey: result.apiKey,
+          registrationDate: result.registrationDate,
+          image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
+        });
+        history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   return (

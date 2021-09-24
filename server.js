@@ -26,6 +26,34 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+app.post("/api/changekey", async (req, res) => {
+  const newKey = generateAPIKEY();
+  const response = await User.findOneAndReplace(
+    { apiKey: req.body.old },
+    {
+      email: req.body.email,
+      password: req.body.password,
+      apiKey: newKey,
+      registrationDate: req.body.registrationDate,
+    }
+  );
+  if (response !== null) {
+    console.log(response.apiKey);
+    console.log("Key changed successful");
+    res.status(200).json({
+      email: response.email,
+      password: response.password,
+      apiKey: newKey,
+      registrationDate: response.registrationDate,
+    });
+  } else {
+    console.log("Couldn't updates key");
+    res.status(404).json({
+      status: 404,
+    });
+  }
+});
+
 app.post("/api/changeemail", async (req, res) => {
   const response = await User.findOneAndReplace(
     { email: req.body.old },
