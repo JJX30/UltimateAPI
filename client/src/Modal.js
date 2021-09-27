@@ -50,7 +50,10 @@ const PasswordModal = ({ closeModal }) => {
     if (password.new === password.old) {
       errorMessage.current.innerHTML = "Password cannot be the same";
       errorMessage.current.hidden = false;
-    } else if (password.new !== "" && password.old !== "") {
+    } else if (password.new === "" || password.old === "") {
+      errorMessage.current.innerHTML = "Password cannot be empty";
+      errorMessage.current.hidden = false;
+    } else {
       const authPassword = {
         new: password.new,
         old: password.old,
@@ -91,9 +94,6 @@ const PasswordModal = ({ closeModal }) => {
       } catch (err) {
         console.log(err);
       }
-    } else {
-      errorMessage.current.innerHTML = "Please input the password";
-      errorMessage.current.hidden = false;
     }
   };
   return (
@@ -106,7 +106,7 @@ const PasswordModal = ({ closeModal }) => {
               <MdClose className="icon"></MdClose>
             </button>
           </div>
-          <div className="modal-section-2">
+          <div className="modal-section-2-password">
             <p>Old password:</p>
             <input
               className="dashboard-input"
@@ -116,7 +116,7 @@ const PasswordModal = ({ closeModal }) => {
               name="old"
             />
           </div>
-          <div className="modal-section-2">
+          <div className="modal-section-2-password">
             <p>New password:</p>
             <input
               className="dashboard-input"
@@ -355,6 +355,18 @@ const Wrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
     height: 220px;
+    font-family: Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .modal-section-2-password {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 135px;
     font-family: Roboto, sans-serif;
     font-size: 24px;
     font-weight: 300;
