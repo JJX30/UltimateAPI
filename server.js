@@ -25,6 +25,54 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+app.post("/api/changepassword", async (req, res) => {
+  const response = await User.findOne({ email: req.body.email });
+  if (response !== null) {
+    const match = await bcrypt.compare(req.body.old, response.password);
+    if (match) {
+      console.log("match");
+      bcrypt.hash(req.body.new, 10, async (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        const result = await User.findOneAndReplace(
+          { email: req.body.email },
+          {
+            email: req.body.email,
+            password: hash,
+            apiKey: req.body.apiKey,
+            registrationDate: req.body.registrationDate,
+          }
+        );
+        if (result !== null) {
+          console.log("Password changed successful");
+          res.status(200).json({
+            email: result.email,
+            password: hash,
+            apiKey: newKey,
+            registrationDate: response.registrationDate,
+          });
+        } else {
+          console.log("Couldn't updates key");
+          res.status(404).json({
+            status: 404,
+          });
+        }
+      });
+    } else {
+      console.log("wrong pass");
+      res.status(404).send({
+        error: "auth failed",
+        status: 404,
+      });
+    }
+  } else {
+    console.log("not found");
+    res.status(404).send({
+      error: "auth failed",
+    });
+  }
+});
 
 app.post("/api/changekey", async (req, res) => {
   const newKey = generateAPIKEY();

@@ -69,14 +69,15 @@ const Wrapper = styled.div`
   }
   .border {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #f5f5f5;
+    align-items: center;
     padding: 5px;
     border-radius: 14px;
   }
   .profile-image {
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 200px;
     margin: 5px;
     padding: 2px;
     background-color: white;

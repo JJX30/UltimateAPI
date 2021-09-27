@@ -23,7 +23,9 @@ const Dashboard = () => {
         <div className="dashboard-bar">
           <div className="dashboard-profile">
             <p className="dashboard-profile-text">Profile</p>
-            <ProfileCard link={false}></ProfileCard>
+            <div className="dashboard-profile-card">
+              <ProfileCard link={false}></ProfileCard>
+            </div>
           </div>
           <div className="dashboard-divider"></div>
         </div>
@@ -102,6 +104,9 @@ const Dashboard = () => {
 export default Dashboard;
 
 const Wrapper = styled.div`
+  .dashboard-profile-card {
+    margin-top: 95px;
+  }
   .left {
     display: flex;
     flex-direction: row;
@@ -119,9 +124,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
   }
-  .dashboard-profile-content {
-    display: flex;
-    flex-direction: row;
+  .dashboard-profile {
   }
   .dashboard-divider {
     height: 500px;
@@ -174,6 +177,9 @@ const Wrapper = styled.div`
     height: 25px;
   }
   @media only screen and (max-width: 1224px) {
+    .dashboard-profile-card {
+      margin-top: 0px;
+    }
     .dashboard {
       display: flex;
       flex-direction: column;

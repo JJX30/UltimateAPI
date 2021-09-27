@@ -37,15 +37,49 @@ const Modal = ({ showModal, setShowModal }) => {
 
 const PasswordModal = ({ closeModal }) => {
   const { user } = useContext(UserContext);
-  const [password, setPassword] = useState(user.password);
+  const [password, setPassword] = useState({ new: "", old: "" });
   const errorMessage = useRef(null);
   const handleChange = (e) => {
     const value = e.target.value;
+    const name = e.target.name;
     errorMessage.current.hidden = true;
-    setPassword(value);
+    setPassword({ ...password, [name]: value });
   };
-  const handleSubmit = () => {
-    if (password === "") {
+  const handleSubmit = async () => {
+    if (password.new !== password.old) {
+      errorMessage.current.innerHTML = "Passwords do not match";
+      errorMessage.current.hidden = false;
+    } else {
+      const authPassword = {
+        new: password.new,
+        old: password.old,
+        email: user.email,
+        apiKey: user.apiKey,
+        registrationDate: user.registrationDate,
+      };
+      const url = "/api/changepassword";
+
+      const options = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        body: JSON.stringify(authPassword),
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        if (result.status === 404) {
+          errorMessage.current.innerHTML = "Incorrect password";
+          errorMessage.current.hidden = false;
+        } else {
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   return (
@@ -59,13 +93,23 @@ const PasswordModal = ({ closeModal }) => {
             </button>
           </div>
           <div className="modal-section-2">
-            <p>Change password:</p>
+            <p>Old password:</p>
             <input
               className="dashboard-input"
-              type="email"
-              value={password}
+              type="password"
+              value={password.old}
               onChange={handleChange}
-              autoFocus
+              name="old"
+            />
+          </div>
+          <div className="modal-section-2">
+            <p>New password:</p>
+            <input
+              className="dashboard-input"
+              type="password"
+              value={password.new}
+              onChange={handleChange}
+              name="new"
             />
           </div>
           <div className="modal-section-3">
@@ -98,7 +142,6 @@ const KeyModal = ({ closeModal }) => {
       old: user.apiKey,
       email: user.email,
       registrationDate: user.registrationDate,
-      password: user.password,
     };
 
     const url = "/api/changekey";
