@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
@@ -6,19 +6,64 @@ const Signup = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [confirm, setConfirm] = useState("");
   const errorMessage = useRef(null);
+  const passwordReq = useRef(null);
+  const passwordReqNum = useRef(null);
+  const passwordReqLen = useRef(null);
+  const password = useRef(null);
   const history = useHistory();
 
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClickoutside);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickoutside);
+    };
+  }, []);
+  const handleClickoutside = (e) => {
+    if (password.current.contains(e.target)) {
+      passwordReq.current.style.display = "block";
+      return;
+    }
+    // outside click
+    passwordReq.current.style.display = "none";
+  };
+
+  useEffect(() => {
+    console.log(user.password);
+    console.log(user.password.length);
+    if (user.password.length >= 8) {
+      passwordReqLen.current.style.color = "green";
+    } else if (user.password.length < 8) {
+      passwordReqLen.current.style.color = "red";
+    }
+    if (/\d/.test(user.password)) {
+      passwordReqNum.current.style.color = "green";
+    } else if (!/\d/.test(user.password)) {
+      passwordReqNum.current.style.color = "red";
+    }
+  }, [user]);
   const handleChange = (e) => {
     errorMessage.current.hidden = true;
     const name = e.target.name;
     const value = e.target.value;
+
     setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.email && user.password && confirm) {
-      if (user.password !== confirm) {
+      if (
+        passwordReqLen.current.style.color === "red" ||
+        passwordReqNum.current.style.color === "red"
+      ) {
+        setUser({ email: user.email, password: "" });
+        setConfirm("");
+        console.log("Signup error");
+        errorMessage.current.innerHTML = "Password does not meet requirements";
+        errorMessage.current.hidden = false;
+      } else if (user.password !== confirm) {
         setUser({ email: user.email, password: "" });
         setConfirm("");
         console.log("Signup error");
@@ -60,6 +105,7 @@ const Signup = () => {
     } else {
       setUser({ email: "", password: "" });
       setConfirm("");
+      errorMessage.current.innerHTML = "You're missing something";
       errorMessage.current.hidden = false;
     }
   };
@@ -80,6 +126,7 @@ const Signup = () => {
               onChange={handleChange}
             />
             <input
+              ref={password}
               type="password"
               placeholder="password"
               className="signup-input"
@@ -87,6 +134,16 @@ const Signup = () => {
               value={user.password}
               onChange={handleChange}
             />
+            <div ref={passwordReq} className="password-reqs">
+              <ul className="password-reqs-list">
+                <li ref={passwordReqLen} className="password-reqs-item-length">
+                  At least 8 characters
+                </li>
+                <li ref={passwordReqNum} className="password-reqs-item-num">
+                  At least one number
+                </li>
+              </ul>
+            </div>
             <input
               type="password"
               placeholder="confirm password"
@@ -113,6 +170,18 @@ const Signup = () => {
 export default Signup;
 
 const Wrapper = styled.div`
+  .password-reqs {
+    display: none;
+    margin: 5px;
+    margin-left: 35px;
+    margin-bottom: 20px;
+  }
+  .password-reqs-item-length {
+    color: red;
+  }
+  .password-reqs-item-num {
+    color: red;
+  }
   .body {
     width: 430px;
     height: 417px;
@@ -145,9 +214,7 @@ const Wrapper = styled.div`
   .signup-inputs {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 387px;
-    height: 176px;
   }
 
   input::placeholder {
@@ -164,13 +231,14 @@ const Wrapper = styled.div`
     border-color: black;
     border-width: 1px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px; /* change */
   }
   form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 387px;
-    height: 285px;
+    height: 600px;
   }
   button {
     width: 269px;
