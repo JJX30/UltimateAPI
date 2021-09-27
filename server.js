@@ -33,6 +33,7 @@ app.post("/api/changepassword", async (req, res) => {
       console.log("match");
       bcrypt.hash(req.body.new, 10, async (err, hash) => {
         if (err) {
+          console.log("there was an error hashing");
           console.log(err);
         }
         const result = await User.findOneAndReplace(
@@ -47,13 +48,13 @@ app.post("/api/changepassword", async (req, res) => {
         if (result !== null) {
           console.log("Password changed successful");
           res.status(200).json({
-            email: result.email,
+            email: response.email,
             password: hash,
-            apiKey: newKey,
+            apiKey: response.apiKey,
             registrationDate: response.registrationDate,
           });
         } else {
-          console.log("Couldn't updates key");
+          console.log("Couldn't updates password");
           res.status(404).json({
             status: 404,
           });

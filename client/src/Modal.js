@@ -36,9 +36,10 @@ const Modal = ({ showModal, setShowModal }) => {
 };
 
 const PasswordModal = ({ closeModal }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [password, setPassword] = useState({ new: "", old: "" });
   const errorMessage = useRef(null);
+  const history = useHistory();
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -46,10 +47,10 @@ const PasswordModal = ({ closeModal }) => {
     setPassword({ ...password, [name]: value });
   };
   const handleSubmit = async () => {
-    if (password.new !== password.old) {
-      errorMessage.current.innerHTML = "Passwords do not match";
+    if (password.new === password.old) {
+      errorMessage.current.innerHTML = "Password cannot be the same";
       errorMessage.current.hidden = false;
-    } else {
+    } else if (password.new !== "" && password.old !== "") {
       const authPassword = {
         new: password.new,
         old: password.old,
@@ -76,10 +77,23 @@ const PasswordModal = ({ closeModal }) => {
           errorMessage.current.innerHTML = "Incorrect password";
           errorMessage.current.hidden = false;
         } else {
+          //successful
+          alert("Changed password!");
+          setUser({
+            email: result.email,
+            password: result.password,
+            apiKey: result.apiKey,
+            registrationDate: result.registrationDate,
+            image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
+          });
+          history.push("/");
         }
       } catch (err) {
         console.log(err);
       }
+    } else {
+      errorMessage.current.innerHTML = "Please input the password";
+      errorMessage.current.hidden = false;
     }
   };
   return (
