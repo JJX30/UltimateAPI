@@ -3,14 +3,9 @@ import styled from "styled-components";
 import DocNavbar from "./DocNavbar";
 import DocFooter from "./DocFooter";
 import { HashLink } from "react-router-hash-link";
-// import { BsLink } from "react-icons/bs";
 import { GrDown } from "react-icons/gr";
 
 const Doc = () => {
-  // const [displayGetting, setDisplayGetting] = useState("none");
-  // const [displayStructure, setDisplayStructure] = useState("none");
-  // const [displayQueries, setDisplayQueries] = useState("none");
-  // const [displayFAQ, setDisplayFAQ] = useState("none");
   const gettingDropDown = useRef(null);
   const structureDropDown = useRef(null);
   const queriesDropDown = useRef(null);
@@ -26,13 +21,11 @@ const Doc = () => {
   function handleClick(type) {
     list.forEach(({ ref, name }) => {
       if (name === type) {
-        console.log("bruh");
         console.log(ref.current.style.display);
         if (
           ref.current.style.display === "none" ||
           ref.current.style.display === ""
         ) {
-          console.log("bruh");
           ref.current.style.display = "flex";
         } else {
           ref.current.style.display = "none";
@@ -81,7 +74,6 @@ const Doc = () => {
                 </div>
                 <div className="doc-nav-drop-container">
                   <HashLink
-                    HashLink
                     to="/doc#getting-started-generate"
                     className="doc-nav-drop-links"
                   >

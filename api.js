@@ -2,16 +2,18 @@ const express = require("express");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+// const jwt = require("jsonwebtoken");
 require("dotenv/config");
 
-const User = require("./models/User.js");
+const session = require("express-session");
+const MongoSession = require("connect-mongodb-session")(session);
 
+const User = require("./models/User.js");
 const app = express();
 const port = 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
@@ -26,6 +28,19 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+const storeSession = new MongoSession({
+  uri: process.env.DB_CONNECTION,
+  collection: "sessions",
+});
+
+app.use(
+  session({
+    secret: process.env.ACCESS_TOKEN_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: storeSession,
+  })
+);
 app.post("/api/changepassword", async (req, res) => {
   const response = await User.findOne({ email: req.body.email });
   if (response !== null) {
@@ -131,6 +146,8 @@ app.post("/api/signin", async (req, res) => {
     const match = await bcrypt.compare(req.body.password, response.password);
     if (match) {
       console.log("match");
+      //   const accessToken = jwt.sign(response, process.env.ACCESS_TOKEN_SECRET);
+      req.session.isAuth = true;
       res.status(200).json(response);
     } else {
       console.log("wrong pass");
@@ -171,7 +188,19 @@ app.post("/api/signup", async (req, res) => {
     });
   }
 });
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers["authorization"];
+//   const token = authHeader && authHeader.split(" ");
+//   if (token === null) return res.sendStatus(401);
 
+//   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+//     if (err) {
+//       return res.sendStatus(403);
+//     }
+//     req.user = user;
+//     next();
+//   });
+// }
 function generateAPIKEY() {
   const rand = crypto.randomBytes(20);
 
