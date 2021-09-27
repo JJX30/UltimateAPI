@@ -73,13 +73,15 @@ const Navbar = () => {
     return "search the documentation...";
   }
   useEffect(() => {
-    // add when mounted
-    document.addEventListener("mousedown", handleClickoutside);
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener("mousedown", handleClickoutside);
-    };
-  }, []);
+    if (!small) {
+      // add when mounted
+      document.addEventListener("mousedown", handleClickoutside);
+      // return function to be called when unmounted
+      return () => {
+        document.removeEventListener("mousedown", handleClickoutside);
+      };
+    }
+  }, [small]);
   const handleClickoutside = (e) => {
     if (searchBar.current.contains(e.target)) {
       searchBar.current.style.display = "block";
