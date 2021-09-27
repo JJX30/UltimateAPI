@@ -118,14 +118,14 @@ const DocNavbar = () => {
       </div>
       <div className="navbar-links">
         <div className="navbar-profile">
-          <Link
+          <HashLink
             hidden
             ref={profileLink}
             className="navbar-link"
-            to="/dashboard"
+            to="/dashboard/#top"
           >
             profile
-          </Link>
+          </HashLink>
           <Link
             hidden
             ref={docLink}

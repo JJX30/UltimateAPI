@@ -1,14 +1,25 @@
 const express = require("express");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 require("dotenv/config");
 
 const Fighter = require("./models/Fighter.js");
 const User = require("./models/User.js");
 
+const auth = async (req, res, next) => {
+  const key = req.params.key;
+  const response = await User.findOne({ apiKey: key });
+  if (response) {
+    console.log(response);
+    next();
+  } else {
+    console.log("not authed");
+    res.status(401).json({ error: "Not authorized", status: 401 });
+  }
+};
+
 const app = express();
-const port = 3001;
+const port = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,157 +33,13 @@ mongoose
     console.log("Connected to Database");
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
+      console.log("UltimateAPI");
     });
   })
   .catch((err) => console.log(err));
-app.post("/api/changepassword", async (req, res) => {
-  const response = await User.findOne({ email: req.body.email });
-  if (response !== null) {
-    const match = await bcrypt.compare(req.body.old, response.password);
-    if (match) {
-      console.log("match");
-      bcrypt.hash(req.body.new, 10, async (err, hash) => {
-        if (err) {
-          console.log("there was an error hashing");
-          console.log(err);
-        }
-        const result = await User.findOneAndReplace(
-          { email: req.body.email },
-          {
-            email: req.body.email,
-            password: hash,
-            apiKey: req.body.apiKey,
-            registrationDate: req.body.registrationDate,
-          }
-        );
-        if (result !== null) {
-          console.log("Password changed successful");
-          res.status(200).json({
-            email: response.email,
-            password: hash,
-            apiKey: response.apiKey,
-            registrationDate: response.registrationDate,
-          });
-        } else {
-          console.log("Couldn't updates password");
-          res.status(404).json({
-            status: 404,
-          });
-        }
-      });
-    } else {
-      console.log("wrong pass");
-      res.status(404).send({
-        error: "auth failed",
-        status: 404,
-      });
-    }
-  } else {
-    console.log("not found");
-    res.status(404).send({
-      error: "auth failed",
-    });
-  }
-});
-
-app.post("/api/changekey", async (req, res) => {
-  const newKey = generateAPIKEY();
-  const response = await User.findOneAndReplace(
-    { apiKey: req.body.old },
-    {
-      email: req.body.email,
-      password: req.body.password,
-      apiKey: newKey,
-      registrationDate: req.body.registrationDate,
-    }
-  );
-  if (response !== null) {
-    console.log(response.apiKey);
-    console.log("Key changed successful");
-    res.status(200).json({
-      email: response.email,
-      password: response.password,
-      apiKey: newKey,
-      registrationDate: response.registrationDate,
-    });
-  } else {
-    console.log("Couldn't updates key");
-    res.status(404).json({
-      status: 404,
-    });
-  }
-});
-
-app.post("/api/changeemail", async (req, res) => {
-  const response = await User.findOneAndReplace(
-    { email: req.body.old },
-    {
-      email: req.body.new,
-      password: req.body.password,
-      apiKey: req.body.apiKey,
-      registrationDate: req.body.registrationDate,
-    }
-  );
-  if (response !== null) {
-    console.log("email changed successful");
-    res.status(200).json(response);
-  } else {
-    console.log("couldn't change email");
-    res.status(404).json({
-      status: 404,
-    });
-  }
-});
-
-app.post("/api/signin", async (req, res) => {
-  const response = await User.findOne({ email: req.body.email });
-  if (response !== null) {
-    const match = await bcrypt.compare(req.body.password, response.password);
-    if (match) {
-      console.log("match");
-      res.status(200).json(response);
-    } else {
-      console.log("wrong pass");
-      res.status(404).send({
-        error: "auth failed",
-      });
-    }
-  } else {
-    console.log("not found");
-    res.status(404).send({
-      error: "auth failed",
-    });
-  }
-});
-
-app.post("/api/signup", async (req, res) => {
-  const response = await User.findOne({ email: req.body.email });
-  if (response === null) {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-      if (err) {
-        console.log(err);
-      }
-      const newUser = new User({
-        email: req.body.email,
-        password: hash,
-        apiKey: generateAPIKEY(),
-        registrationDate: new Date().toString(),
-      });
-      newUser.save();
-      console.log("Account successfully created");
-    });
-    res.status(200).json({ message: "it worked", status: 200 });
-  } else {
-    console.log("Account creation unsuccessful");
-    res.status(404).json({
-      message: "Email already in use",
-      status: 404,
-    });
-  }
-});
 
 // find fighter based on firstname lastname query
-app.get("/api/v1/ufc/fighters", async (req, res) => {
+app.get("/v1/:key/ufc/fighters", auth, async (req, res) => {
   const queries = Object.keys(req.query);
   const { firstname, lastname } = req.query;
   try {
@@ -245,7 +112,7 @@ app.get("/api/v1/ufc/fighters", async (req, res) => {
   }
 });
 // get fighter list based of height
-app.get("/api/v1/ufc/fighters/height", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/height", auth, async (req, res) => {
   const { height } = req.query;
   try {
     if (height) {
@@ -272,7 +139,7 @@ app.get("/api/v1/ufc/fighters/height", async (req, res) => {
   }
 });
 // get fighter list based off weight
-app.get("/api/v1/ufc/fighters/weight", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/weight", auth, async (req, res) => {
   const { weight } = req.query;
 
   try {
@@ -300,7 +167,7 @@ app.get("/api/v1/ufc/fighters/weight", async (req, res) => {
   }
 });
 // get fighter list based off stances
-app.get("/api/v1/ufc/fighters/stance", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/stance", auth, async (req, res) => {
   const { stance } = req.query;
 
   try {
@@ -328,7 +195,7 @@ app.get("/api/v1/ufc/fighters/stance", async (req, res) => {
   }
 });
 // get fighter list based off number of wins
-app.get("/api/v1/ufc/fighters/record", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/record", auth, async (req, res) => {
   const { wins, losses, draws } = req.query;
   const queries = Object.keys(req.query);
 
@@ -464,7 +331,7 @@ app.get("/api/v1/ufc/fighters/record", async (req, res) => {
 });
 
 // fighter ID's based off firstname and lastname query
-app.get("/api/v1/ufc/fighters/id", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/id", auth, async (req, res) => {
   const { firstname, lastname } = req.query;
   const queries = req.query;
   try {
@@ -556,7 +423,7 @@ app.get("/api/v1/ufc/fighters/id", async (req, res) => {
 });
 
 // ROUTES by ID
-app.get("/api/v1/ufc/fighters/:id", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id", auth, async (req, res) => {
   try {
     const fighterInfo = await Fighter.findOne({ _id: req.params.id });
     res.status(200).json(fighterInfo);
@@ -571,7 +438,7 @@ app.get("/api/v1/ufc/fighters/:id", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/firstname", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/firstname", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -589,7 +456,7 @@ app.get("/api/v1/ufc/fighters/:id/firstname", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/lastname", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/lastname", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -606,7 +473,7 @@ app.get("/api/v1/ufc/fighters/:id/lastname", async (req, res) => {
     });
   }
 });
-app.get("/api/v1/ufc/fighters/:id/nickname", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/nickname", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -624,7 +491,7 @@ app.get("/api/v1/ufc/fighters/:id/nickname", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/height", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/height", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -642,7 +509,7 @@ app.get("/api/v1/ufc/fighters/:id/height", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/weight", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/weight", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -660,7 +527,7 @@ app.get("/api/v1/ufc/fighters/:id/weight", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/reach", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/reach", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -678,7 +545,7 @@ app.get("/api/v1/ufc/fighters/:id/reach", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/stance", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/stance", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -696,7 +563,7 @@ app.get("/api/v1/ufc/fighters/:id/stance", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/wins", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/wins", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -714,7 +581,7 @@ app.get("/api/v1/ufc/fighters/:id/wins", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/losses", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/losses", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -732,7 +599,7 @@ app.get("/api/v1/ufc/fighters/:id/losses", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/draws", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/draws", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -750,7 +617,7 @@ app.get("/api/v1/ufc/fighters/:id/draws", async (req, res) => {
   }
 });
 
-app.get("/api/v1/ufc/fighters/:id/belt", async (req, res) => {
+app.get("/v1/:key/ufc/fighters/:id/belt", auth, async (req, res) => {
   try {
     const result = await Fighter.findOne({ _id: req.params.id }).lean();
     const response = {
@@ -767,17 +634,3 @@ app.get("/api/v1/ufc/fighters/:id/belt", async (req, res) => {
     });
   }
 });
-
-function generateAPIKEY() {
-  const rand = crypto.randomBytes(20);
-
-  let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-  let str = "";
-
-  for (let i = 0; i < rand.length; i++) {
-    let index = rand[i] % chars.length;
-    str += chars[index];
-  }
-  return str;
-}
