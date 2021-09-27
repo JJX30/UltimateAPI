@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
 import { UserContext } from "./UserContext";
@@ -39,7 +39,44 @@ const PasswordModal = ({ closeModal }) => {
   const { user, setUser } = useContext(UserContext);
   const [password, setPassword] = useState({ new: "", old: "" });
   const errorMessage = useRef(null);
+  const passwordReq = useRef(null);
+  const passwordReqNum = useRef(null);
+  const passwordReqLen = useRef(null);
+  const newPassword = useRef(null);
   const history = useHistory();
+
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClickoutside);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClickoutside);
+    };
+  }, []);
+  const handleClickoutside = (e) => {
+    if (newPassword.current.contains(e.target)) {
+      passwordReq.current.style.display = "block";
+      return;
+    }
+    // outside click
+    passwordReq.current.style.display = "none";
+  };
+
+  useEffect(() => {
+    console.log(password.new);
+    console.log(password.old);
+    if (password.new.length >= 8) {
+      passwordReqLen.current.style.color = "green";
+    } else if (password.new.length < 8) {
+      passwordReqLen.current.style.color = "red";
+    }
+    if (/\d/.test(password.new)) {
+      passwordReqNum.current.style.color = "green";
+    } else if (!/\d/.test(password.new)) {
+      passwordReqNum.current.style.color = "red";
+    }
+  }, [password]);
+
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -52,6 +89,12 @@ const PasswordModal = ({ closeModal }) => {
       errorMessage.current.hidden = false;
     } else if (password.new === "" || password.old === "") {
       errorMessage.current.innerHTML = "Password cannot be empty";
+      errorMessage.current.hidden = false;
+    } else if (
+      passwordReqLen.current.style.color === "red" ||
+      passwordReqNum.current.style.color === "red"
+    ) {
+      errorMessage.current.innerHTML = "Password does not meet requirements";
       errorMessage.current.hidden = false;
     } else {
       const authPassword = {
@@ -106,7 +149,7 @@ const PasswordModal = ({ closeModal }) => {
               <MdClose className="icon"></MdClose>
             </button>
           </div>
-          <div className="modal-section-2-password">
+          <div className="modal-section-2-password-old">
             <p>Old password:</p>
             <input
               className="dashboard-input"
@@ -119,6 +162,7 @@ const PasswordModal = ({ closeModal }) => {
           <div className="modal-section-2-password">
             <p>New password:</p>
             <input
+              ref={newPassword}
               className="dashboard-input"
               type="password"
               value={password.new}
@@ -126,7 +170,20 @@ const PasswordModal = ({ closeModal }) => {
               name="new"
             />
           </div>
-          <div className="modal-section-3">
+          <div ref={passwordReq} className="password-reqs-modal">
+            <ul className="password-reqs-list">
+              <li
+                ref={passwordReqLen}
+                className="password-reqs-item-length-modal"
+              >
+                At least 8 characters
+              </li>
+              <li ref={passwordReqNum} className="password-reqs-item-num-modal">
+                At least one number
+              </li>
+            </ul>
+          </div>
+          <div className="modal-section-3-password">
             <button onClick={handleSubmit} className="modal-submit-button">
               Change
             </button>
@@ -323,6 +380,19 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .password-reqs-modal {
+    display: none;
+    margin-left: 330px;
+    position: absolute;
+    z-index: 10;
+  }
+  .password-reqs-item-length-modal {
+    color: red;
+  }
+  .password-reqs-item-num-modal {
+    color: red;
+  }
   .error-message {
     color: red;
   }
@@ -343,6 +413,13 @@ const Wrapper = styled.div`
     font-size: 20px;
     font-weight: 300;
   }
+  .modal-section-3-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
   .modal-section-3 {
     display: flex;
     flex-direction: column;
@@ -361,12 +438,25 @@ const Wrapper = styled.div`
     color: rgba(0, 0, 0, 0.8);
   }
 
+  .modal-section-2-password-old {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    font-family: Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 50px;
+    margin-bottom: 70px;
+  }
   .modal-section-2-password {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 135px;
+    height: 50px;
     font-family: Roboto, sans-serif;
     font-size: 24px;
     font-weight: 300;
