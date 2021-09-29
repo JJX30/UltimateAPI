@@ -23,23 +23,39 @@ const DocNavbar = () => {
   };
 
   useEffect(() => {
-    if (Auth.isAuthenticated()) {
-      dynamicButton.current.innerHTML = "sign out";
-      profileLink.current.hidden = false;
-      docLink.current.hidden = false;
-    }
-  });
+    authToken().then((result) => {
+      if (result) {
+        Auth.login(() => {
+          dynamicButton.current.innerHTML = "sign out";
+          profileLink.current.hidden = false;
+          docLink.current.hidden = false;
+          getPayload().then(({ email, apiKey, registrationDate }) => {
+            setUser({
+              email: email,
+              apiKey: apiKey,
+              registrationDate: registrationDate,
+              image: `https://avatars.dicebear.com/api/identicon/${registrationDate}.svg`,
+            });
+          });
+        });
+      }
+    });
+  }, [setUser]);
 
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
       console.log("Signed out");
-      setUser(null);
       Auth.logout(() => {
         dynamicButton.current.innerHTML = "sign in";
-        history.push("/");
         profileLink.current.hidden = true;
         docLink.current.hidden = true;
+        signout().then((result) => {
+          if (result) {
+            setUser(null);
+          }
+        });
         alert("You have signed out");
+        history.push("/");
       });
     } else {
       history.push("/signin");
@@ -148,7 +164,71 @@ const DocNavbar = () => {
     </DocDiv>
   );
 };
+async function authToken() {
+  const url = "/api/auth";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result.isAuth) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
+}
 
+async function getPayload() {
+  const url = "/api/user";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result.status === 404) {
+      return null;
+    } else {
+      return result;
+    }
+  } catch (err) {
+    return null;
+  }
+}
+async function signout() {
+  const url = "/api/signout";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result) {
+      return true;
+    }
+  } catch (err) {
+    return false;
+  }
+}
 export default DocNavbar;
 
 const DocDiv = styled.nav`

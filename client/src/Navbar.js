@@ -61,15 +61,15 @@ const Navbar = () => {
     if (Auth.isAuthenticated()) {
       console.log("Signed out");
       Auth.logout(() => {
+        dynamicButton.current.innerHTML = "sign in";
+        profileLink.current.hidden = true;
+        docLink.current.hidden = true;
         signout().then((result) => {
           if (result) {
             setUser(null);
-            dynamicButton.current.innerHTML = "sign in";
-            profileLink.current.hidden = true;
-            docLink.current.hidden = true;
-            alert("You have signed out");
           }
         });
+        alert("You have signed out");
         history.push("/");
       });
     } else {
