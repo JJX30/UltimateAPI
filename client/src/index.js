@@ -37,7 +37,7 @@ function App() {
       window.removeEventListener("resize", checkSize);
     };
   }, [size]);
-
+  // console.log(Auth.isAuthenticated());
   return (
     <UserContext.Provider value={providerUser}>
       <Wrapper>

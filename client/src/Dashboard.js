@@ -16,6 +16,7 @@ const Dashboard = () => {
       return { show: !prev.show, type: type };
     });
   }
+
   return (
     <Wrapper>
       <Navbar></Navbar>

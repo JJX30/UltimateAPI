@@ -189,7 +189,7 @@ const PasswordModal = ({ closeModal }) => {
 };
 
 const KeyModal = ({ closeModal }) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [key] = useState(user.apiKey);
   const errorMessage = useRef(null);
   const history = useHistory();
@@ -217,7 +217,6 @@ const KeyModal = ({ closeModal }) => {
         errorMessage.current.hidden = false;
       } else {
         alert("New key generated!");
-        setUser({ ...user, apiKey: result.apiKey });
         history.push("/");
       }
     } catch (err) {
@@ -241,6 +240,7 @@ const KeyModal = ({ closeModal }) => {
               type="email"
               value={key}
               autoFocus
+              readOnly
             />
           </div>
           <div className="modal-section-3">
@@ -258,7 +258,7 @@ const KeyModal = ({ closeModal }) => {
 };
 
 const EmailModal = ({ closeModal }) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [email, setEmail] = useState(user.email);
   const history = useHistory();
   const errorMessage = useRef(null);
@@ -300,7 +300,6 @@ const EmailModal = ({ closeModal }) => {
           errorMessage.current.hidden = false;
         } else {
           alert("Email successfully changed!");
-          setUser({ ...user, email: newEmail.new });
           history.push("/");
         }
       } catch (err) {

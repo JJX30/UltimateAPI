@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Auth from "./Auth";
 import { UserContext } from "./UserContext";
 import SearchData from "./SearchData";
+
 import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
@@ -37,64 +38,40 @@ const Navbar = () => {
   }, [size]);
 
   useEffect(() => {
-    async function fetchData() {
-      const url = "/api/auth";
-      const options = {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      };
-      const response = await fetch(url, options);
-      const result = await response.json();
-
-      if (result.isAuth) {
-        const { email, apiKey, registrationDate } = result.payload;
-        console.log("auth");
+    authToken().then((result) => {
+      if (result) {
         Auth.login(() => {
-          setUser({
-            email: email,
-            apiKey: apiKey,
-            registrationDate: registrationDate,
-            image: `https://avatars.dicebear.com/api/identicon/${registrationDate}.svg`,
+          dynamicButton.current.innerHTML = "sign out";
+          profileLink.current.hidden = false;
+          docLink.current.hidden = false;
+          getPayload().then(({ email, apiKey, registrationDate }) => {
+            setUser({
+              email: email,
+              apiKey: apiKey,
+              registrationDate: registrationDate,
+              image: `https://avatars.dicebear.com/api/identicon/${registrationDate}.svg`,
+            });
           });
         });
-        dynamicButton.current.innerHTML = "sign out";
-        profileLink.current.hidden = false;
-        docLink.current.hidden = false;
       }
-    }
-    fetchData();
+    });
   }, [setUser]);
-
+  console.log(user);
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
       console.log("Signed out");
-      setUser(null);
-      async function fetchData() {
-        const url = "/api/deletecookie";
-        const options = {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-          },
-        };
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result.message);
-        Auth.logout(() => {
-          dynamicButton.current.innerHTML = "sign in";
-          profileLink.current.hidden = true;
-          docLink.current.hidden = true;
-          history.push("/");
-          alert("You have signed out");
+      Auth.logout(() => {
+        signout().then((result) => {
+          if (result) {
+            setUser(null);
+            dynamicButton.current.innerHTML = "sign in";
+            profileLink.current.hidden = true;
+            docLink.current.hidden = true;
+            alert("You have signed out");
+          }
         });
-      }
-      fetchData();
+        history.push("/");
+      });
     } else {
       history.push("/signin");
     }
@@ -232,6 +209,72 @@ const Navbar = () => {
   );
 };
 
+async function authToken() {
+  const url = "/api/auth";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result.isAuth) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
+}
+
+async function getPayload() {
+  const url = "/api/user";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result.status === 404) {
+      return null;
+    } else {
+      return result;
+    }
+  } catch (err) {
+    return null;
+  }
+}
+
+async function signout() {
+  const url = "/api/signout";
+  const options = {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    if (result) {
+      return true;
+    }
+  } catch (err) {
+    return false;
+  }
+}
 export default Navbar;
 
 const Wrapper = styled.nav`

@@ -30,8 +30,6 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    console.log(user.password);
-    console.log(user.password.length);
     if (user.password.length >= 8) {
       passwordReqLen.current.style.color = "green";
     } else if (user.password.length < 8) {

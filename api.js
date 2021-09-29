@@ -104,8 +104,23 @@ app.post("/api/changekey", authToken, async (req, res) => {
   );
   if (response !== null) {
     console.log("Key changed successful");
+    res.clearCookie("token");
+
+    const token = jwt.sign(
+      {
+        email: response.email,
+        apiKey: newKey,
+        registrationDate: response.registrationDate,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "24h" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+    });
     res.status(200).json({
-      apiKey: newKey,
+      status: 200,
     });
   } else {
     console.log("Couldn't updates key");
@@ -122,8 +137,24 @@ app.post("/api/changeemail", authToken, async (req, res) => {
   );
   if (response !== null) {
     console.log("email changed successful");
+    res.clearCookie("token");
+
+    const token = jwt.sign(
+      {
+        email: req.body.new,
+        apiKey: response.apiKey,
+        registrationDate: response.registrationDate,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "24h" }
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+    });
+
     res.status(200).json({
-      email: req.body.new,
+      status: 200,
     });
   } else {
     console.log("couldn't change email");
@@ -198,34 +229,34 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+app.get("/api/user", authToken, (req, res) => {
+  const user = req.user;
+  console.log(user);
+  res.status(200).json(user);
+});
+
 app.get("/api/auth", (req, res) => {
   const token = req.cookies.token;
   if (token) {
     try {
       const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-      res.json({ payload: user, isAuth: true });
-      next();
+      if (user) {
+        res.json({ isAuth: true });
+      }
     } catch (err) {
-      res.json({ isAuth: false });
       res.clearCookie("token");
+      res.json({ isAuth: false });
     }
   } else {
-    res.json({ isAuth: false });
     res.clearCookie("token");
+    res.json({ isAuth: false });
   }
 });
 
-app.get("/api/deletecookie", (req, res) => {
+app.get("/api/signout", (req, res) => {
   res.clearCookie("token");
   res.json({ message: "deleted" });
 });
-// app.get("/api/data", authToken, (req, res) => {
-//   console.log("hi");
-//   res.json({ name: "mauricio", age: 19 });
-// });
-// app.get("/api", authToken, (req, res) => {
-//   res.send("welp");
-// });
 
 function authToken(req, res, next) {
   const token = req.cookies.token;
@@ -234,13 +265,21 @@ function authToken(req, res, next) {
       const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
       req.user = user;
+      console.log("auth passed");
       next();
     } catch (err) {
       res.clearCookie("token");
-      res.end();
+      res.status(404).json({
+        status: 404,
+        message: "Cookie was tampered with",
+      });
     }
   } else {
-    res.end();
+    console.log("auth token did not pass");
+    res.status(404).json({
+      status: 404,
+      message: "No cookie found",
+    });
   }
 }
 
