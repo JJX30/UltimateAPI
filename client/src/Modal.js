@@ -194,8 +194,8 @@ const KeyModal = ({ closeModal }) => {
   const errorMessage = useRef(null);
   const history = useHistory();
   const handleSubmit = async () => {
-    const newKey = {
-      old: user.apiKey,
+    const email = {
+      email: user.email,
     };
 
     const url = "/api/changekey";
@@ -206,7 +206,7 @@ const KeyModal = ({ closeModal }) => {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
       },
-      body: JSON.stringify(newKey),
+      body: JSON.stringify(email),
     };
 
     try {

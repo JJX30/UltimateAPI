@@ -97,7 +97,7 @@ app.post("/api/changekey", authToken, async (req, res) => {
   console.log("token");
   const newKey = generateAPIKEY();
   const response = await User.findOneAndUpdate(
-    { apiKey: req.body.old },
+    { email: req.body.email },
     {
       apiKey: newKey,
     }
