@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Auth from "./Auth";
 import { UserContext } from "./UserContext";
 import SearchData from "./SearchData";
-
 import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
@@ -38,24 +37,64 @@ const Navbar = () => {
   }, [size]);
 
   useEffect(() => {
-    if (Auth.isAuthenticated()) {
-      dynamicButton.current.innerHTML = "sign out";
-      profileLink.current.hidden = false;
-      docLink.current.hidden = false;
+    async function fetchData() {
+      const url = "/api/auth";
+      const options = {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      };
+      const response = await fetch(url, options);
+      const result = await response.json();
+
+      if (result.isAuth) {
+        const { email, apiKey, registrationDate } = result.payload;
+        console.log("auth");
+        Auth.login(() => {
+          setUser({
+            email: email,
+            apiKey: apiKey,
+            registrationDate: registrationDate,
+            image: `https://avatars.dicebear.com/api/identicon/${registrationDate}.svg`,
+          });
+        });
+        dynamicButton.current.innerHTML = "sign out";
+        profileLink.current.hidden = false;
+        docLink.current.hidden = false;
+      }
     }
-  });
+    fetchData();
+  }, [setUser]);
 
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
       console.log("Signed out");
       setUser(null);
-      Auth.logout(() => {
-        dynamicButton.current.innerHTML = "sign in";
-        history.push("/");
-        profileLink.current.hidden = true;
-        docLink.current.hidden = true;
-        alert("You have signed out");
-      });
+      async function fetchData() {
+        const url = "/api/deletecookie";
+        const options = {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        };
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result.message);
+        Auth.logout(() => {
+          dynamicButton.current.innerHTML = "sign in";
+          profileLink.current.hidden = true;
+          docLink.current.hidden = true;
+          history.push("/");
+          alert("You have signed out");
+        });
+      }
+      fetchData();
     } else {
       history.push("/signin");
     }

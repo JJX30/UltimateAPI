@@ -44,11 +44,9 @@ const Signin = () => {
           errorMessage.current.innerHTML = "Try signing in again!";
           errorMessage.current.hidden = false;
         } else {
-          console.log("log in successful");
           Auth.login(() => {
             setUser({
               email: result.email,
-              password: result.password,
               apiKey: result.apiKey,
               registrationDate: result.registrationDate,
               image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,

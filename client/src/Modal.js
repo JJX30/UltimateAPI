@@ -36,7 +36,7 @@ const Modal = ({ showModal, setShowModal }) => {
 };
 
 const PasswordModal = ({ closeModal }) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [password, setPassword] = useState({ new: "", old: "" });
   const errorMessage = useRef(null);
   const passwordReq = useRef(null);
@@ -101,8 +101,6 @@ const PasswordModal = ({ closeModal }) => {
         new: password.new,
         old: password.old,
         email: user.email,
-        apiKey: user.apiKey,
-        registrationDate: user.registrationDate,
       };
       const url = "/api/changepassword";
 
@@ -125,13 +123,6 @@ const PasswordModal = ({ closeModal }) => {
         } else {
           //successful
           alert("Changed password!");
-          setUser({
-            email: result.email,
-            password: result.password,
-            apiKey: result.apiKey,
-            registrationDate: result.registrationDate,
-            image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
-          });
           history.push("/");
         }
       } catch (err) {
@@ -199,20 +190,12 @@ const PasswordModal = ({ closeModal }) => {
 
 const KeyModal = ({ closeModal }) => {
   const { user, setUser } = useContext(UserContext);
-  const [key, setKey] = useState(user.apiKey);
+  const [key] = useState(user.apiKey);
   const errorMessage = useRef(null);
   const history = useHistory();
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    errorMessage.current.hidden = true;
-    setKey(value);
-  };
   const handleSubmit = async () => {
     const newKey = {
       old: user.apiKey,
-      email: user.email,
-      registrationDate: user.registrationDate,
     };
 
     const url = "/api/changekey";
@@ -234,13 +217,7 @@ const KeyModal = ({ closeModal }) => {
         errorMessage.current.hidden = false;
       } else {
         alert("New key generated!");
-        setUser({
-          email: result.email,
-          password: result.password,
-          apiKey: result.apiKey,
-          registrationDate: result.registrationDate,
-          image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
-        });
+        setUser({ ...user, apiKey: result.apiKey });
         history.push("/");
       }
     } catch (err) {
@@ -263,7 +240,6 @@ const KeyModal = ({ closeModal }) => {
               className="dashboard-input"
               type="email"
               value={key}
-              onChange={handleChange}
               autoFocus
             />
           </div>
@@ -303,9 +279,6 @@ const EmailModal = ({ closeModal }) => {
       const newEmail = {
         new: email,
         old: user.email,
-        apiKey: user.apiKey,
-        registrationDate: user.registrationDate,
-        password: user.password,
       };
       const url = "/api/changeemail";
 
@@ -327,13 +300,7 @@ const EmailModal = ({ closeModal }) => {
           errorMessage.current.hidden = false;
         } else {
           alert("Email successfully changed!");
-          setUser({
-            email: newEmail.new,
-            password: result.password,
-            apiKey: result.apiKey,
-            registrationDate: result.registrationDate,
-            image: `https://avatars.dicebear.com/api/identicon/${result.registrationDate}.svg`,
-          });
+          setUser({ ...user, email: newEmail.new });
           history.push("/");
         }
       } catch (err) {
