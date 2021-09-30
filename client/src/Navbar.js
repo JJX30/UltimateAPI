@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { GiBoxingGloveSurprise } from "react-icons/gi";
+import logo from "./images/logo/logooo.jpg";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Auth from "./Auth";
@@ -119,19 +119,13 @@ const Navbar = () => {
       {small ? (
         <div className="navbar-search">
           <Link className="navbar-link navbar-logo" to="/">
-            <GiBoxingGloveSurprise
-              size={70}
-              color="#DB0000"
-            ></GiBoxingGloveSurprise>
+            <img className="navbar-logo-pic" alt="UltimateAPI" src={logo}></img>
           </Link>
         </div>
       ) : (
         <div className="navbar-search">
           <Link className="navbar-link navbar-logo" to="/">
-            <GiBoxingGloveSurprise
-              size={70}
-              color="#DB0000"
-            ></GiBoxingGloveSurprise>
+            <img className="navbar-logo-pic" alt="UltimateAPI" src={logo}></img>
           </Link>
 
           <div className="search">
@@ -282,6 +276,11 @@ const Wrapper = styled.nav`
   justify-content: space-between;
   background-color: black;
   height: 78px;
+  .navbar-logo-pic {
+    height: 65px;
+    margin-top: 9px;
+    margin-left: 20px;
+  }
   li {
     list-style-type: none;
   }
@@ -366,8 +365,7 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    width: 653px;
-    margin-left: 31px;
+    width: 700px;
   }
   .navbar-logo {
     display: flex;
@@ -386,9 +384,5 @@ const Wrapper = styled.nav`
     );
     width: 111px;
     height: 52px;
-  }
-
-  GiBoxingGlove {
-    color: #db0000;
   }
 `;
