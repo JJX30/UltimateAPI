@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 // const session = require("express-session");
 
 const User = require("./models/User.js");
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 // app.use(
