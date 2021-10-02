@@ -1,2 +1,2 @@
-# UltimateAPI-client
-Client for UltimateAPI
+# UltimateAPI 
+API for UFC fighters and stats
