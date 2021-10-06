@@ -12,25 +12,25 @@ const Modal = ({ showModal, setShowModal }) => {
   };
   if (showModal.type === "email") {
     return (
-      <>
+      <div>
         {showModal.show ? (
           <EmailModal closeModal={closeModal}></EmailModal>
         ) : null}
-      </>
+      </div>
     );
   } else if (showModal.type === "key") {
     return (
-      <>
+      <div>
         {showModal.show ? <KeyModal closeModal={closeModal}></KeyModal> : null}
-      </>
+      </div>
     );
   } else if (showModal.type === "password") {
     return (
-      <>
+      <div>
         {showModal.show ? (
           <PasswordModal closeModal={closeModal}></PasswordModal>
         ) : null}
-      </>
+      </div>
     );
   }
 };
@@ -131,7 +131,7 @@ const PasswordModal = ({ closeModal }) => {
     }
   };
   return (
-    <>
+    <div>
       <Wrapper>
         <div className="modal-body">
           <div className="modal-section-1">
@@ -184,7 +184,7 @@ const PasswordModal = ({ closeModal }) => {
           </div>
         </div>
       </Wrapper>
-    </>
+    </div>
   );
 };
 
@@ -224,7 +224,7 @@ const KeyModal = ({ closeModal }) => {
     }
   };
   return (
-    <>
+    <div>
       <Wrapper>
         <div className="modal-body">
           <div className="modal-section-1">
@@ -253,7 +253,7 @@ const KeyModal = ({ closeModal }) => {
           </div>
         </div>
       </Wrapper>
-    </>
+    </div>
   );
 };
 
@@ -309,7 +309,7 @@ const EmailModal = ({ closeModal }) => {
   };
 
   return (
-    <>
+    <div>
       <Wrapper>
         <div className="modal-body">
           <div className="modal-section-1">
@@ -338,7 +338,7 @@ const EmailModal = ({ closeModal }) => {
           </div>
         </div>
       </Wrapper>
-    </>
+    </div>
   );
 };
 
