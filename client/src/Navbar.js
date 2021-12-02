@@ -56,10 +56,8 @@ const Navbar = () => {
       }
     });
   }, [setUser]);
-  console.log(user);
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
-      console.log("Signed out");
       Auth.logout(() => {
         dynamicButton.current.innerHTML = "sign in";
         profileLink.current.hidden = true;
@@ -170,6 +168,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
       <div className="navbar-links">
         <div className="navbar-profile">
           <HashLink
@@ -346,13 +345,13 @@ const Wrapper = styled.nav`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 200px;
+    margin-right: 10px;
+    margin-left: 40px;
   }
   .navbar-links {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 360px;
   }
   .navbar-link {
     font-family: Roboto, sans-serif;

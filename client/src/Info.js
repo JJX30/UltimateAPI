@@ -225,7 +225,6 @@ const Slider = ({ which }) => {
     }
   };
   const handleFighterBackward = () => {
-    console.log("bruh");
     if (fighterIndex === 0) {
       setFighterIndex(10);
     } else {
@@ -694,6 +693,48 @@ const Wrapper = styled.div`
       border-radius: 50px;
       font-family: Roboto, sans-serif;
       font-weight: 200;
+    }
+    .image-div {
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .info-content-text-small {
+      width: 400px;
+      height: 500px;
+      background-color: black;
+      border-radius: 50px;
+      font-family: Roboto, sans-serif;
+      font-weight: 200;
+    }
+    .info-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background: rgb(138, 0, 0);
+      background: linear-gradient(
+        360deg,
+        rgba(138, 0, 0, 1) 0%,
+        rgba(179, 0, 0, 1) 100%
+      );
+      height: 700px;
+    }
+    .image-div {
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+    }
+    .info-content-paragraph {
+      margin-top: 37px;
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      line-height: 36px;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 100;
     }
   }
 `;

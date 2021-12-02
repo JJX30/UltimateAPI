@@ -21,7 +21,6 @@ const Doc = () => {
   function handleClick(type) {
     list.forEach(({ ref, name }) => {
       if (name === type) {
-        console.log(ref.current.style.display);
         if (
           ref.current.style.display === "none" ||
           ref.current.style.display === ""

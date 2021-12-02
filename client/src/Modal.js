@@ -63,8 +63,6 @@ const PasswordModal = ({ closeModal }) => {
   };
 
   useEffect(() => {
-    console.log(password.new);
-    console.log(password.old);
     if (password.new.length >= 8) {
       passwordReqLen.current.style.color = "green";
     } else if (password.new.length < 8) {

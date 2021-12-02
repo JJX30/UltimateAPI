@@ -44,7 +44,6 @@ const DocNavbar = () => {
 
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
-      console.log("Signed out");
       Auth.logout(() => {
         dynamicButton.current.innerHTML = "sign in";
         profileLink.current.hidden = true;

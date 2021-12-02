@@ -58,13 +58,11 @@ const Signup = () => {
       ) {
         setUser({ email: user.email, password: "" });
         setConfirm("");
-        console.log("Signup error");
         errorMessage.current.innerHTML = "Password does not meet requirements";
         errorMessage.current.hidden = false;
       } else if (user.password !== confirm) {
         setUser({ email: user.email, password: "" });
         setConfirm("");
-        console.log("Signup error");
         errorMessage.current.innerHTML = "Passwords do not match";
         errorMessage.current.hidden = false;
       } else {
@@ -87,13 +85,10 @@ const Signup = () => {
           if (result.status === 404) {
             setUser({ email: user.email, password: "" });
             setConfirm("");
-            console.log("Signup error");
             errorMessage.current.innerHTML = "Email already in use";
             errorMessage.current.hidden = false;
           } else if (result.status === 200) {
             alert("Account Succesfully created!");
-            console.log("Account created");
-            console.log("route to login page");
             history.push("/signin");
           }
         } catch (err) {
@@ -181,7 +176,7 @@ const Wrapper = styled.div`
     color: red;
   }
   .body {
-    width: 430px;
+    width: 387px;
     height: 417px;
     display: flex;
     flex-direction: column;
@@ -204,7 +199,7 @@ const Wrapper = styled.div`
   }
   h1 {
     font-family: Roboto, sans-serif;
-    font-size: 48px;
+    font-size: 44px;
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 0;
@@ -234,9 +229,7 @@ const Wrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 387px;
-    height: 600px;
+    justify-content: center;
   }
   button {
     width: 269px;
