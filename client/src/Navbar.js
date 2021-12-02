@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "./images/logo/logooo.jpg";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -14,9 +15,12 @@ const Navbar = () => {
   const docLink = useRef(null);
   const dynamicButton = useRef(null);
   const searchBar = useRef(null);
+  const dropdown = useRef(null);
+  const dropdownButton = useRef(null);
   const history = useHistory();
   const [size, setSize] = useState(window.innerWidth);
   const [small, setSmall] = useState(false);
+  const [extraSmall, setExtraSmall] = useState(false);
 
   const [search, setSearch] = useState("");
 
@@ -24,6 +28,18 @@ const Navbar = () => {
     setSize(window.innerWidth);
   };
 
+  useEffect(() => {
+    if (size < 470) {
+      setExtraSmall(true);
+    }
+    if (size > 470) {
+      setExtraSmall(false);
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
   useEffect(() => {
     if (size < 984) {
       setSmall(true);
@@ -43,6 +59,7 @@ const Navbar = () => {
         Auth.login(() => {
           dynamicButton.current.innerHTML = "sign out";
           profileLink.current.hidden = false;
+          console.log("bruh");
           docLink.current.hidden = false;
           getPayload().then(({ email, apiKey, registrationDate }) => {
             setUser({
@@ -112,6 +129,20 @@ const Navbar = () => {
   const handleFocus = () => {
     searchBar.current.style.display = "block";
   };
+  const toggleDropdown = () => {
+    if (dropdown.current.style.display === "flex") {
+      dropdown.current.style.display = "none";
+      dropdownButton.current.style.background = "black";
+    } else {
+      dropdown.current.style.display = "flex";
+
+      dropdownButton.current.style.background = `linear-gradient(
+      360deg,
+      rgba(185, 1, 1, 1) 0%,
+      rgba(219, 0, 0, 1) 100%
+    )`;
+    }
+  };
   return (
     <Wrapper>
       {small ? (
@@ -168,36 +199,74 @@ const Navbar = () => {
           </div>
         </div>
       )}
-
-      <div className="navbar-links">
-        <div className="navbar-profile">
-          <HashLink
-            hidden
-            ref={profileLink}
-            className="navbar-link"
-            to="/dashboard#top"
+      {extraSmall ? (
+        <div className="dropdown">
+          <div
+            className="dropbtn"
+            ref={dropdownButton}
+            onClick={toggleDropdown}
           >
-            profile
-          </HashLink>
-          <Link
-            hidden
-            ref={docLink}
-            className="navbar-link navbar-doc"
-            to="/doc"
-          >
-            doc
-          </Link>
+            <GiHamburgerMenu className="hamburger-icon"></GiHamburgerMenu>
+          </div>
+          <div className="dropdown-content" ref={dropdown}>
+            <HashLink
+              hidden
+              ref={profileLink}
+              className="navbar-link"
+              to="/dashboard#top"
+            >
+              profile
+            </HashLink>
+            <Link
+              hidden
+              ref={docLink}
+              className="navbar-link navbar-doc"
+              to="/doc"
+            >
+              doc
+            </Link>
+            <div className="navbar-signin">
+              <button
+                className="navbar-link"
+                ref={dynamicButton}
+                onClick={handleClick}
+              >
+                sign in
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="navbar-signin">
-          <button
-            className="navbar-link"
-            ref={dynamicButton}
-            onClick={handleClick}
-          >
-            sign in
-          </button>
+      ) : (
+        <div className="navbar-links">
+          <div className="navbar-profile">
+            <HashLink
+              hidden
+              ref={profileLink}
+              className="navbar-link"
+              to="/dashboard#top"
+            >
+              profile
+            </HashLink>
+            <Link
+              hidden
+              ref={docLink}
+              className="navbar-link navbar-doc"
+              to="/doc"
+            >
+              doc
+            </Link>
+          </div>
+          <div className="navbar-signin">
+            <button
+              className="navbar-link"
+              ref={dynamicButton}
+              onClick={handleClick}
+            >
+              sign in
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </Wrapper>
   );
 };
@@ -383,5 +452,61 @@ const Wrapper = styled.nav`
     );
     width: 111px;
     height: 52px;
+  }
+  /* Dropdown Button */
+  .dropbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+    height: 78px;
+  }
+  .hamburger-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    background: rgb(185, 1, 1);
+    background: linear-gradient(
+      360deg,
+      rgba(185, 1, 1, 1) 0%,
+      rgba(219, 0, 0, 1) 100%
+    );
+    left: -71px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background: rgb(185, 1, 1);
+    background: linear-gradient(
+      360deg,
+      rgba(185, 1, 1, 1) 0%,
+      rgba(219, 0, 0, 1) 100%
+    );
   }
 `;
