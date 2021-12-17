@@ -720,7 +720,7 @@ app.post("/api/changekey", authToken, async (req, res) => {
         apiKey: newKey,
         registrationDate: response.registrationDate,
       },
-      process.env.ACCESS_TOKEN_SECRET,
+      "bruh",
       { expiresIn: "24h" }
     );
     res.cookie("token", token, {
@@ -788,6 +788,7 @@ app.post("/api/signin", isAuth, async (req, res) => {
           registrationDate: response.registrationDate,
         },
         process.env.ACCESS_TOKEN_SECRET,
+        "bruh",
         { expiresIn: "24h" }
       );
       res.cookie("token", token, {
@@ -850,7 +851,7 @@ app.get("/api/auth", (req, res) => {
   const token = req.cookies.token;
   if (token) {
     try {
-      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      const user = jwt.verify(token, "bruh");
       if (user) {
         res.json({ isAuth: true });
       }
@@ -873,7 +874,7 @@ function authToken(req, res, next) {
   const token = req.cookies.token;
   if (token) {
     try {
-      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      const user = jwt.verify(token, "bruh");
 
       req.user = user;
       console.log("auth passed");

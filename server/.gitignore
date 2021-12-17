@@ -49,7 +49,7 @@ build/Release
 
 # Dependency directories
 
-static/
+# static/
 node_modules/
 client/node_modules/
 jspm_packages/

@@ -118,7 +118,6 @@
     "mquery": "^3.2.5",
     "ms": "^2.0.0",
     "negotiator": "^0.6.2",
-    "nodemon": "^2.0.12",
     "nopt": "^1.0.10",
     "normalize-path": "^3.0.0",
     "normalize-url": "^4.5.1",

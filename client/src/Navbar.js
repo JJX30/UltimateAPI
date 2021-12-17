@@ -57,10 +57,11 @@ const Navbar = () => {
     authToken().then((result) => {
       if (result) {
         Auth.login(() => {
-          dynamicButton.current.innerHTML = "sign out";
-          profileLink.current.hidden = false;
-          console.log("bruh");
-          docLink.current.hidden = false;
+          if (size > 470) {
+            dynamicButton.current.innerHTML = "sign out";
+            profileLink.current.hidden = false;
+            docLink.current.hidden = false;
+          }
           getPayload().then(({ email, apiKey, registrationDate }) => {
             setUser({
               email: email,
@@ -72,13 +73,15 @@ const Navbar = () => {
         });
       }
     });
-  }, [setUser]);
+  }, [setUser, size]);
   const handleClick = () => {
     if (Auth.isAuthenticated()) {
       Auth.logout(() => {
-        dynamicButton.current.innerHTML = "sign in";
-        profileLink.current.hidden = true;
-        docLink.current.hidden = true;
+        if (size > 470) {
+          dynamicButton.current.innerHTML = "sign in";
+          profileLink.current.hidden = true;
+          docLink.current.hidden = true;
+        }
         signout().then((result) => {
           if (result) {
             setUser(null);
@@ -209,31 +212,35 @@ const Navbar = () => {
             <GiHamburgerMenu className="hamburger-icon"></GiHamburgerMenu>
           </div>
           <div className="dropdown-content" ref={dropdown}>
-            <HashLink
-              hidden
-              ref={profileLink}
-              className="navbar-link"
-              to="/dashboard#top"
-            >
-              profile
-            </HashLink>
-            <Link
-              hidden
-              ref={docLink}
-              className="navbar-link navbar-doc"
-              to="/doc"
-            >
-              doc
-            </Link>
-            <div className="navbar-signin">
-              <button
-                className="navbar-link"
-                ref={dynamicButton}
-                onClick={handleClick}
-              >
-                sign in
-              </button>
-            </div>
+            {user ? (
+              <div>
+                <HashLink className="navbar-link" to="/dashboard#top">
+                  profile
+                </HashLink>
+                <Link className="navbar-link navbar-doc" to="/doc">
+                  doc
+                </Link>
+                <div className="navbar-signin">
+                  <button
+                    className="navbar-link"
+                    ref={dynamicButton}
+                    onClick={handleClick}
+                  >
+                    sign out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="navbar-signin">
+                <button
+                  className="navbar-link"
+                  ref={dynamicButton}
+                  onClick={handleClick}
+                >
+                  sign in
+                </button>
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -344,6 +351,7 @@ const Wrapper = styled.nav`
   justify-content: space-between;
   background-color: black;
   height: 78px;
+
   .navbar-logo-pic {
     height: 65px;
     margin-top: 9px;
@@ -508,5 +516,8 @@ const Wrapper = styled.nav`
       rgba(185, 1, 1, 1) 0%,
       rgba(219, 0, 0, 1) 100%
     );
+  }
+  .navbar-link-dropdown {
+    display: none;
   }
 `;
