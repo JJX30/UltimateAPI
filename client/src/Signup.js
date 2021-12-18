@@ -71,6 +71,7 @@ const Signup = () => {
 
         const options = {
           method: "POST",
+          credentials: "include",
           mode: "cors",
           headers: {
             Accept: "application/json",

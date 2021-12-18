@@ -30,6 +30,7 @@ const Signin = () => {
       const url = "/api/signin";
       const options = {
         method: "POST",
+        credentials: "include",
         mode: "cors",
         headers: {
           Accept: "application/json",

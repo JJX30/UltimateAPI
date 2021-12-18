@@ -104,6 +104,7 @@ const PasswordModal = ({ closeModal }) => {
 
       const options = {
         method: "POST",
+        credentials: "include",
         mode: "cors",
         headers: {
           Accept: "application/json",
@@ -199,6 +200,7 @@ const KeyModal = ({ closeModal }) => {
     const url = "/api/changekey";
     const options = {
       method: "POST",
+      credentials: "include",
       mode: "cors",
       headers: {
         Accept: "application/json",
@@ -282,6 +284,7 @@ const EmailModal = ({ closeModal }) => {
 
       const options = {
         method: "POST",
+        credentials: "include",
         mode: "cors",
         headers: {
           Accept: "application/json",

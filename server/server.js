@@ -712,7 +712,10 @@ app.post("/api/changekey", authToken, async (req, res) => {
   );
   if (response !== null) {
     console.log("Key changed successful");
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      domain: "ultimateapi.tech",
+      path: "/",
+    });
 
     const token = jwt.sign(
       {

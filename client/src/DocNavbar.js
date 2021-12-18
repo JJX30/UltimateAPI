@@ -164,6 +164,7 @@ async function authToken() {
   const url = "/api/auth";
   const options = {
     method: "GET",
+    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
@@ -187,6 +188,7 @@ async function getPayload() {
   const url = "/api/user";
   const options = {
     method: "GET",
+    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
@@ -209,6 +211,7 @@ async function signout() {
   const url = "/api/signout";
   const options = {
     method: "GET",
+    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
