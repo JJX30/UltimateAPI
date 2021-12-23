@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static("static"));
+app.use(express.static("static"));
 app.use(cookieParser());
 
 const apiAuth = async (req, res, next) => {
@@ -724,7 +724,7 @@ app.post("/api/changekey", authToken, async (req, res) => {
       { expiresIn: "24h" }
     );
     res.cookie("token", token, {
-      // domain: "ultimateapi.tech",
+      domain: "ultimateapi.tech",
       httpOnly: true,
       secure: true,
     });
@@ -758,7 +758,7 @@ app.post("/api/changeemail", authToken, async (req, res) => {
       { expiresIn: "24h" }
     );
     res.cookie("token", token, {
-      // domain: "ultimateapi.tech",
+      domain: "ultimateapi.tech",
       httpOnly: true,
       secure: true,
     });
@@ -791,7 +791,7 @@ app.post("/api/signin", isAuth, async (req, res) => {
         { expiresIn: "24h" }
       );
       res.cookie("token", token, {
-        // domain: "ultimateapi.tech",
+        domain: "ultimateapi.tech",
         httpOnly: true,
         secure: true,
       });

@@ -266,6 +266,7 @@ async function authToken() {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
+    credentials: "same-origin",
   };
   try {
     const response = await fetch(url, options);
@@ -311,6 +312,7 @@ async function signout() {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8",
     },
+    credentials: "same-origin",
   };
   try {
     const response = await fetch(url, options);
