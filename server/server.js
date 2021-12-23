@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("static"));
+// app.use(express.static("static"));
 app.use(cookieParser());
 
 const apiAuth = async (req, res, next) => {
@@ -712,10 +712,7 @@ app.post("/api/changekey", authToken, async (req, res) => {
   );
   if (response !== null) {
     console.log("Key changed successful");
-    res.clearCookie("token", {
-      domain: "ultimateapi.tech",
-      path: "/",
-    });
+    res.clearCookie("token");
 
     const token = jwt.sign(
       {
@@ -723,11 +720,11 @@ app.post("/api/changekey", authToken, async (req, res) => {
         apiKey: newKey,
         registrationDate: response.registrationDate,
       },
-      "bruh",
+      process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "24h" }
     );
     res.cookie("token", token, {
-      domain: "ultimateapi.tech",
+      // domain: "ultimateapi.tech",
       httpOnly: true,
       secure: true,
     });
@@ -761,7 +758,7 @@ app.post("/api/changeemail", authToken, async (req, res) => {
       { expiresIn: "24h" }
     );
     res.cookie("token", token, {
-      domain: "ultimateapi.tech",
+      // domain: "ultimateapi.tech",
       httpOnly: true,
       secure: true,
     });
@@ -791,11 +788,10 @@ app.post("/api/signin", isAuth, async (req, res) => {
           registrationDate: response.registrationDate,
         },
         process.env.ACCESS_TOKEN_SECRET,
-        "bruh",
         { expiresIn: "24h" }
       );
       res.cookie("token", token, {
-        domain: "ultimateapi.tech",
+        // domain: "ultimateapi.tech",
         httpOnly: true,
         secure: true,
       });
@@ -854,7 +850,7 @@ app.get("/api/auth", (req, res) => {
   const token = req.cookies.token;
   if (token) {
     try {
-      const user = jwt.verify(token, "bruh");
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
       if (user) {
         res.json({ isAuth: true });
       }
@@ -877,7 +873,7 @@ function authToken(req, res, next) {
   const token = req.cookies.token;
   if (token) {
     try {
-      const user = jwt.verify(token, "bruh");
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
       req.user = user;
       console.log("auth passed");

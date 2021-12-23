@@ -71,7 +71,6 @@ const Signup = () => {
 
         const options = {
           method: "POST",
-          credentials: "include",
           mode: "cors",
           headers: {
             Accept: "application/json",
@@ -254,5 +253,88 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  @media only screen and (max-width: 400px) {
+    h1 {
+      font-family: Roboto, sans-serif;
+      font-size: 40px;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .body {
+      width: 300px;
+      height: 417px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .subtitle {
+      font-family: Roboto, sans-serif;
+      font-size: 25px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
+      margin-bottom: 29px;
+      margin-top: 10px;
+    }
+    .signup-inputs {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+    }
+    .signup-input {
+      font-size: 18px;
+      padding-inline-start: 30px;
+      padding-inline-end: 30px;
+      width: 300px;
+      height: 46px;
+      border-radius: 50px;
+      border-color: black;
+      border-width: 1px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin-bottom: 20px; /* change */
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    h1 {
+      font-family: Roboto, sans-serif;
+      font-size: 38px;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .body {
+      width: 250px;
+      height: 417px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .subtitle {
+      font-family: Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.8);
+      margin-bottom: 29px;
+      margin-top: 10px;
+    }
+    .signup-inputs {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+    }
+    .signup-input {
+      font-size: 18px;
+      padding-inline-start: 30px;
+      padding-inline-end: 30px;
+      width: 250px;
+      height: 46px;
+      border-radius: 50px;
+      border-color: black;
+      border-width: 1px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin-bottom: 20px; /* change */
+    }
   }
 `;

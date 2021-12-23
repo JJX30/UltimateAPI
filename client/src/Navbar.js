@@ -282,7 +282,6 @@ async function authToken() {
   const url = "/api/auth";
   const options = {
     method: "GET",
-    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
@@ -306,7 +305,6 @@ async function getPayload() {
   const url = "/api/user";
   const options = {
     method: "GET",
-    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
@@ -330,7 +328,6 @@ async function signout() {
   const url = "/api/signout";
   const options = {
     method: "GET",
-    credentials: "include",
     mode: "cors",
     headers: {
       Accept: "application/json",
@@ -355,6 +352,20 @@ const Wrapper = styled.nav`
   background-color: black;
   height: 78px;
 
+  /* .navbar-logo-pic::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1; // hide images
+    content: url("./images/fighters/jose.png") url("conor.png")
+      url("./images/fighters/alex.png") url("./images/fighters/brandon.png")
+      url("./images/fighters/ciryl.png") url("./images/fighters/colby.png")
+      url("./images/fighters/israel.png") url("./images/fighters/jan.png")
+      url("./images/fighters/justin.png") url("./images/fighters/max.png")
+      url("./images/fighters/sean.png") url("./images/promotions/bellator.png")
+      url("./images/promotions/cage-warriors-logo.png"); // load images
+  } */
   .navbar-logo-pic {
     height: 65px;
     margin-top: 9px;

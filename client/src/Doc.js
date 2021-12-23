@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import DocNavbar from "./DocNavbar";
 import DocFooter from "./DocFooter";
@@ -11,12 +11,37 @@ const Doc = () => {
   const queriesDropDown = useRef(null);
   const faqDropDown = useRef(null);
   const miniDropDown = useRef(null);
+  const docDocumentation = useRef(null);
+  const doc = useRef(null);
+  const [size, setSize] = useState(window.innerWidth);
+  const [small, setSmall] = useState(false);
   const list = [
     { ref: gettingDropDown, name: "getting" },
     { ref: structureDropDown, name: "structure" },
     { ref: queriesDropDown, name: "queries" },
     { ref: faqDropDown, name: "faq" },
   ];
+
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (size < 1170) {
+      setSmall(true);
+      doc.current.style.justifyContent = "center";
+      docDocumentation.current.style.paddingLeft = "100px";
+    }
+    if (size > 1170) {
+      setSmall(false);
+      doc.current.style.justifyContent = "";
+      docDocumentation.current.style.paddingLeft = "400px";
+    }
+    window.addEventListener("resize", checkSize);
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
+  }, [size]);
 
   function handleClick(type) {
     list.forEach(({ ref, name }) => {
@@ -45,244 +70,251 @@ const Doc = () => {
   return (
     <Wrapper>
       <DocNavbar></DocNavbar>
-      <div className="doc-bar">
-        <div className="doc-nav-container">
-          <nav className="doc-nav">
-            <ul className="doc-nav-list">
-              <div className="doc-nav-link-container">
-                <HashLink to="/doc#top" className="doc-nav-links">
-                  🔎GETTING STARTED{" "}
-                </HashLink>
-                <button
-                  onClick={() => {
-                    handleClick("getting");
-                  }}
-                  className="arrow-icon"
-                >
-                  <GrDown></GrDown>
-                </button>
-              </div>
-              <div ref={gettingDropDown} className="doc-nav-drop-list">
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#getting-started-try"
-                    className="doc-nav-drop-links"
-                  >
-                    🥊 Try UltimateAPI
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#getting-started-generate"
-                    className="doc-nav-drop-links"
-                  >
-                    🔑 Generate the key
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#getting-started-your"
-                    className="doc-nav-drop-links"
-                  >
-                    🥇 Your first request
-                  </HashLink>
-                </div>
-              </div>
-              <div className="doc-nav-link-container">
-                <HashLink to="/doc#structure" className="doc-nav-links">
-                  🪜STRUCTURE
-                </HashLink>
-                <button
-                  onClick={() => {
-                    handleClick("structure");
-                  }}
-                  className="arrow-icon"
-                >
-                  <GrDown></GrDown>
-                </button>
-              </div>
-              <div ref={structureDropDown} className="doc-nav-drop-list">
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-id"
-                    className="doc-nav-drop-links"
-                  >
-                    🎫 ID
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-name"
-                    className="doc-nav-drop-links"
-                  >
-                    ✒️ Name
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-stats"
-                    className="doc-nav-drop-links"
-                  >
-                    📊 Stats
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#structure-record"
-                    className="doc-nav-drop-links"
-                  >
-                    🏆 Record
-                  </HashLink>
-                </div>
-              </div>
-              <div className="doc-nav-link-container">
-                <HashLink to="/doc#queries" className="doc-nav-links">
-                  ❓QUERIES
-                </HashLink>
-                <button
-                  onClick={() => {
-                    handleClick("queries");
-                  }}
-                  className="arrow-icon"
-                >
-                  <GrDown></GrDown>
-                </button>
-              </div>
-              <div ref={queriesDropDown} className="doc-nav-drop-list">
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#queries-fighter"
-                    className="doc-nav-drop-links"
-                  >
-                    🥷 Find a fighter
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container-bruh">
-                  <HashLink
-                    to="/doc#queries-attributes"
-                    className="doc-nav-drop-links"
-                  >
-                    🕵️ Find by attributes
+      <div className="doc-bar" ref={doc}>
+        {small ? (
+          <div></div>
+        ) : (
+          <div className="doc-nav-container">
+            <nav className="doc-nav">
+              <ul className="doc-nav-list">
+                <div className="doc-nav-link-container">
+                  <HashLink to="/doc#top" className="doc-nav-links">
+                    🔎GETTING STARTED{" "}
                   </HashLink>
                   <button
                     onClick={() => {
-                      handleMini();
+                      handleClick("getting");
                     }}
-                    className="arrow-icon-mini"
+                    className="arrow-icon"
                   >
                     <GrDown></GrDown>
                   </button>
                 </div>
-                <div ref={miniDropDown} className="doc-nav-drop-list-mini">
-                  <div className="doc-nav-drop-container-mini">
+                <div ref={gettingDropDown} className="doc-nav-drop-list">
+                  <div className="doc-nav-drop-container">
                     <HashLink
-                      to="/doc#queries-height"
+                      to="/doc#getting-started-try"
                       className="doc-nav-drop-links"
                     >
-                      📏 Height
+                      🥊 Try UltimateAPI
                     </HashLink>
                   </div>
-                  <div className="doc-nav-drop-container-mini">
+                  <div className="doc-nav-drop-container">
                     <HashLink
-                      to="/doc#queries-weight"
+                      to="/doc#getting-started-generate"
                       className="doc-nav-drop-links"
                     >
-                      ⚖️ Weight
+                      🔑 Generate the key
                     </HashLink>
                   </div>
-                  <div className="doc-nav-drop-container-mini">
+                  <div className="doc-nav-drop-container">
                     <HashLink
-                      to="/doc#queries-stance"
+                      to="/doc#getting-started-your"
                       className="doc-nav-drop-links"
                     >
-                      🥋 Stance
-                    </HashLink>
-                  </div>
-                  <div className="doc-nav-drop-container-mini">
-                    <HashLink
-                      to="/doc#queries-rec"
-                      className="doc-nav-drop-links"
-                    >
-                      🏅 Record
+                      🥇 Your first request
                     </HashLink>
                   </div>
                 </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#queries-find"
-                    className="doc-nav-drop-links"
+                <div className="doc-nav-link-container">
+                  <HashLink to="/doc#structure" className="doc-nav-links">
+                    🪜STRUCTURE
+                  </HashLink>
+                  <button
+                    onClick={() => {
+                      handleClick("structure");
+                    }}
+                    className="arrow-icon"
                   >
-                    🆔 Find the ID
-                  </HashLink>
+                    <GrDown></GrDown>
+                  </button>
                 </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#queries-search"
-                    className="doc-nav-drop-links"
+                <div ref={structureDropDown} className="doc-nav-drop-list">
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#structure-id"
+                      className="doc-nav-drop-links"
+                    >
+                      🎫 ID
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#structure-name"
+                      className="doc-nav-drop-links"
+                    >
+                      ✒️ Name
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#structure-stats"
+                      className="doc-nav-drop-links"
+                    >
+                      📊 Stats
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#structure-record"
+                      className="doc-nav-drop-links"
+                    >
+                      🏆 Record
+                    </HashLink>
+                  </div>
+                </div>
+                <div className="doc-nav-link-container">
+                  <HashLink to="/doc#queries" className="doc-nav-links">
+                    ❓QUERIES
+                  </HashLink>
+                  <button
+                    onClick={() => {
+                      handleClick("queries");
+                    }}
+                    className="arrow-icon"
                   >
-                    🔍 Search with ID
-                  </HashLink>
+                    <GrDown></GrDown>
+                  </button>
                 </div>
-              </div>
-              <div className="doc-nav-link-container">
-                <HashLink to="/doc#FAQ" className="doc-nav-links">
-                  📝FAQ
-                </HashLink>
-                <button
-                  onClick={() => {
-                    handleClick("faq");
-                  }}
-                  className="arrow-icon"
-                >
-                  <GrDown></GrDown>
-                </button>
-              </div>
-              <div ref={faqDropDown} className="doc-nav-drop-list">
-                <div className="doc-nav-drop-container">
-                  <HashLink to="/doc#FAQ-data" className="doc-nav-drop-links">
-                    📀 How did you <br></br>get the data?
-                  </HashLink>
+                <div ref={queriesDropDown} className="doc-nav-drop-list">
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#queries-fighter"
+                      className="doc-nav-drop-links"
+                    >
+                      🥷 Find a fighter
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container-bruh">
+                    <HashLink
+                      to="/doc#queries-attributes"
+                      className="doc-nav-drop-links"
+                    >
+                      🕵️ Find by attributes
+                    </HashLink>
+                    <button
+                      onClick={() => {
+                        handleMini();
+                      }}
+                      className="arrow-icon-mini"
+                    >
+                      <GrDown></GrDown>
+                    </button>
+                  </div>
+                  <div ref={miniDropDown} className="doc-nav-drop-list-mini">
+                    <div className="doc-nav-drop-container-mini">
+                      <HashLink
+                        to="/doc#queries-height"
+                        className="doc-nav-drop-links"
+                      >
+                        📏 Height
+                      </HashLink>
+                    </div>
+                    <div className="doc-nav-drop-container-mini">
+                      <HashLink
+                        to="/doc#queries-weight"
+                        className="doc-nav-drop-links"
+                      >
+                        ⚖️ Weight
+                      </HashLink>
+                    </div>
+                    <div className="doc-nav-drop-container-mini">
+                      <HashLink
+                        to="/doc#queries-stance"
+                        className="doc-nav-drop-links"
+                      >
+                        🥋 Stance
+                      </HashLink>
+                    </div>
+                    <div className="doc-nav-drop-container-mini">
+                      <HashLink
+                        to="/doc#queries-rec"
+                        className="doc-nav-drop-links"
+                      >
+                        🏅 Record
+                      </HashLink>
+                    </div>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#queries-find"
+                      className="doc-nav-drop-links"
+                    >
+                      🆔 Find the ID
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#queries-search"
+                      className="doc-nav-drop-links"
+                    >
+                      🔍 Search with ID
+                    </HashLink>
+                  </div>
                 </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink to="/doc#FAQ-weird" className="doc-nav-drop-links">
-                    ⁉️ Why is the <br></br>data formatted <br></br>so weird?
+                <div className="doc-nav-link-container">
+                  <HashLink to="/doc#FAQ" className="doc-nav-links">
+                    📝FAQ
                   </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#FAQ-updated"
-                    className="doc-nav-drop-links"
+                  <button
+                    onClick={() => {
+                      handleClick("faq");
+                    }}
+                    className="arrow-icon"
                   >
-                    ⏰ How often <br></br>will this API <br></br>be updated?
+                    <GrDown></GrDown>
+                  </button>
+                </div>
+                <div ref={faqDropDown} className="doc-nav-drop-list">
+                  <div className="doc-nav-drop-container">
+                    <HashLink to="/doc#FAQ-data" className="doc-nav-drop-links">
+                      📀 How did you <br></br>get the data?
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#FAQ-weird"
+                      className="doc-nav-drop-links"
+                    >
+                      ⁉️ Why is the <br></br>data formatted <br></br>so weird?
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#FAQ-updated"
+                      className="doc-nav-drop-links"
+                    >
+                      ⏰ How often <br></br>will this API <br></br>be updated?
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#FAQ-project"
+                      className="doc-nav-drop-links"
+                    >
+                      ☝️ I'm confused <br></br>is this a <br></br>solo project?
+                    </HashLink>
+                  </div>
+                  <div className="doc-nav-drop-container">
+                    <HashLink
+                      to="/doc#FAQ-questions"
+                      className="doc-nav-drop-links"
+                    >
+                      🙃 Are these <br></br>real questions?
+                    </HashLink>
+                  </div>
+                </div>
+                <div className="doc-nav-link-container">
+                  <HashLink to="/doc#thankyou" className="doc-nav-links">
+                    🎉THANK YOU
                   </HashLink>
                 </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#FAQ-project"
-                    className="doc-nav-drop-links"
-                  >
-                    ☝️ I'm confused <br></br>is this a <br></br>solo project?
-                  </HashLink>
-                </div>
-                <div className="doc-nav-drop-container">
-                  <HashLink
-                    to="/doc#FAQ-questions"
-                    className="doc-nav-drop-links"
-                  >
-                    🙃 Are these <br></br>real questions?
-                  </HashLink>
-                </div>
-              </div>
-              <div className="doc-nav-link-container">
-                <HashLink to="/doc#thankyou" className="doc-nav-links">
-                  🎉THANK YOU
-                </HashLink>
-              </div>
-            </ul>
-          </nav>
-          <div className="doc-divider"></div>
-        </div>
-        <div className="doc-documentation">
+              </ul>
+            </nav>
+            <div className="doc-divider"></div>
+          </div>
+        )}
+        <div className="doc-documentation" ref={docDocumentation}>
           <div className="doc-documentation-heading">
             <p className="doc-documentation-h1">🔎 Getting started</p>
             <p className="doc-documentation-subtitle">
@@ -360,6 +392,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/612a58314d73f352602c2ad5
               </p>
             </div>
@@ -589,6 +622,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters?
                 <mark className="highlight">firstname=conor</mark>
               </p>
@@ -687,6 +721,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/height?
                 <mark className="highlight">height=5' 11</mark>
               </p>
@@ -781,6 +816,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/weight?
                 <mark id="queries-stance" className="highlight">
                   weight=155
@@ -803,6 +839,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/stance?
                 <mark id="queries-rec" className="highlight">
                   stance=switch
@@ -825,6 +862,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/record?
                 <mark className="highlight">wins=29</mark>
               </p>
@@ -918,6 +956,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/record?
                 <mark className="highlight">{"wins=32&losses=14&draws=0"}</mark>
               </p>
@@ -1010,6 +1049,7 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/id?
                 <mark className="highlight">
                   {"firstname=conor&lastname=mcgregor"}
@@ -1051,7 +1091,9 @@ const Doc = () => {
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
+                <br></br>
                 /ufc/fighters/
+                <br></br>
                 <mark className="highlight">{"612a58304d73f352602c2548"}</mark>
                 /firstname
               </p>
@@ -1076,17 +1118,17 @@ const Doc = () => {
               <br></br>
             </p>
             <ul className="doc-documentation-list-sub">
-              <li className="item indent">firstname</li>
-              <li className="item indent">lastname</li>
-              <li className="item indent">nickname</li>
-              <li className="item indent">height</li>
-              <li className="item indent">weight</li>
-              <li className="item indent">reach</li>
-              <li className="item indent">stance</li>
-              <li className="item indent">wins</li>
-              <li className="item indent">losses</li>
-              <li className="item indent">draws</li>
-              <li id="FAQ" className="indent">
+              <li className="item indent epic">firstname</li>
+              <li className="item indent epic">lastname</li>
+              <li className="item indent epic">nickname</li>
+              <li className="item indent epic">height</li>
+              <li className="item indent epic">weight</li>
+              <li className="item indent epic">reach</li>
+              <li className="item indent epic">stance</li>
+              <li className="item indent epic">wins</li>
+              <li className="item indent epic">losses</li>
+              <li className="item indent epic">draws</li>
+              <li id="FAQ" className="indent epic">
                 belt
               </li>
             </ul>
@@ -1339,7 +1381,7 @@ const Wrapper = styled.div`
     background-color: #c8c9cc;
   }
   .doc-documentation {
-    padding-left: 400px;
+    padding-left: 400px; /* take this off when size changes */
     padding-bottom: 70px;
     margin-top: 80px;
     padding-right: 100px;
@@ -1409,5 +1451,243 @@ const Wrapper = styled.div`
   .doc-divider {
     width: 2px;
     background-color: #ebebeb;
+  }
+
+  @media only screen and (max-width: 770px) {
+    .doc-documentation-h1 {
+      font-size: 55px;
+      margin-top: 20px;
+      margin-left: 100px;
+    }
+    .doc-documentation-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 30px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .doc-documentation-p {
+      font-size: 15px;
+      margin-top: 50px;
+      margin-left: 100px;
+      margin-right: 100px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-divider {
+      height: 1px;
+      width: 600px;
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 60px;
+      background-color: #c8c9cc;
+    }
+    .list-item {
+      margin-left: 100px;
+    }
+    .doc-documentation-h2 {
+      font-size: 35px;
+      margin-top: 60px;
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+    .doc-documentation-code-box {
+      border-style: solid;
+      border-color: #c8c9cc;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      padding: 13px;
+      padding-left: 20px;
+      margin-top: 30px;
+      font-size: 14px;
+      margin-left: 100px;
+      width: 600px;
+      line-height: 1.7;
+    }
+    .doc-documentation-code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+    }
+    .doc-documentation-p-sub {
+      font-size: 15px;
+      margin-top: 30px;
+      margin-left: 100px;
+      margin-right: 100px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .list-item-indent {
+      margin-left: 150px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      list-style: circle;
+    }
+    .doc-documentation-h3 {
+      font-size: 25px;
+      margin-top: 60px;
+      margin-left: 100px;
+    }
+    .epic {
+      margin-left: 100px;
+    }
+  }
+  @media only screen and (max-width: 620px) {
+    .doc-documentation-h1 {
+      font-size: 35px;
+      margin-top: 20px;
+      margin-left: 180px;
+    }
+    .doc-documentation-subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      margin-left: 180px;
+      margin-right: 180px;
+      margin-top: 30px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .doc-documentation-p {
+      font-size: 12px;
+      margin-top: 50px;
+      margin-left: 180px;
+      margin-right: 180px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-divider {
+      height: 1px;
+      width: 400px;
+      margin-left: 180px;
+      margin-right: 180px;
+      margin-top: 60px;
+      background-color: #c8c9cc;
+    }
+    .list-item {
+      margin-left: 180px;
+    }
+    .doc-documentation-h2 {
+      font-size: 23px;
+      margin-top: 60px;
+      margin-left: 180px;
+      margin-right: 180px;
+    }
+    .doc-documentation-code-box {
+      border-style: solid;
+      border-color: #c8c9cc;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      padding: 13px;
+      padding-left: 20px;
+      margin-top: 30px;
+      font-size: 14px;
+      margin-left: 180px;
+      width: 400px;
+      line-height: 1.7;
+    }
+    .doc-documentation-code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+    }
+    .doc-documentation-p-sub {
+      font-size: 12px;
+      margin-top: 30px;
+      margin-left: 180px;
+      margin-right: 180px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .list-item-indent {
+      margin-left: 200px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      list-style: circle;
+    }
+    .doc-documentation-h3 {
+      font-size: 18px;
+      margin-top: 60px;
+      margin-left: 180px;
+    }
+    .epic {
+      margin-left: 180px;
+    }
+  }
+  @media only screen and (max-width: 415px) {
+    .doc-documentation-h1 {
+      font-size: 35px;
+      margin-top: 20px;
+      margin-left: 240px;
+    }
+    .doc-documentation-subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      margin-left: 240px;
+      margin-right: 240px;
+      margin-top: 30px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .doc-documentation-p {
+      font-size: 12px;
+      margin-top: 50px;
+      margin-left: 240px;
+      margin-right: 240px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-divider {
+      height: 1px;
+      width: 300px;
+      margin-left: 240px;
+      margin-right: 240px;
+      margin-top: 60px;
+      background-color: #c8c9cc;
+    }
+    .list-item {
+      margin-left: 240px;
+    }
+    .doc-documentation-h2 {
+      font-size: 23px;
+      margin-top: 60px;
+      margin-left: 240px;
+      margin-right: 240px;
+    }
+    .doc-documentation-code-box {
+      border-style: solid;
+      border-color: #c8c9cc;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      padding: 13px;
+      padding-left: 20px;
+      margin-top: 30px;
+      font-size: 14px;
+      margin-left: 240px;
+      width: 300px;
+      line-height: 1.7;
+    }
+    .doc-documentation-code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+    }
+    .doc-documentation-p-sub {
+      font-size: 12px;
+      margin-top: 30px;
+      margin-left: 240px;
+      margin-right: 240px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .list-item-indent {
+      margin-left: 200px;
+      margin-bottom: 20px;
+      margin-top: 10px;
+      list-style: circle;
+    }
+    .doc-documentation-h3 {
+      font-size: 18px;
+      margin-top: 60px;
+      margin-left: 240px;
+    }
+    .epic {
+      margin-left: 240px;
+    }
   }
 `;

@@ -194,6 +194,59 @@ const Wrapper = styled.div`
       font-weight: 300;
     }
   }
+
+  @media only screen and (max-width: 400px) {
+    .homepage-logo-heading-small {
+      font-size: 50px;
+    }
+
+    .homepage-logo-content-small {
+      font-size: 17px;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 300;
+    }
+
+    .homepage-divider-small {
+      height: 1px;
+      width: 200px;
+      background-color: black;
+      color: black;
+    }
+    .homepage-small {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    .homepage-logo-heading-small {
+      font-size: 50px;
+    }
+
+    .homepage-logo-content-small {
+      font-size: 20px;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 300;
+    }
+
+    .homepage-divider-small {
+      height: 1px;
+      width: 200px;
+      background-color: black;
+      color: black;
+    }
+    .homepage-small {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+  }
 `;
 
 ReactDom.render(<App></App>, document.getElementById("root"));
