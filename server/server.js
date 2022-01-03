@@ -865,8 +865,7 @@ app.get("/api/auth", (req, res) => {
 });
 
 app.get("/api/signout", (req, res) => {
-  res.clearCookie("token");
-  res.json({ message: "deleted" });
+  res.clearCookie("token", { domain: "ultimateapi.tech", path: "/" }).send();
 });
 
 function authToken(req, res, next) {
