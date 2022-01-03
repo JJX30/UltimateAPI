@@ -196,8 +196,17 @@ const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: 400px) {
+    .homepage-divider-small {
+      height: 1px;
+      width: 300px;
+      background-color: black;
+      color: black;
+    }
+  }
+
+  @media only screen and (max-width: 370px) {
     .homepage-logo-heading-small {
-      font-size: 50px;
+      font-size: 60px;
     }
 
     .homepage-logo-content-small {
@@ -205,13 +214,6 @@ const Wrapper = styled.div`
       margin: 0;
       color: rgba(0, 0, 0, 0.8);
       font-weight: 300;
-    }
-
-    .homepage-divider-small {
-      height: 1px;
-      width: 200px;
-      background-color: black;
-      color: black;
     }
     .homepage-small {
       display: flex;
@@ -221,7 +223,7 @@ const Wrapper = styled.div`
       margin-bottom: 50px;
     }
   }
-  @media only screen and (max-width: 300px) {
+  @media only screen and (max-width: 317px) {
     .homepage-logo-heading-small {
       font-size: 50px;
     }

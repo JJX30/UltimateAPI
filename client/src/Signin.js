@@ -104,6 +104,7 @@ const Wrapper = styled.div`
     height: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-evenly;
   }
 
@@ -180,5 +181,87 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  @media only screen and (max-width: 430px) {
+    .body {
+      width: 200px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    .signin-inputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 300px;
+      height: 176px;
+    }
+    .signin-input {
+      font-size: 18px;
+      padding-inline-start: 30px;
+      padding-inline-end: 30px;
+      width: 300px;
+      height: 46px;
+      border-radius: 50px;
+      border-color: black;
+      border-width: 1px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 300px;
+      height: 285px;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    .signin-inputs {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 200px;
+      height: 176px;
+    }
+    .signin-input {
+      font-size: 18px;
+      padding-inline-start: 30px;
+      padding-inline-end: 30px;
+      width: 200px;
+      height: 40px;
+      border-radius: 50px;
+      border-color: black;
+      border-width: 1px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 200px;
+      height: 285px;
+    }
+    button {
+      width: 180px;
+      height: 70px;
+      cursor: pointer;
+      border-radius: 50px;
+      border-style: none;
+      color: white;
+      background: rgb(185, 1, 1);
+      background: linear-gradient(
+        360deg,
+        rgba(185, 1, 1, 1) 0%,
+        rgba(219, 0, 0, 1) 100%
+      );
+      font-family: Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+    }
   }
 `;

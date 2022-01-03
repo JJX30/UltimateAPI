@@ -53,7 +53,7 @@ const Footer = () => {
                     <AiOutlineFacebook size={40}></AiOutlineFacebook>
                   </a>
                   <a
-                    href="https://twitter.com/mdelcas4"
+                    href="https://twitter.com/hedosntknow"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
@@ -120,7 +120,7 @@ const Footer = () => {
                         <AiOutlineFacebook size={40}></AiOutlineFacebook>
                       </a>
                       <a
-                        href="https://twitter.com/mdelcas4"
+                        href="https://twitter.com/hedosntknow"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="social-link"
@@ -204,7 +204,7 @@ const Footer = () => {
                         <AiOutlineFacebook size={40}></AiOutlineFacebook>
                       </a>
                       <a
-                        href="https://twitter.com/mdelcas4"
+                        href="https://twitter.com/hedosntknow"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="social-link"

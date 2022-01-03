@@ -30,12 +30,10 @@ const Doc = () => {
     if (size < 1170) {
       setSmall(true);
       doc.current.style.justifyContent = "center";
-      docDocumentation.current.style.paddingLeft = "100px";
     }
     if (size > 1170) {
       setSmall(false);
       doc.current.style.justifyContent = "";
-      docDocumentation.current.style.paddingLeft = "400px";
     }
     window.addEventListener("resize", checkSize);
     return () => {
@@ -388,7 +386,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -618,7 +616,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -717,7 +715,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -812,7 +810,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -835,7 +833,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -858,7 +856,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -952,7 +950,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -1045,7 +1043,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -1087,7 +1085,7 @@ const Doc = () => {
             </p>
             <div className="doc-documentation-code-box">
               <p className="doc-documentation-code">
-                www.ultimateapi.io/api/v1/
+                www.ultimateapi.tech/v1/
                 <mark className="highlight">
                   {"{"}your_key{"}"}
                 </mark>
@@ -1452,8 +1450,176 @@ const Wrapper = styled.div`
     width: 2px;
     background-color: #ebebeb;
   }
+  @media only screen and (max-width: 1170px) {
+    .doc-documentation {
+      padding-left: 100px;
+      font-family: Roboto, sans-serif;
+    }
+  }
+  @media only screen and (max-width: 585px) {
+    .doc-documentation-h1 {
+      font-size: 90px;
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .doc-documentation-subtitle {
+      font-size: 25px;
+      font-weight: 300;
+      margin-left: 0px;
+      margin-top: 30px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .doc-documentation-p {
+      font-size: 17px;
+      margin-top: 50px;
+      margin-left: 0px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-divider {
+      height: 1px;
+      margin-left: 0px;
+      margin-top: 60px;
+      background-color: #c8c9cc;
+    }
+    .list-item {
+      margin: 0px;
+      margin-top: 35px;
+    }
+    .doc-documentation-h2 {
+      font-size: 45px;
+      margin-top: 60px;
+      margin-left: 0px;
+    }
+    .doc-documentation-code-box {
+      border-style: solid;
+      border-color: #c8c9cc;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      padding: 13px;
+      padding-left: 20px;
+      margin-top: 20px;
+      font-size: 14px;
+      margin-left: 0px;
+      line-height: 1.7;
+    }
+    .doc-documentation-p-sub {
+      font-size: 17px;
+      margin-top: 20px;
+      margin-left: 0px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-h3 {
+      font-size: 30px;
+      margin-top: 60px;
+      margin-left: 0px;
+    }
+  }
+  @media only screen and (max-width: 565px) {
+    .doc-documentation {
+      padding-left: 50px;
+      padding-right: 50px;
+      font-family: Roboto, sans-serif;
+    }
+  }
+  @media only screen and (max-width: 465px) {
+    .doc-documentation {
+      padding-left: 10px;
+      padding-right: 10px;
+      font-family: Roboto, sans-serif;
+    }
+  }
+  @media only screen and (max-width: 385px) {
+    .doc-documentation {
+      padding-left: 0px;
+      padding-right: 0px;
+      font-family: Roboto, sans-serif;
+    }
+  }
+  @media only screen and (max-width: 365px) {
+    .doc-documentation {
+      padding-left: 0px;
+      padding-right: 0px;
+      width: 250px;
+      font-family: Roboto, sans-serif;
+    }
+    .doc-documentation-h1 {
+      font-size: 60px;
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .doc-documentation-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      margin-left: 0px;
+      margin-top: 30px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+    .doc-documentation-p {
+      font-size: 15px;
+      margin-top: 50px;
+      margin-left: 0px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-divider {
+      height: 1px;
+      margin-left: 0px;
+      margin-top: 60px;
+      background-color: #c8c9cc;
+    }
+    .list-item {
+      margin: 0px;
+      margin-top: 35px;
+    }
+    .doc-documentation-h2 {
+      font-size: 45px;
+      margin-top: 60px;
+      margin-left: 0px;
+    }
+    .doc-documentation-code-box {
+      border-style: solid;
+      border-color: #c8c9cc;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      padding: 5px;
+      padding-left: 8px;
+      margin-top: 20px;
+      font-size: 10px;
+      margin-left: 0px;
 
-  @media only screen and (max-width: 770px) {
+      line-height: 1.7;
+    }
+    .doc-documentation-p-sub {
+      font-size: 15px;
+      margin-top: 20px;
+      margin-left: 0px;
+      color: rgba(0, 0, 0, 0.8);
+      line-height: 1.7;
+    }
+    .doc-documentation-h3 {
+      font-size: 30px;
+      margin-top: 60px;
+      margin-left: 0px;
+    }
+    .indent {
+      margin-left: 12px;
+    }
+    .indent2 {
+      margin-left: 24px;
+    }
+    .list-item-indent {
+      margin-left: 25px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      list-style: circle;
+    }
+  }
+  /* @media only screen and (max-width: 770px) {
+    .doc-documentation {
+      font-family: Roboto, sans-serif;
+    }
     .doc-documentation-h1 {
       font-size: 55px;
       margin-top: 20px;
@@ -1477,7 +1643,7 @@ const Wrapper = styled.div`
     }
     .doc-documentation-divider {
       height: 1px;
-      width: 600px;
+      width: 100px;
       margin-left: 100px;
       margin-right: 100px;
       margin-top: 60px;
@@ -1689,5 +1855,5 @@ const Wrapper = styled.div`
     .epic {
       margin-left: 240px;
     }
-  }
+  } */
 `;
