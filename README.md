@@ -8,7 +8,7 @@ API for UFC fighters and stats
 
 Whether you’re making an app, making your own API, or just an MMA fan that happens to code, UltimateAPI is here to provide you with the best UFC data at the fastest speeds.
 
-Visit <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">UltimateAPI.tech</a>, create an account, and receive your very own API key to start using the UltimateAPI!
+Visit <a href="https://www.ultimateapi.tech/" target="_blank" rel="noopener noreferrer">UltimateAPI.tech</a>, create an account, and receive your very own API key to start using the UltimateAPI!
 
 # Queries
 
