@@ -10,6 +10,10 @@ Whether you’re making an app, making your own API, or just an MMA fan that hap
 
 Visit <a href="https://www.ultimateapi.tech/" target="_blank" rel="noopener noreferrer">UltimateAPI.tech</a>, create an account, and receive your very own API key to start using the UltimateAPI!
 
+Test account
+user: test@test.com
+pass: testtest123
+
 # Queries
 
 Once you have your API key, you’re ready to make your first request to UltimateAPI.
