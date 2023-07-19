@@ -1,14 +1,14 @@
 # UltimateAPI 
 
+<b>Test account</b> <br>
+user: test@test.com<br>
+pass: testtest123
+
 <img width="732" alt="UltimateAPI LOGO" src="https://user-images.githubusercontent.com/67036033/160915898-1890ea4e-d314-4840-a55f-75a56ce9c5bf.png">
 
 API for UFC fighters and stats
 
 # Usage
-
-Test account <br>
-user: test@test.com<br>
-pass: testtest123
 
 Whether you’re making an app, making your own API, or just an MMA fan that happens to code, UltimateAPI is here to provide you with the best UFC data at the fastest speeds.
 
